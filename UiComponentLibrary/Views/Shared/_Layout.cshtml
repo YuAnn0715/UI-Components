@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"] - UiComponentLibrary</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/bootstrap-icons/font/bootstrap-icons.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/_content/UiComponentLibrary.Components/ui-components.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/showcase.css" asp-append-version="true" />
+</head>
+<body class="ui-showcase-body">
+    <header class="ui-showcase-header">
+        <div class="container-fluid ui-showcase-header-inner">
+            <a class="ui-showcase-brand" asp-controller="Home" asp-action="Index">
+                <span class="ui-showcase-brand-mark" aria-hidden="true"><i class="bi bi-grid-1x2-fill"></i></span>
+                <span>UiComponentLibrary</span>
+            </a>
+            <span class="ui-showcase-context">元件預覽站</span>
+        </div>
+    </header>
+    <main class="container-fluid ui-showcase-shell">@RenderBody()</main>
+    <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js" asp-append-version="true"></script>
+    <script src="~/_content/UiComponentLibrary.Components/ui-components.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

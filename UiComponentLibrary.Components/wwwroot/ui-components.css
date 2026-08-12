@@ -1,0 +1,1540 @@
+:root {
+    /* 設定：表單邊框。 */
+    --ui-border-color: #ced4da;
+    /* 設定：輸入焦點。 */
+    --ui-focus-color: #86b7fe;
+    /* 設定：表單文字。 */
+    --ui-text-color: #212529;
+    /* 設定：表單背景。 */
+    --ui-background-color: #fff;
+    /* 設定：按鈕背景。 */
+    --ui-button-background: #0d6efd;
+    /* 設定：按鈕文字。 */
+    --ui-button-text: #fff;
+    /* 設定：按鈕邊框。 */
+    --ui-button-border: var(--ui-button-background);
+}
+
+/* 設定：檔案上傳元件、檔案下載元件、表單欄位。 */
+.ui-field, .ui-file-upload, .ui-file-download {
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+/* 設定：欄位標籤。 */
+.ui-label {
+    display: inline-block;
+    margin-bottom: .45rem;
+    font-weight: 600;
+}
+
+/* 設定：輸入控制項。 */
+.ui-control {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 2.5rem;
+    padding: .5rem .75rem;
+    border: 1px solid;
+    border-radius: .375rem;
+    font: inherit;
+    line-height: 1.5;
+}
+
+/* 設定：輸入控制項。 */
+textarea.ui-control {
+    min-height: auto;
+    resize: vertical;
+}
+
+/* 設定：檔案下載元件、下載元件、按鈕。 */
+.ui-button, .ui-file-download .btn, .ui-download-dialog .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .4rem;
+    min-height: 2.5rem;
+    padding: .5rem .85rem;
+    border: 1px solid transparent;
+    border-radius: .375rem;
+    font: inherit;
+    font-weight: 600;
+    line-height: 1.5;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+/* 設定：核取控制項。 */
+.ui-check-control {
+    width: 1rem;
+    height: 1rem;
+    margin: 0 .35rem 0 0;
+    vertical-align: -.1rem;
+    accent-color: var(--ui-focus-color);
+}
+
+/* 設定：表單欄位。 */
+.ui-field {
+    margin-bottom: 1rem;
+}
+
+/* 設定：欄位標籤。 */
+.ui-label {
+    color: var(--ui-text-color);
+}
+
+/* 設定：輸入控制項。 */
+.ui-control {
+    color: var(--ui-text-color);
+    background-color: var(--ui-background-color);
+    border-color: var(--ui-border-color);
+}
+
+    /* 設定：輸入控制項的互動狀態。 */
+    .ui-control:focus {
+        color: var(--ui-text-color);
+        background-color: var(--ui-background-color);
+        border-color: var(--ui-focus-color);
+        box-shadow: 0 0 0 .25rem color-mix(in srgb, var(--ui-focus-color) 25%, transparent);
+    }
+
+/* 設定：標籤選擇器。 */
+.ui-tag-select-control {
+    display: flex;
+    min-height: 2.5rem;
+    align-items: center;
+    gap: .45rem;
+    padding: .3rem .4rem .3rem .65rem;
+    border: 1px solid var(--ui-border-color);
+    border-radius: .375rem;
+    color: var(--ui-text-color);
+    background: var(--ui-background-color);
+}
+
+    /* 設定：標籤選擇器的互動狀態。 */
+    .ui-tag-select-control:focus-within {
+        border-color: var(--ui-focus-color);
+        box-shadow: 0 0 0 .25rem color-mix(in srgb, var(--ui-focus-color) 25%, transparent);
+    }
+
+/* 設定：標籤選擇器。 */
+.ui-tag-select-tags {
+    display: flex;
+    flex: 1 1 auto;
+    flex-wrap: wrap;
+    gap: .4rem;
+    min-width: 0;
+}
+
+/* 設定：標籤選擇器。 */
+.ui-tag-select-tag {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    max-width: 100%;
+    padding: .25rem 1.25rem .25rem .55rem;
+    border-radius: .25rem;
+    color: var(--ui-tag-text-color, #fff);
+    background: var(--ui-tag-color, #4f46e5);
+    font-size: .875rem;
+    line-height: 1.25;
+}
+
+    /* 設定：標籤選擇器。 */
+    .ui-tag-select-tag span {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+/* 設定：標籤選擇器。 */
+.ui-tag-select-remove {
+    position: absolute;
+    top: -.32rem;
+    right: -.32rem;
+    display: grid;
+    width: 1rem;
+    height: 1rem;
+    place-items: center;
+    padding: 0;
+    border: 1px solid currentColor;
+    border-radius: 50%;
+    color: var(--ui-tag-text-color, #fff);
+    background: var(--ui-tag-color, #4f46e5);
+    font-size: .8rem;
+    line-height: 1;
+}
+
+    /* 設定：標籤選擇器的互動狀態。 */
+    .ui-tag-select-remove:focus-visible {
+        outline: 2px solid var(--ui-focus-color);
+        outline-offset: 2px;
+    }
+
+/* 設定：標籤選擇器。 */
+.ui-tag-select-menu {
+    flex: 0 1 10rem;
+    min-width: 8rem;
+    border: 0;
+    border-left: 1px solid color-mix(in srgb, var(--ui-border-color) 70%, transparent);
+    padding: .35rem .5rem;
+    color: var(--ui-text-color);
+    background: transparent;
+    outline: 0;
+}
+
+/* 設定：標籤選擇器。 */
+.ui-tag-select-values {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+@media (max-width: 575.98px) {
+    /* 設定：標籤選擇器。 */
+    .ui-tag-select-control {
+        align-items: stretch;
+        flex-wrap: wrap;
+    }
+
+    /* 設定：標籤選擇器。 */
+    .ui-tag-select-menu {
+        flex-basis: 100%;
+        border-top: 1px solid color-mix(in srgb, var(--ui-border-color) 70%, transparent);
+        border-left: 0;
+    }
+}
+
+/* 設定：核取控制項。 */
+.ui-check-control {
+    border-color: var(--ui-border-color);
+}
+
+    /* 設定：核取控制項的互動狀態。 */
+    .ui-check-control:focus {
+        border-color: var(--ui-focus-color);
+        box-shadow: 0 0 0 .25rem color-mix(in srgb, var(--ui-focus-color) 25%, transparent);
+    }
+
+    /* 設定：核取控制項的互動狀態。 */
+    .ui-check-control:checked {
+        background-color: var(--ui-focus-color);
+        border-color: var(--ui-focus-color);
+    }
+
+/* 設定：按鈕。 */
+.ui-button {
+    color: var(--ui-button-text);
+    background-color: var(--ui-button-background);
+    border-color: var(--ui-button-border);
+}
+
+    /* 設定：按鈕的互動狀態。 */
+    .ui-button:hover, .ui-button:focus-visible {
+        color: var(--ui-button-text);
+        background-color: color-mix(in srgb, var(--ui-button-background) 88%, #000);
+        border-color: var(--ui-button-border);
+    }
+
+/* 設定：主題編輯器。 */
+.ui-theme-editor {
+    position: static;
+}
+
+    /* 設定：主題編輯器。 */
+    .ui-theme-editor [hidden] {
+        display: none !important;
+    }
+
+/* 設定：程式碼區塊。 */
+.ui-code-output {
+    min-height: 11rem;
+    white-space: pre-wrap;
+}
+
+/* 設定：元件展示區。 */
+.ui-showcase-shell {
+    width: 90%;
+    max-width: none;
+}
+
+/* 設定：元件預覽卡片。 */
+.ui-preview-card {
+    max-width: 1400px;
+    margin-inline: auto;
+}
+
+/* 設定：元件導覽列。 */
+.ui-component-nav {
+    position: sticky;
+    top: 1rem;
+}
+
+    /* 設定：元件導覽列。 */
+    .ui-component-nav .nav-link {
+        color: #495057;
+    }
+
+        /* 設定：元件導覽列的互動狀態。 */
+        .ui-component-nav .nav-link:hover {
+            background-color: #f1f5f9;
+            color: #0d6efd;
+        }
+
+/* 設定：程式碼區塊。 */
+.ui-code-details > summary {
+    cursor: pointer;
+    color: #0d6efd;
+    font-weight: 600;
+}
+
+/* 設定：元件文件。 */
+.ui-doc-code {
+    margin: .5rem 0 0;
+    padding: .85rem 1rem;
+    border-radius: .65rem;
+    color: #e2e8f0;
+    background: #0f172a;
+    white-space: pre-wrap;
+}
+
+    /* 設定：元件文件。 */
+    .ui-doc-code code {
+        color: inherit;
+    }
+
+/* 設定：元件文件。 */
+.ui-doc-parameters {
+    display: grid;
+    grid-template-columns: minmax(7.5rem, auto) 1fr;
+    gap: .45rem .75rem;
+    margin: .75rem 0 0;
+    font-size: .9rem;
+}
+
+    /* 設定：元件文件。 */
+    .ui-doc-parameters dt {
+        margin: 0;
+    }
+
+    /* 設定：元件文件。 */
+    .ui-doc-parameters dd {
+        margin: 0;
+        color: #475569;
+    }
+
+/* 設定：顏色設定區。 */
+.ui-color-controls {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(10.25rem, 1fr));
+    gap: .55rem;
+}
+
+    /* 設定：顏色設定區的狀態。 */
+    .ui-color-controls > [data-ui-color-row] {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: auto;
+        padding: .45rem .55rem;
+        border: 1px solid #4b5563;
+        border-radius: .55rem;
+        background: #fafbfc;
+    }
+
+        /* 設定：顏色設定區的互動狀態。 */
+        .ui-color-controls > [data-ui-color-row]:focus {
+            outline: 0;
+            border-color: #111827;
+            box-shadow: 0 0 0 .2rem rgba(31, 41, 55, .18);
+        }
+
+        /* 設定：顏色設定區的互動狀態。 */
+        .ui-color-controls > [data-ui-color-row]:hover {
+            border-color: #111827;
+        }
+
+    /* 設定：顏色設定區。 */
+    .ui-color-controls .form-label {
+        margin: 0;
+        color: #475569;
+        font-size: .8rem;
+        line-height: 1.15;
+    }
+
+    /* 設定：顏色設定區。 */
+    .ui-color-controls .form-control-color {
+        width: 2.15rem;
+        min-width: 2.15rem;
+        height: 2rem;
+        padding: .15rem;
+        border-radius: .4rem;
+    }
+
+/* 設定：標籤顏色設定。 */
+.ui-tag-color-controls {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+@media (max-width: 767.98px) {
+    /* 設定：標籤顏色設定。 */
+    .ui-tag-color-controls {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 419.98px) {
+    /* 設定：標籤顏色設定。 */
+    .ui-tag-color-controls {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* 設定：日期選擇器。 */
+.ui-date-control {
+    cursor: pointer;
+    background-image: linear-gradient(45deg, transparent 50%, #64748b 50%), linear-gradient(135deg, #64748b 50%, transparent 50%);
+    background-position: calc(100% - 18px) 50%, calc(100% - 13px) 50%;
+    background-size: 5px 5px;
+    background-repeat: no-repeat;
+}
+
+/* 設定：日期選擇器。 */
+.ui-date-dialog {
+    width: min(24rem, calc(100vw - 2rem));
+    border: 0;
+    border-radius: 1rem;
+    padding: 1.25rem;
+    box-shadow: 0 1.5rem 3rem rgba(15, 23, 42, .22);
+    color: #1e293b;
+}
+
+    /* 設定：日期選擇器的背景遮罩。 */
+    .ui-date-dialog::backdrop {
+        background: rgba(15, 23, 42, .42);
+    }
+
+/* 設定：日期選擇器。 */
+.ui-date-dialog-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+/* 設定：日期選擇器。 */
+.ui-date-nav {
+    width: 2.25rem;
+    height: 2.25rem;
+    border: 0;
+    border-radius: .5rem;
+    color: #334155;
+    background: #f1f5f9;
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
+    /* 設定：日期選擇器的互動狀態。 */
+    .ui-date-nav:hover {
+        background: #e2e8f0;
+    }
+
+/* 設定：日期選擇器。 */
+.ui-date-weekdays, .ui-date-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    gap: .25rem;
+}
+
+/* 設定：日期選擇器。 */
+.ui-date-weekdays {
+    margin-bottom: .5rem;
+    color: #64748b;
+    font-size: .75rem;
+    font-weight: 700;
+}
+
+/* 設定：日期選擇器。 */
+.ui-date-day {
+    position: relative;
+    z-index: 0;
+    height: 2.35rem;
+    border: 0;
+    border-radius: .5rem;
+    color: #334155;
+    background: transparent;
+}
+
+    /* 設定：日期選擇器的互動狀態。 */
+    .ui-date-day:hover {
+        background: #f1f5f9;
+    }
+
+    /* 設定：日期選擇器的狀態。 */
+    .ui-date-day.is-in-range {
+        border-radius: .5rem;
+        background: var(--ui-range-fill-color, #ddd6fe);
+    }
+
+    /* 設定：日期選擇器、月份選項、年份選項的狀態。 */
+    .ui-date-day.is-selected, .ui-month-option.is-selected, .ui-year-option.is-selected {
+        z-index: 1;
+        border-radius: .6rem;
+        color: #fff;
+        background: var(--ui-range-endpoint-color, var(--ui-confirm-color, #4f46e5));
+    }
+
+/* 設定：日期選擇器。 */
+.ui-date-title {
+    border: 0;
+    border-radius: .5rem;
+    padding: .45rem .75rem;
+    color: #1e293b;
+    background: transparent;
+    font-weight: 700;
+}
+
+    /* 設定：日期選擇器的互動狀態。 */
+    .ui-date-title:hover {
+        background: #f1f5f9;
+    }
+
+/* 設定：月份選項、年份選項。 */
+.ui-month-grid, .ui-year-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: .5rem;
+}
+
+/* 設定：月份選項、年份選項。 */
+.ui-month-option, .ui-year-option {
+    min-height: 3rem;
+    border: 0;
+    border-radius: .6rem;
+    color: #334155;
+    background: #f8fafc;
+    font-weight: 600;
+}
+
+    /* 設定：月份選項、年份選項的互動狀態。 */
+    .ui-month-option:hover, .ui-year-option:hover {
+        background: #e2e8f0;
+    }
+
+/* 設定：日期時間選擇器、日期選擇器。 */
+.ui-date-time-panel {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1.25rem;
+    padding: 1rem;
+    border-radius: .75rem;
+    color: #334155;
+    background: #f1f5f9;
+    font-weight: 700;
+}
+
+    /* 設定：日期時間選擇器、日期選擇器。 */
+    .ui-date-time-panel select {
+        min-width: 5rem;
+        border: 1px solid #cbd5e1;
+        border-radius: .6rem;
+        padding: .6rem .75rem;
+        color: #1e293b;
+        background: #fff;
+        font: inherit;
+    }
+
+    /* 設定：日期時間選擇器、日期選擇器。 */
+    .ui-date-time-panel b {
+        margin-inline: .3rem;
+        font-size: 1.25rem;
+    }
+
+/* 設定：日期選擇器。 */
+.ui-date-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: .5rem;
+    margin-top: 1.25rem;
+}
+
+/* 設定：日期選擇器。 */
+.ui-date-confirm {
+    color: #fff;
+    background: var(--ui-confirm-color, #4f46e5);
+    border-color: var(--ui-confirm-color, #4f46e5);
+}
+
+/* 設定：日期選擇器。 */
+.ui-date-cancel {
+    color: #fff;
+    background: var(--ui-cancel-color, #64748b);
+    border-color: var(--ui-cancel-color, #64748b);
+}
+
+/* 設定：時間選擇器。 */
+.ui-time-control {
+    cursor: pointer;
+    background-image: linear-gradient(45deg, transparent 50%, #64748b 50%), linear-gradient(135deg, #64748b 50%, transparent 50%);
+    background-position: calc(100% - 18px) 50%, calc(100% - 13px) 50%;
+    background-size: 5px 5px;
+    background-repeat: no-repeat;
+}
+
+/* 設定：時間選擇器。 */
+.ui-time-dialog {
+    width: min(23rem, calc(100vw - 2rem));
+    border: 0;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    box-shadow: 0 1.5rem 3rem rgba(15, 23, 42, .22);
+}
+
+    /* 設定：時間選擇器的背景遮罩。 */
+    .ui-time-dialog::backdrop {
+        background: rgba(15, 23, 42, .42);
+    }
+
+/* 設定：時間選擇器。 */
+.ui-time-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    color: #1e293b;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+    /* 設定：時間選擇器。 */
+    .ui-time-header small {
+        color: #64748b;
+        font-size: .75rem;
+        font-weight: 600;
+    }
+
+/* 設定：翻頁時鐘。 */
+.ui-flip-clock {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .7rem;
+    margin: 1.5rem 0;
+}
+
+/* 設定：翻頁時鐘。 */
+.ui-flip-unit {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: .35rem .5rem;
+    align-items: center;
+}
+
+    /* 設定：翻頁時鐘。 */
+    .ui-flip-unit button {
+        grid-column: 1;
+        border: 0;
+        border-radius: .55rem;
+        color: #475569;
+        background: #e2e8f0;
+        font-size: 1.15rem;
+        line-height: 1.5;
+    }
+
+        /* 設定：翻頁時鐘的互動狀態。 */
+        .ui-flip-unit button:hover {
+            background: #cbd5e1;
+        }
+
+    /* 設定：翻頁時鐘。 */
+    .ui-flip-unit span {
+        grid-column: 2;
+        grid-row: 2;
+        color: #64748b;
+        font-size: .8rem;
+        font-weight: 700;
+    }
+
+    /* 設定：翻頁時鐘。 */
+    .ui-flip-unit .ui-flip-number {
+        display: flex;
+        grid-column: 1;
+        width: 6.2rem;
+        height: 6.25rem;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        border-radius: .7rem;
+        color: var(--ui-flip-number-color, #fff);
+        background: var(--ui-flip-number-background, #1e293b);
+        text-align: center;
+    }
+
+    /* 設定：翻頁時鐘。 */
+    .ui-flip-unit .ui-flip-value {
+        display: block;
+        color: var(--ui-flip-number-color, #fff);
+        transform: translateY(.35rem);
+        font: 800 5rem/1 Bahnschrift, "Arial Narrow", Consolas, ui-monospace, monospace;
+        letter-spacing: 0;
+    }
+
+/* 設定：翻頁時鐘的狀態。 */
+.ui-flip-number.is-flipping {
+    animation: ui-flip .26s ease-out;
+}
+
+/* 設定：翻頁時鐘。 */
+.ui-flip-colon {
+    align-self: center;
+    margin: 0;
+    color: #334155;
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+@keyframes ui-flip {
+    0% {
+        transform: rotateX(-70deg);
+        opacity: .25;
+    }
+
+    100% {
+        transform: rotateX(0);
+        opacity: 1;
+    }
+}
+
+/* 設定：時間選擇器。 */
+.ui-time-trigger {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    height: auto;
+    padding: .75rem 1rem;
+    text-align: left;
+}
+
+/* 設定：時間選擇器。 */
+.ui-time-trigger-icon {
+    color: var(--ui-time-format-color, #4f46e5);
+    font-size: 1.25rem;
+}
+
+/* 設定：時間選擇器。 */
+.ui-time-trigger-value {
+    flex: 1;
+    color: #0f172a;
+    font: 700 1.65rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+/* 設定：時間選擇器。 */
+.ui-time-trigger-period {
+    padding: .35rem .6rem;
+    border-radius: .55rem;
+    color: var(--ui-time-format-color, #4f46e5);
+    background: color-mix(in srgb, var(--ui-time-format-color, #4f46e5) 10%, white);
+    font-size: .78rem;
+    font-weight: 800;
+}
+
+/* 設定：Vue 時間欄位。 */
+.ui-vue-time-fields {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: .65rem;
+    margin-top: 1rem;
+}
+
+/* 設定：Vue 時間欄位。 */
+.ui-vue-time-select {
+    width: 100%;
+    border: 1px solid #e5e7eb;
+    border-radius: .65rem;
+    padding: .7rem;
+    color: var(--ui-time-control-color, #475569);
+    background: #fff;
+    font: 700 1.1rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+/* 設定：時間選擇器、表單欄位。 */
+.ui-field:has(.ui-time-trigger) {
+    position: relative;
+}
+
+/* 設定：進階時間選擇器。 */
+.ui-premium-time-panel {
+    position: absolute;
+    z-index: 10;
+    top: calc(100% - .35rem);
+    left: 0;
+    width: min(22rem, 100%);
+    padding: 1rem;
+    border: 1px solid #eef0f6;
+    border-radius: 1rem;
+    background: #fff;
+    box-shadow: 0 1.25rem 2.5rem rgba(15,23,42,.16);
+}
+
+/* 設定：進階時間選擇器。 */
+.ui-premium-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: .6rem;
+    padding-bottom: 1rem;
+}
+
+    /* 設定：進階時間選擇器。 */
+    .ui-premium-tabs button, .ui-premium-period button {
+        border: 1px solid #e5e7eb;
+        border-radius: .65rem;
+        padding: .65rem;
+        color: #64748b;
+        background: #fff;
+        font-weight: 700;
+    }
+
+        /* 設定：進階時間選擇器的狀態。 */
+        .ui-premium-tabs button.is-active {
+            color: #fff;
+            background: var(--ui-time-format-color, #4f46e5);
+            border-color: var(--ui-time-format-color, #4f46e5);
+        }
+
+    /* 設定：進階時間選擇器、時間選擇器的狀態。 */
+    .ui-premium-tabs [data-ui-time-now] {
+        color: var(--ui-time-control-color, #475569);
+        border-color: color-mix(in srgb, var(--ui-time-control-color, #475569) 30%, #e5e7eb);
+    }
+
+    /* 設定：進階時間選擇器、時間選擇器的狀態。 */
+    .ui-premium-tabs [data-ui-time-format] {
+        color: var(--ui-time-format-color, #4f46e5);
+        border-color: color-mix(in srgb, var(--ui-time-format-color, #4f46e5) 30%, #e5e7eb);
+    }
+
+/* 設定：進階時間選擇器。 */
+.ui-premium-wheels {
+    display: grid;
+    grid-template-columns: 1fr 1fr .85fr;
+    min-height: 12rem;
+    overflow: hidden;
+    border: 1px solid #eef0f6;
+    border-radius: .8rem;
+}
+
+    /* 設定：進階時間選擇器的狀態。 */
+    .ui-premium-wheels.is-24-hour {
+        grid-template-columns: 1fr 1fr;
+    }
+
+/* 設定：進階時間選擇器。 */
+.ui-premium-wheel {
+    display: grid;
+    grid-template-rows: repeat(5, 1fr);
+    border-right: 1px solid #eef0f6;
+}
+
+/* 設定：進階時間選擇器。 */
+.ui-premium-wheel-item {
+    border: 0;
+    color: #94a3b8;
+    background: transparent;
+    font: 700 1.2rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+    /* 設定：進階時間選擇器的狀態。 */
+    .ui-premium-wheel-item.is-selected {
+        margin-inline: .25rem;
+        border-radius: .6rem;
+        color: var(--ui-time-control-color, #475569);
+        background: color-mix(in srgb, var(--ui-time-control-color, #475569) 14%, white);
+        box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ui-time-control-color, #475569) 24%, transparent);
+    }
+
+/* 設定：進階時間選擇器。 */
+.ui-premium-period {
+    display: grid;
+    align-content: center;
+    gap: .55rem;
+    padding: .6rem;
+}
+
+    /* 設定：進階時間選擇器的狀態。 */
+    .ui-premium-period button.is-active {
+        color: #fff;
+        background: var(--ui-time-meridiem-color, #0f766e);
+        border-color: var(--ui-time-meridiem-color, #0f766e);
+    }
+
+/* 設定：進階時間選擇器。 */
+.ui-premium-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .6rem;
+    margin-top: 1rem;
+}
+
+    /* 設定：進階時間選擇器。 */
+    .ui-premium-actions button {
+        border: 1px solid #e5e7eb;
+        border-radius: .65rem;
+        padding: .7rem;
+        background: #fff;
+        color: #475569;
+        font-weight: 800;
+    }
+
+    /* 設定：進階時間選擇器、時間選擇器的狀態。 */
+    .ui-premium-actions [data-ui-time-done] {
+        color: #fff;
+        background: var(--ui-confirm-color, #4f46e5);
+        border-color: var(--ui-confirm-color, #4f46e5);
+    }
+
+    /* 設定：進階時間選擇器、時間選擇器的狀態。 */
+    .ui-premium-actions [data-ui-time-cancel] {
+        color: var(--ui-cancel-color, #64748b);
+        border-color: color-mix(in srgb, var(--ui-cancel-color, #64748b) 30%, #e5e7eb);
+    }
+
+/* 設定：時間選擇器。 */
+.ui-time-dialog {
+    border: 1px solid rgba(255, 255, 255, .72);
+    background: linear-gradient(135deg, rgba(255,255,255,.72), rgba(226,232,240,.48));
+    backdrop-filter: blur(22px) saturate(150%);
+    -webkit-backdrop-filter: blur(22px) saturate(150%);
+}
+
+/* 設定：時間選擇器。 */
+.ui-time-header {
+    padding-bottom: .9rem;
+    border-bottom: 1px solid rgba(148, 163, 184, .3);
+}
+
+    /* 設定：時間選擇器。 */
+    .ui-time-header button {
+        min-width: 5.25rem;
+        min-height: 2.7rem;
+        border: 1px solid color-mix(in srgb, var(--ui-time-format-color, #4f46e5) 35%, transparent);
+        border-radius: .65rem;
+        padding: .4rem .7rem;
+        color: var(--ui-time-format-color, #4f46e5);
+        background: color-mix(in srgb, var(--ui-time-format-color, #4f46e5) 10%, rgba(255,255,255,.55));
+        font: inherit;
+        font-size: .78rem;
+        font-weight: 700;
+    }
+
+/* 設定：翻頁時鐘。 */
+.ui-flip-clock {
+    margin-block: 2rem;
+    padding: 1.35rem;
+    border: 1px solid rgba(255,255,255,.8);
+    border-radius: 1rem;
+    background: rgba(255,255,255,.35);
+    box-shadow: inset 0 1px rgba(255,255,255,.75);
+}
+
+/* 設定：翻頁時鐘。 */
+.ui-flip-unit {
+    grid-template-columns: 1fr;
+}
+
+    /* 設定：翻頁時鐘。 */
+    .ui-flip-unit button:not(.ui-flip-number) {
+        min-height: 2.6rem;
+        color: #fff;
+        background: var(--ui-time-control-color, #475569);
+    }
+
+/* 設定：翻頁時鐘。 */
+.ui-flip-number {
+    min-height: 6.25rem;
+    border: 0;
+    cursor: pointer;
+    background: var(--ui-flip-number-background, linear-gradient(160deg, rgba(51,65,85,.92), rgba(15,23,42,.96)));
+    box-shadow: inset 0 1px rgba(255,255,255,.18), 0 .6rem 1.1rem rgba(15,23,42,.22);
+}
+
+/* 設定：時間選擇器。 */
+.ui-time-meridiem {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .5rem;
+    margin-top: 1rem;
+}
+
+    /* 設定：時間選擇器。 */
+    .ui-time-meridiem button {
+        border: 1px solid color-mix(in srgb, var(--ui-time-meridiem-color, #0f766e) 28%, transparent);
+        border-radius: .7rem;
+        padding: .6rem;
+        color: var(--ui-time-meridiem-color, #0f766e);
+        background: rgba(255,255,255,.52);
+        font-weight: 800;
+    }
+
+        /* 設定：時間選擇器的狀態。 */
+        .ui-time-meridiem button.is-active {
+            color: #fff;
+            background: var(--ui-time-meridiem-color, #0f766e);
+        }
+
+/* 設定：快速時間選擇區、時間選擇器。 */
+.ui-time-quick-panel {
+    margin-top: 1rem;
+    padding: .9rem;
+    border: 1px solid rgba(255,255,255,.72);
+    border-radius: .9rem;
+    background: rgba(255,255,255,.48);
+}
+
+/* 設定：快速時間選擇區、時間選擇器。 */
+.ui-time-quick-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: .65rem;
+    color: #334155;
+    font-weight: 700;
+}
+
+    /* 設定：快速時間選擇區、時間選擇器。 */
+    .ui-time-quick-title button {
+        border: 0;
+        border-radius: .4rem;
+        color: #475569;
+        background: transparent;
+        font-size: 1.4rem;
+        line-height: 1;
+    }
+
+/* 設定：快速時間選擇區、時間選擇器。 */
+.ui-time-quick-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    max-height: 13rem;
+    gap: .35rem;
+    overflow-y: auto;
+}
+
+    /* 設定：快速時間選擇區、時間選擇器。 */
+    .ui-time-quick-grid button {
+        border: 0;
+        border-radius: .5rem;
+        padding: .45rem .2rem;
+        color: #334155;
+        background: rgba(255,255,255,.7);
+        font-weight: 700;
+    }
+
+        /* 設定：快速時間選擇區、時間選擇器的互動狀態。 */
+        .ui-time-quick-grid button:hover {
+            color: #fff;
+            background: var(--ui-time-control-color, #475569);
+        }
+
+/* 設定：檔案上傳元件。 */
+.ui-file-upload {
+    /* 設定：上傳區邊框。 */
+    --ui-upload-border-color: #8b5cf6;
+    /* 設定：上傳進度。 */
+    --ui-upload-progress-color: #4f46e5;
+    /* 設定：上傳按鈕。 */
+    --ui-upload-button-color: #4f46e5;
+}
+
+/* 設定：上傳設定區。 */
+.ui-upload-settings {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(10rem, .42fr);
+    gap: .75rem;
+    padding: .85rem;
+    border: 1px solid #4b5563;
+    border-radius: .7rem;
+    background: #fafbfc;
+}
+
+    /* 設定：上傳設定區。 */
+    .ui-upload-settings .form-label {
+        margin-bottom: .35rem;
+        color: #475569;
+        font-size: .85rem;
+        font-weight: 600;
+    }
+
+    /* 設定：上傳設定區。 */
+    .ui-upload-settings .form-text {
+        font-size: .78rem;
+    }
+
+/* 設定：檔案拖放區。 */
+.ui-file-drop-zone {
+    display: flex;
+    min-height: 18rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: .55rem;
+    padding: 2rem 1.25rem;
+    border: 2px dashed var(--ui-upload-border-color);
+    border-radius: 1rem;
+    color: #1e293b;
+    background: #fff;
+    text-align: center;
+    transition: border-color .18s ease, background .18s ease, transform .18s ease;
+    cursor: pointer;
+}
+
+    /* 設定：檔案拖放區的互動狀態。 */
+    .ui-file-drop-zone:focus {
+        outline: 0;
+        box-shadow: 0 0 0 .22rem color-mix(in srgb, var(--ui-upload-border-color) 22%, transparent);
+    }
+
+    /* 設定：檔案拖放區的互動狀態。 */
+    .ui-file-drop-zone:hover, .ui-file-drop-zone.is-dragging {
+        border-style: solid;
+        background: color-mix(in srgb, var(--ui-upload-border-color) 5%, #fff);
+    }
+
+    /* 設定：檔案拖放區的狀態。 */
+    .ui-file-drop-zone.is-dragging {
+        transform: scale(1.01);
+    }
+
+/* 設定：檔案上傳元件。 */
+.ui-file-upload-icon {
+    display: grid;
+    width: 3.6rem;
+    height: 3.6rem;
+    place-items: center;
+    border-radius: .9rem;
+    color: #fff;
+    background: var(--ui-upload-button-color);
+    font-size: 2.2rem;
+    font-weight: 800;
+    line-height: 1;
+}
+
+/* 設定：檔案拖放區。 */
+.ui-file-drop-zone strong {
+    font-size: 1.25rem;
+}
+
+/* 設定：檔案提示文字、檔案分隔文字。 */
+.ui-file-or, .ui-file-hint {
+    color: #64748b;
+}
+
+/* 設定：檔案提示文字。 */
+.ui-file-hint {
+    margin-top: .35rem;
+    font-size: .85rem;
+}
+
+/* 設定：瀏覽檔案按鈕。 */
+.ui-file-browse {
+    border: 0;
+    padding: 0;
+    color: var(--ui-upload-button-color);
+    background: transparent;
+    font: inherit;
+    font-weight: 800;
+    text-decoration: underline;
+    text-underline-offset: .2rem;
+}
+
+/* 設定：瀏覽檔案按鈕。 */
+.ui-file-browse {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+}
+
+/* 設定：元件導覽列。 */
+.ui-component-nav .nav-link {
+    display: flex;
+    align-items: center;
+    gap: .65rem;
+}
+
+    /* 設定：元件導覽列。 */
+    .ui-component-nav .nav-link > .bi {
+        width: 1.1rem;
+        text-align: center;
+    }
+
+/* 設定：檔案輸入欄位。 */
+.ui-file-input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    clip-path: inset(50%);
+}
+
+.ui-file-list {
+    display: grid;
+    gap: .65rem;
+    margin-top: .8rem;
+}
+
+/* 設定：檔案項目。 */
+.ui-file-item {
+    display: grid;
+    grid-template-columns: 2.55rem 1fr auto;
+    align-items: center;
+    gap: .75rem;
+    padding: .8rem .9rem;
+    border: 1px solid #e2e8f0;
+    border-radius: .85rem;
+    background: #fff;
+    box-shadow: 0 .45rem 1.15rem rgba(15,23,42,.06);
+}
+
+/* 設定：檔案項目。 */
+.ui-file-item-icon {
+    display: grid;
+    width: 2.55rem;
+    height: 2.55rem;
+    place-items: center;
+    border-radius: .7rem;
+    color: var(--ui-upload-progress-color);
+    background: color-mix(in srgb, var(--ui-upload-progress-color) 12%, #fff);
+    font-size: 1.25rem;
+    font-weight: 900;
+}
+
+/* 設定：檔案項目。 */
+.ui-file-item strong, .ui-file-item small {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* 設定：檔案項目。 */
+.ui-file-item small {
+    margin-top: .15rem;
+    color: #64748b;
+}
+
+/* 設定：檔案項目。 */
+.ui-file-item > button {
+    width: 2rem;
+    height: 2rem;
+    border: 0;
+    border-radius: .55rem;
+    color: #64748b;
+    background: #f8fafc;
+    font-size: 1.4rem;
+    line-height: 1;
+}
+
+    /* 設定：檔案項目的互動狀態。 */
+    .ui-file-item > button:hover {
+        color: #0f172a;
+        background: #e2e8f0;
+    }
+
+/* 設定：檔案上傳進度。 */
+.ui-file-progress {
+    display: block;
+    height: .36rem;
+    margin-top: .55rem;
+    overflow: hidden;
+    border-radius: 99px;
+    background: #e2e8f0;
+}
+
+    /* 設定：檔案上傳進度。 */
+    .ui-file-progress i {
+        display: block;
+        width: 0;
+        height: 100%;
+        border-radius: inherit;
+        background: linear-gradient(105deg, var(--ui-upload-progress-color) 0%, var(--ui-upload-progress-color) 38%, #fff 49%, var(--ui-upload-progress-color) 60%, var(--ui-upload-progress-color) 100%);
+        background-size: 220% 100%;
+        animation: ui-upload-pulse 1.1s linear infinite;
+        transition: width .1s linear;
+    }
+
+@keyframes ui-upload-pulse {
+    to {
+        background-position: -220% 0;
+    }
+}
+
+/* 設定：檔案上傳進度、檔案項目的狀態。 */
+.ui-file-item.is-complete .ui-file-progress {
+    background: color-mix(in srgb, var(--ui-upload-progress-color) 15%, #fff);
+}
+
+    /* 設定：檔案上傳進度、檔案項目的狀態。 */
+    .ui-file-item.is-complete .ui-file-progress i {
+        animation: none;
+        background: var(--ui-upload-progress-color);
+    }
+
+/* 設定：檔案項目的狀態。 */
+.ui-file-item.is-error {
+    border-color: #fecaca;
+    background: #fffafa;
+}
+
+    /* 設定：檔案項目的狀態。 */
+    .ui-file-item.is-error .ui-file-item-icon {
+        color: #dc2626;
+        background: #fee2e2;
+    }
+
+    /* 設定：檔案項目的狀態。 */
+    .ui-file-item.is-error small {
+        color: #b91c1c;
+        font-weight: 600;
+    }
+
+/* 設定：檔案下載元件。 */
+.ui-file-download {
+    display: grid;
+    gap: .75rem;
+}
+
+/* 設定：下載元件。 */
+.ui-download-card {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 1rem;
+    background: #fff;
+    box-shadow: 0 .45rem 1.15rem rgba(15,23,42,.06);
+}
+
+/* 設定：檔案下載元件、下載元件的狀態。 */
+.ui-file-download [data-ui-download-start] {
+    color: var(--ui-button-text, #fff);
+    background-color: var(--ui-button-background, #0d6efd);
+    border-color: var(--ui-button-border, var(--ui-button-background, #0d6efd));
+}
+
+    /* 設定：檔案下載元件、下載元件的互動狀態。 */
+    .ui-file-download [data-ui-download-start]:hover, .ui-file-download [data-ui-download-start]:focus-visible {
+        color: var(--ui-button-text, #fff);
+        background-color: color-mix(in srgb, var(--ui-button-background, #0d6efd) 88%, #000);
+        border-color: var(--ui-button-border, var(--ui-button-background, #0d6efd));
+    }
+
+/* 設定：下載元件。 */
+.ui-download-file-icon {
+    display: grid;
+    width: 3.25rem;
+    height: 3.25rem;
+    place-items: center;
+    border-radius: .85rem;
+    color: #4f46e5;
+    background: #eef2ff;
+    font-size: 1.55rem;
+}
+
+/* 設定：下載元件。 */
+.ui-download-copy {
+    display: grid;
+    gap: .15rem;
+}
+
+    /* 設定：下載元件。 */
+    .ui-download-copy span {
+        color: #64748b;
+        font-size: .9rem;
+    }
+
+/* 設定：下載元件。 */
+.ui-download-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    justify-content: flex-end;
+}
+
+    /* 設定：下載元件。 */
+    .ui-download-actions .btn, .ui-download-dialog-actions .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: .4rem;
+    }
+
+/* 設定：下載元件。 */
+.ui-download-demo-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: .5rem;
+    padding-inline: .25rem;
+}
+
+    /* 設定：下載元件。 */
+    .ui-download-demo-actions > span {
+        margin-right: .15rem;
+        color: #64748b;
+        font-size: .875rem;
+        font-weight: 600;
+    }
+
+/* 設定：下載元件。 */
+.ui-download-dialog {
+    width: min(29rem, calc(100vw - 2rem));
+    border: 0;
+    border-radius: 1.15rem;
+    padding: 0;
+    color: #1e293b;
+    box-shadow: 0 1.5rem 3rem rgba(15,23,42,.3);
+}
+
+    /* 設定：下載元件的背景遮罩。 */
+    .ui-download-dialog::backdrop {
+        background: rgba(15,23,42,.48);
+    }
+
+/* 設定：下載元件。 */
+.ui-download-dialog-content {
+    padding: 1.65rem;
+    text-align: center;
+}
+
+/* 設定：下載元件。 */
+.ui-download-status-icon {
+    display: grid;
+    width: 4.75rem;
+    height: 4.75rem;
+    place-items: center;
+    margin: 0 auto 1rem;
+    border-radius: 50%;
+    font-size: 2rem;
+}
+
+    /* 設定：下載元件的狀態。 */
+    .ui-download-status-icon.is-downloading {
+        color: #4f46e5;
+        background: #eef2ff;
+    }
+
+    /* 設定：下載元件的狀態。 */
+    .ui-download-status-icon.is-success {
+        color: #16a34a;
+        background: #dcfce7;
+    }
+
+    /* 設定：下載元件的狀態。 */
+    .ui-download-status-icon.is-failure {
+        color: #dc2626;
+        background: #fee2e2;
+    }
+
+/* 設定：下載元件。 */
+.ui-download-dialog h2 {
+    margin: 0;
+    font-size: 1.3rem;
+}
+
+/* 設定：下載元件。 */
+.ui-download-dialog p {
+    margin: .45rem 0 1.25rem;
+    color: #64748b;
+}
+
+/* 設定：下載元件。 */
+.ui-download-progress {
+    height: .8rem;
+    overflow: hidden;
+    border-radius: 999px;
+    background: #e2e8f0;
+}
+
+    /* 設定：下載元件。 */
+    .ui-download-progress > i {
+        display: block;
+        width: 0;
+        height: 100%;
+        border-radius: inherit;
+        background: linear-gradient(105deg, #4f46e5 0%, #4f46e5 36%, #fff 50%, #4f46e5 64%, #4f46e5 100%);
+        background-size: 230% 100%;
+        transition: width .18s ease;
+    }
+
+/* 設定：下載元件的狀態。 */
+.ui-download-dialog.is-downloading .ui-download-progress > i {
+    animation: ui-download-pulse 1s linear infinite;
+}
+
+/* 設定：下載元件的狀態。 */
+.ui-download-dialog:not(.is-downloading) .ui-download-progress > i {
+    animation: none;
+}
+
+@keyframes ui-download-pulse {
+    to {
+        background-position: -230% 0;
+    }
+}
+
+/* 設定：下載元件的狀態。 */
+.ui-download-dialog.is-success .ui-download-progress > i {
+    background: #22c55e;
+}
+
+/* 設定：下載元件的狀態。 */
+.ui-download-dialog.is-failure .ui-download-progress > i {
+    background: #ef4444;
+}
+
+/* 設定：下載元件。 */
+.ui-download-dialog-actions {
+    display: flex;
+    justify-content: center;
+    gap: .55rem;
+    margin-top: 1.25rem;
+}
+
+@media (max-width: 575.98px) {
+    /* 設定：下載元件。 */
+    .ui-download-card {
+        grid-template-columns: auto 1fr;
+    }
+
+    /* 設定：下載元件。 */
+    .ui-download-actions {
+        grid-column: 1 / -1;
+        justify-content: stretch;
+    }
+
+        /* 設定：下載元件。 */
+        .ui-download-actions .btn {
+            flex: 1;
+            justify-content: center;
+        }
+}
+
+@media (max-width: 575.98px) {
+    /* 設定：檔案拖放區。 */
+    .ui-file-drop-zone {
+        min-height: 14rem;
+    }
+
+    /* 設定：上傳設定區。 */
+    .ui-upload-settings {
+        grid-template-columns: 1fr;
+    }
+}

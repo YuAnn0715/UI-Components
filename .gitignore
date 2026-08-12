@@ -1,0 +1,15 @@
+# .NET 建置輸出
+[Bb]in/
+[Oo]bj/
+
+# Visual Studio 使用者設定
+.vs/
+
+# 本機 NuGet 套件輸出
+local-nuget/
+
+# 使用者與作業系統檔案
+*.user
+*.suo
+.DS_Store
+Thumbs.db
