@@ -1555,7 +1555,7 @@ textarea.ui-control {
     height: 3.25rem;
     place-items: center;
     border-radius: .85rem;
-    color: #4f46e5;
+    color: var(--ui-download-icon-color, #4f46e5);
     background: #eef2ff;
     font-size: 1.55rem;
 }
@@ -1680,7 +1680,7 @@ textarea.ui-control {
         width: 0;
         height: 100%;
         border-radius: inherit;
-        background: linear-gradient(105deg, #4f46e5 0%, #4f46e5 36%, #fff 50%, #4f46e5 64%, #4f46e5 100%);
+        background: linear-gradient(105deg, var(--ui-download-progress-color, #4f46e5) 0%, var(--ui-download-progress-color, #4f46e5) 36%, #fff 50%, var(--ui-download-progress-color, #4f46e5) 64%, var(--ui-download-progress-color, #4f46e5) 100%);
         background-size: 230% 100%;
         transition: width .18s ease;
     }

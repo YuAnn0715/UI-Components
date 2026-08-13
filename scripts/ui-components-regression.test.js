@@ -19,9 +19,10 @@ class FakeElement {
         this.hidden = false;
         this.open = false;
         this.files = [];
+        const styleValues = new Map();
         this.style = {
-            setProperty: () => {},
-            getPropertyValue: () => ""
+            setProperty: (name, value) => styleValues.set(name, String(value)),
+            getPropertyValue: name => styleValues.get(name) ?? ""
         };
         this.classList = {
             add: (...tokens) => this.setClasses(tokens, true),
@@ -96,6 +97,8 @@ class FakeElement {
         this.attributes.set(name, String(value));
     }
 
+    insertAdjacentHTML() {}
+
     querySelector(selector) {
         if (Object.prototype.hasOwnProperty.call(this.selectors, selector)) return this.selectors[selector];
         return this.find(node => node.matches(selector));
@@ -169,12 +172,63 @@ class FakeEvent {
 }
 
 function makeFixtures() {
+    const makeTarget = (component, forName, styleValues = {}) => {
+        const target = new FakeElement("div", { uiComponent: component, uiFor: forName });
+        Object.entries(styleValues).forEach(([name, value]) => target.style.setProperty(name, value));
+        return target;
+    };
+    const textTarget = makeTarget("text-input", "Name");
+    const checkboxTarget = makeTarget("checkbox", "EmailUpdates", { "--ui-focus-color": "#ea580c" });
+    const radioTarget = makeTarget("radio", "PreferredContact", { "--ui-focus-color": "#2563eb" });
+    const secondRadioTarget = makeTarget("radio", "PreferredContact", { "--ui-focus-color": "#2563eb" });
+    const targets = [textTarget, checkboxTarget, radioTarget, secondRadioTarget];
+
+    const codeOutput = new FakeElement("code", { uiGeneratedCode: "" });
+    const copyButton = new FakeElement("button", { uiCopy: "" });
+    const colorInputs = [
+        ["--ui-border-color", "#ced4da"],
+        ["--ui-focus-color", "#86b7fe"],
+        ["--ui-text-color", "#212529"],
+        ["--ui-background-color", "#ffffff"]
+    ].map(([variable, defaultValue]) => new FakeElement("input", { uiColor: variable, uiDefault: defaultValue }));
+    const colorRows = colorInputs.map(input => {
+        const row = new FakeElement("div", { uiColorRow: "" });
+        row.append(input);
+        return row;
+    });
+    const colorInput = colorInputs.find(input => input.dataset.uiColor === "--ui-focus-color");
+    const colorControls = new FakeElement("div");
+    colorControls.className = "ui-color-controls";
+    colorControls.append(colorRows);
+    const editor = new FakeElement("section", { uiThemeEditor: "" }, {
+        "[data-ui-generated-code]": codeOutput,
+        "[data-ui-color]": colorInputs,
+        "[data-ui-color-row]": colorRows,
+        "[data-ui-copy]": copyButton,
+        ".ui-color-controls": [colorControls]
+    });
+    editor.append(colorControls);
+
+    const guideButton = new FakeElement("button", { uiShowGuide: "" });
+    const guide = new FakeElement("section", { uiGeneralGuide: "" });
+    const previewSection = new FakeElement("section", { uiPreviewSection: "" });
+    const componentDoc = new FakeElement("section", { uiComponentDoc: "" });
+    const docTitle = new FakeElement("h2");
+    const docSummary = new FakeElement("p");
+    const docRazor = new FakeElement("code", { uiDocRazor: "" });
+    const docData = new FakeElement("div", { uiDocData: "" });
+    const previewTitle = new FakeElement("h2");
+    const checkboxNav = new FakeElement("button", { uiShowKind: "checkbox" });
+    const radioNav = new FakeElement("button", { uiShowKind: "radio" });
+    const navButtons = [checkboxNav, radioNav];
+
     const downloadStart = new FakeElement("button", { uiDownloadStart: "" });
     const download = new FakeElement("section", { uiComponent: "file-download" }, {
         "[data-ui-download-start]": downloadStart,
         "[data-ui-download-success]": null,
         "[data-ui-download-failure]": null
     });
+    download.style.setProperty("--ui-download-progress-color", "#c026d3");
 
     const dateControls = ["date", "datetime", "range"].map(mode => {
         const control = new FakeElement("input", { uiDateControl: mode });
@@ -249,10 +303,22 @@ function makeFixtures() {
         ["[data-ui-data-table]", [tableComponent]]
     ]);
 
+    const queryMap = new Map([
+        ["[data-ui-theme-editor]", editor],
+        ["[data-ui-show-guide]", guideButton],
+        ["[data-ui-general-guide]", guide],
+        ["[data-ui-preview-section]", previewSection],
+        ["[data-ui-component-doc]", componentDoc],
+        ["#component-doc-title", docTitle],
+        ["[data-ui-doc-summary]", docSummary],
+        ["[data-ui-doc-razor]", docRazor],
+        ["[data-ui-doc-data]", docData],
+        ["#component-preview-title", previewTitle]
+    ]);
     const document = {
         body: new FakeElement("body"),
-        querySelector: selector => selector === "[data-ui-theme-editor]" ? null : null,
-        querySelectorAll: selector => selectorMap.get(selector) ?? [],
+        querySelector: selector => queryMap.get(selector) ?? null,
+        querySelectorAll: selector => selector === "[data-ui-component]" ? targets : selector === "[data-ui-show-kind]" ? navButtons : selectorMap.get(selector) ?? [],
         createElement: tagName => new FakeElement(tagName),
         addEventListener: () => {}
     };
@@ -263,12 +329,13 @@ function makeFixtures() {
         clearTimeout: () => {},
         setTimeout: callback => callback()
     };
-    return { document, window, downloadStart, dateControls, timeControl, tagInputText, tagInputValues, uploadInput, uploadDropZone, tableComponent };
+    return { document, window, downloadStart, download, dateControls, timeControl, tagInputText, tagInputValues, uploadInput, uploadDropZone, tableComponent, colorInput, codeOutput, checkboxNav, radioNav, checkboxTarget, radioTarget, secondRadioTarget };
 }
 
 const source = fs.readFileSync("standalone/ui-components.js", "utf8");
 const styles = fs.readFileSync("standalone/ui-components.css", "utf8");
 const showcaseStyles = fs.readFileSync("UiComponentLibrary/wwwroot/css/showcase.css", "utf8");
+const showcaseMarkup = fs.readFileSync("UiComponentLibrary/Views/Home/Index.cshtml", "utf8");
 const fixtures = makeFixtures();
 let thrown = null;
 try {
@@ -284,7 +351,7 @@ try {
             return option;
         },
         URL,
-        getComputedStyle: () => ({ getPropertyValue: () => "" }),
+         getComputedStyle: element => ({ getPropertyValue: name => element.style.getPropertyValue(name) }),
         console
     }, { filename: "standalone/ui-components.js" });
 } catch (error) {
@@ -292,6 +359,22 @@ try {
 }
 
 assert.equal(thrown, null, `ui-components.js initialization threw: ${thrown?.message}`);
+const generatedCode = () => fixtures.codeOutput.children.map(child => child.textContent).join("");
+fixtures.checkboxNav.dispatchEvent(new FakeEvent("click"));
+assert.match(generatedCode(), /--ui-border-color:#ced4da/, "checkbox copy HTML omitted an available default theme setting");
+fixtures.colorInput.value = "#123456";
+fixtures.colorInput.dispatchEvent(new FakeEvent("input"));
+assert.equal(fixtures.checkboxTarget.style.getPropertyValue("--ui-focus-color"), "#123456", "checkbox preview did not receive the selected theme");
+assert.match(generatedCode(), /data-ui-component="checkbox"[\s\S]*style="[^"]*--ui-focus-color:#123456/, "checkbox copy HTML did not receive the selected theme");
+fixtures.radioNav.dispatchEvent(new FakeEvent("click"));
+fixtures.colorInput.value = "#0f766e";
+fixtures.colorInput.dispatchEvent(new FakeEvent("input"));
+assert.equal(fixtures.radioTarget.style.getPropertyValue("--ui-focus-color"), "#0f766e", "radio preview did not receive the selected theme");
+assert.equal(fixtures.secondRadioTarget.style.getPropertyValue("--ui-focus-color"), "#0f766e", "radio group did not receive the selected theme");
+assert.match(generatedCode(), /data-ui-component="radio"[\s\S]*style="[^"]*--ui-focus-color:#0f766e/, "radio copy HTML did not receive the selected theme");
+fixtures.downloadStart.dispatchEvent(new FakeEvent("click"));
+const downloadDialog = fixtures.document.body.children.find(child => child.className.startsWith("ui-download-dialog"));
+assert.equal(downloadDialog?.style.getPropertyValue("--ui-download-progress-color"), "#c026d3", "download dialog did not receive the selected progress color");
 assert.ok(fixtures.downloadStart.listeners.has("click"), "download start interaction was not initialized");
 fixtures.dateControls.forEach(control => assert.ok(control.listeners.has("click"), `${control.dataset.uiDateControl} picker interaction was not initialized`));
 assert.ok(fixtures.timeControl.listeners.has("click"), "time picker interaction was not initialized");
@@ -313,10 +396,36 @@ assert.match(cssRule(".ui-file-list"), /width:\s*100%/i, "file progress list is 
 assert.match(cssRule(".ui-file-upload"), /width:\s*100%/i, "file uploader does not define its own width");
 assert.match(cssRule(".ui-file-item"), /width:\s*100%/i, "file progress item is not constrained to the uploader width");
 assert.match(cssRule(".ui-file-item"), /min-width:\s*0/i, "file progress item can overflow because its minimum width is not reset");
+assert.match(cssRule(".ui-download-file-icon"), /var\(--ui-download-icon-color/i, "download file icon does not use a configurable theme color");
+assert.match(cssRule(".ui-download-progress > i"), /var\(--ui-download-progress-color/i, "download progress does not use a configurable theme color");
 assert.match(showcaseStyles, /\.ui-component-workspace\s*\{[^}]*grid-template-columns:\s*minmax\(0,\s*1fr\)/s, "editor and preview are not stacked vertically");
 assert.match(showcaseStyles, /\.ui-preview-card \[data-ui-preview-item\]\s*\{[^}]*width:\s*100%/s, "preview components do not fill the available width");
 assert.match(showcaseStyles, /\.ui-preview-card \[data-ui-preview-item\]\s*\{[^}]*flex:\s*0 0 100%/s, "preview grid columns are not expanded to full width");
 assert.match(showcaseStyles, /data-ui-preview-kind="button"|data-ui-preview-kind\\=\"button\\"/, "button width exception is missing");
 assert.match(showcaseStyles, /\.ui-preview-card \[data-ui-preview-kind="button"\][^}]*\{[^}]*width:\s*auto/s, "button preview is still forced to full width");
 
-console.log("PASS: all component initializers reached their interaction bindings");
+const expectedThemeVariables = [
+    "--ui-border-color", "--ui-focus-color", "--ui-text-color", "--ui-background-color",
+    "--ui-tag-color", "--ui-tag-text-color",
+    "--ui-button-background", "--ui-button-text", "--ui-button-border",
+    "--ui-confirm-color", "--ui-cancel-color", "--ui-range-endpoint-color", "--ui-range-fill-color",
+    "--ui-time-control-color",
+    "--ui-flip-number-color", "--ui-flip-number-background",
+    "--ui-upload-border-color", "--ui-upload-progress-color", "--ui-upload-button-color", "--ui-download-icon-color", "--ui-download-progress-color",
+    "--ui-table-header-background", "--ui-table-header-text", "--ui-table-border", "--ui-table-stripe", "--ui-table-accent"
+];
+const escapedVariable = variable => variable.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+const allowedBlock = source.match(/const allowed = \{([\s\S]*?)\n\s*\};/)?.[1] ?? "";
+expectedThemeVariables.forEach(variable => {
+    assert.match(allowedBlock, new RegExp(escapedVariable(variable)), `${variable} is not mapped to a component theme`);
+    assert.match(showcaseMarkup, new RegExp(`data-ui-color=["']${escapedVariable(variable)}["']`), `${variable} has no color editor control`);
+});
+assert.doesNotMatch(allowedBlock, /--ui-time-format-color|--ui-time-meridiem-color/, "time format and meridiem colors should not be configurable");
+assert.doesNotMatch(showcaseMarkup, /data-ui-color=["']--ui-time-format-color["']|data-ui-color=["']--ui-time-meridiem-color["']/, "time format and meridiem controls should be removed");
+assert.match(source, /getComputedStyle\(active\)[\s\S]*--ui-download-progress-color/, "download dialog does not inherit the selected progress color");
+assert.match(source, /"file-download":\s*`[^`]*\$\{style\}/s, "download generated HTML does not include the selected icon color");
+assert.match(source, /const themeSnippet = \(snippet, component\)[\s\S]*\$\{style\}/, "generated label snippets have no theme style adapter");
+assert.match(source, /snippets\.checkbox = themeSnippet\(snippets\.checkbox, "checkbox"\)/, "checkbox generated HTML does not include the selected theme");
+assert.match(source, /snippets\.radio = themeSnippet\(snippets\.radio, "radio"\)/, "radio generated HTML does not include the selected theme");
+
+console.log("PASS: theme synchronization and component initializers reached their interaction bindings");

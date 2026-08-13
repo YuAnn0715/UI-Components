@@ -30,6 +30,9 @@
         </div>
     </header>
     <main class="container-fluid ui-showcase-shell">@RenderBody()</main>
+    <footer class="ui-showcase-footer" aria-label="版權聲明">
+        <span>&copy; @DateTime.Now.Year Yu Ann Cai，版權所有</span>
+    </footer>
     <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js" asp-append-version="true"></script>
     <script src="~/lib/ui-components/ui-components.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)

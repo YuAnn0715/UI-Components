@@ -20,7 +20,7 @@
         range: ["--ui-border-color", "--ui-focus-color", "--ui-text-color", "--ui-background-color", "--ui-confirm-color", "--ui-cancel-color", "--ui-range-endpoint-color", "--ui-range-fill-color"],
         time: ["--ui-border-color", "--ui-focus-color", "--ui-text-color", "--ui-background-color", "--ui-confirm-color", "--ui-cancel-color", "--ui-time-control-color", "--ui-flip-number-color", "--ui-flip-number-background"],
         upload: ["--ui-upload-border-color", "--ui-upload-progress-color", "--ui-upload-button-color"],
-        download: ["--ui-button-background", "--ui-button-text", "--ui-button-border"],
+        download: ["--ui-button-background", "--ui-button-text", "--ui-button-border", "--ui-download-icon-color", "--ui-download-progress-color"],
         tagSelect: ["--ui-border-color", "--ui-focus-color", "--ui-text-color", "--ui-background-color", "--ui-tag-color", "--ui-tag-text-color"],
         table: ["--ui-table-header-background", "--ui-table-header-text", "--ui-table-border", "--ui-table-stripe", "--ui-table-accent"]
     };
@@ -32,6 +32,7 @@
         "--ui-range-endpoint-color": "endpoint-color", "--ui-range-fill-color": "range-color",
         "--ui-time-control-color": "control-color", "--ui-flip-number-color": "flip-number-color", "--ui-flip-number-background": "flip-number-background-color",
         "--ui-upload-border-color": "border-color", "--ui-upload-progress-color": "progress-color", "--ui-upload-button-color": "button-color",
+        "--ui-download-icon-color": "icon-color", "--ui-download-progress-color": "progress-color",
         "--ui-tag-color": "tag-color", "--ui-tag-text-color": "tag-text-color",
         "--ui-table-header-background": "header-background-color", "--ui-table-header-text": "header-text-color",
         "--ui-table-border": "table-border-color", "--ui-table-stripe": "stripe-background-color", "--ui-table-accent": "accent-color"
@@ -172,8 +173,14 @@
         if (!target) return;
         const kind = target.dataset.uiComponent;
         const cssVariables = variablesFor(target)
-            .map(variable => `${variable}:${target.style.getPropertyValue(variable).trim()}`)
-            .filter(variable => !variable.endsWith(":"))
+            .map(variable => {
+                const configured = target.style.getPropertyValue(variable).trim();
+                if (configured) return `${variable}:${configured}`;
+                const input = colorInputs.find(candidate => candidate.dataset.uiColor === variable);
+                const fallback = input?.value || input?.dataset.uiDefault || "";
+                return fallback ? `${variable}:${fallback}` : "";
+            })
+            .filter(Boolean)
             .join(";");
         const style = cssVariables ? ` style="${cssVariables}"` : "";
         // 建立欄位程式碼。
@@ -195,6 +202,12 @@
             "time-picker": field("時間", '<input class="ui-control ui-time-control" id="time-picker-value" name="selectedTime" type="text" readonly autocomplete="off" data-ui-time-control="true" />'),
             "date-range-picker": `<div class="ui-field" data-ui-component="date-range-picker"${style}>\n  <label class="ui-label" for="date-range-value">住宿日期</label>\n  <input class="ui-control ui-date-control" id="date-range-value" type="text" readonly autocomplete="off" data-ui-date-control="range" />\n  <input name="startDate" type="hidden" data-ui-range-start />\n  <input name="endDate" type="hidden" data-ui-range-end />\n</div>`
         };
+        const themeSnippet = (snippet, component) => snippet.replace(
+            '<label class="ui-field">',
+            `<label class="ui-field" data-ui-component="${component}"${style}>`
+        );
+        snippets.checkbox = themeSnippet(snippets.checkbox, "checkbox");
+        snippets.radio = themeSnippet(snippets.radio, "radio");
         formatCode(codeOutput, snippets[kind] || "");
     }
 
@@ -416,6 +429,11 @@
     };
 
     // 顯示下載狀態。
+    function copyTheme() {
+        const computed = getComputedStyle(active);
+        dialog.style.setProperty("--ui-download-progress-color", computed.getPropertyValue("--ui-download-progress-color").trim());
+    }
+
     function render(state, progress = 0) {
         window.clearInterval(timer);
         const details = state === "success"
@@ -471,6 +489,7 @@
 
     // 開啟下載視窗。
     function open(state) {
+        copyTheme();
         render("downloading", 8);
         if (!dialog.open) dialog.showModal();
         let progress = 8;
