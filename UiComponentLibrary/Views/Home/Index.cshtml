@@ -27,24 +27,36 @@
             <aside class="col-lg-3">
                 <nav class="card shadow-sm ui-component-nav" data-ui-component-nav aria-label="元件導覽">
                     <div class="card-body p-3">
-                        <div class="ui-nav-heading">表單元件</div>
+                        <div class="ui-nav-heading">元件瀏覽器</div>
                         <div class="nav nav-pills flex-column gap-1">
                             <button class="nav-link text-start" type="button" data-ui-show-guide>使用說明</button>
-                            <button class="nav-link text-start active" type="button" data-ui-show-kind="text-input">Text Input</button>
-                            <button class="nav-link text-start" type="button" data-ui-show-kind="textarea">Textarea</button>
-                            <button class="nav-link text-start" type="button" data-ui-show-kind="select">Select</button>
-                            <button class="nav-link text-start" type="button" data-ui-show-kind="tag-input">標籤式 Input</button>
-                            <button class="nav-link text-start" type="button" data-ui-show-kind="tag-select">標籤式 Select</button>
-                            <button class="nav-link text-start" type="button" data-ui-show-kind="checkbox">Checkbox</button>
-                            <button class="nav-link text-start" type="button" data-ui-show-kind="radio">Radio</button>
-                            <button class="nav-link text-start" type="button" data-ui-show-kind="button">Button</button>
-                            <button class="nav-link text-start" type="button" data-ui-show-kind="file-upload">檔案上傳</button>
-                            <button class="nav-link text-start" type="button" data-ui-show-kind="file-download">檔案下載</button>
-                            <button class="nav-link text-start" type="button" data-ui-show-kind="data-table">Data Table</button>
-                            <button class="nav-link text-start" type="button" data-ui-show-kind="date-picker">日期選擇器</button>
-                            <button class="nav-link text-start" type="button" data-ui-show-kind="date-time-picker">日期＋時間</button>
-                            <button class="nav-link text-start" type="button" data-ui-show-kind="time-picker">時間選擇器</button>
-                            <button class="nav-link text-start" type="button" data-ui-show-kind="date-range-picker">日期區間</button>
+                            <div class="ui-nav-group">
+                                <div class="ui-nav-group-label">基礎輸入</div>
+                                <button class="nav-link text-start active" type="button" data-ui-show-kind="text-input">Text Input</button>
+                                <button class="nav-link text-start" type="button" data-ui-show-kind="textarea">Textarea</button>
+                                <button class="nav-link text-start" type="button" data-ui-show-kind="select">Select</button>
+                                <button class="nav-link text-start" type="button" data-ui-show-kind="button">Button</button>
+                            </div>
+                            <div class="ui-nav-group">
+                                <div class="ui-nav-group-label">標籤與選擇</div>
+                                <button class="nav-link text-start" type="button" data-ui-show-kind="tag-input">標籤式 Input</button>
+                                <button class="nav-link text-start" type="button" data-ui-show-kind="tag-select">標籤式 Select</button>
+                                <button class="nav-link text-start" type="button" data-ui-show-kind="checkbox">Checkbox</button>
+                                <button class="nav-link text-start" type="button" data-ui-show-kind="radio">Radio</button>
+                            </div>
+                            <div class="ui-nav-group">
+                                <div class="ui-nav-group-label">檔案</div>
+                                <button class="nav-link text-start" type="button" data-ui-show-kind="file-upload">檔案上傳</button>
+                                <button class="nav-link text-start" type="button" data-ui-show-kind="file-download">檔案下載</button>
+                            </div>
+                            <div class="ui-nav-group">
+                                <div class="ui-nav-group-label">日期與資料</div>
+                                <button class="nav-link text-start" type="button" data-ui-show-kind="data-table">Data Table</button>
+                                <button class="nav-link text-start" type="button" data-ui-show-kind="date-picker">日期選擇器</button>
+                                <button class="nav-link text-start" type="button" data-ui-show-kind="date-time-picker">日期＋時間</button>
+                                <button class="nav-link text-start" type="button" data-ui-show-kind="time-picker">時間選擇器</button>
+                                <button class="nav-link text-start" type="button" data-ui-show-kind="date-range-picker">日期區間</button>
+                            </div>
                         </div>
                     </div>
                 </nav>
@@ -70,6 +82,7 @@ var attachment = Request.Form.Files.GetFile("attachment");</code></pre>
                     </div>
                 </section>
 
+                <div class="ui-component-workspace">
                 <section class="card shadow-sm mb-4 ui-theme-editor" data-ui-theme-editor aria-labelledby="theme-editor-title">
                     <div class="card-body p-4">
                         <h2 class="h4" id="theme-editor-title">元件配色編輯器</h2>
@@ -213,6 +226,7 @@ var attachment = Request.Form.Files.GetFile("attachment");</code></pre>
                         </div>
                     </form>
                 </section>
+                </div>
 
                 <section class="card shadow-sm mt-4" data-ui-component-doc aria-labelledby="component-doc-title">
                     <div class="card-body p-4">

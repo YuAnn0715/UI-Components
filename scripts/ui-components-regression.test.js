@@ -268,6 +268,7 @@ function makeFixtures() {
 
 const source = fs.readFileSync("standalone/ui-components.js", "utf8");
 const styles = fs.readFileSync("standalone/ui-components.css", "utf8");
+const showcaseStyles = fs.readFileSync("UiComponentLibrary/wwwroot/css/showcase.css", "utf8");
 const fixtures = makeFixtures();
 let thrown = null;
 try {
@@ -312,5 +313,10 @@ assert.match(cssRule(".ui-file-list"), /width:\s*100%/i, "file progress list is 
 assert.match(cssRule(".ui-file-upload"), /width:\s*100%/i, "file uploader does not define its own width");
 assert.match(cssRule(".ui-file-item"), /width:\s*100%/i, "file progress item is not constrained to the uploader width");
 assert.match(cssRule(".ui-file-item"), /min-width:\s*0/i, "file progress item can overflow because its minimum width is not reset");
+assert.match(showcaseStyles, /\.ui-component-workspace\s*\{[^}]*grid-template-columns:\s*minmax\(0,\s*1fr\)/s, "editor and preview are not stacked vertically");
+assert.match(showcaseStyles, /\.ui-preview-card \[data-ui-preview-item\]\s*\{[^}]*width:\s*100%/s, "preview components do not fill the available width");
+assert.match(showcaseStyles, /\.ui-preview-card \[data-ui-preview-item\]\s*\{[^}]*flex:\s*0 0 100%/s, "preview grid columns are not expanded to full width");
+assert.match(showcaseStyles, /data-ui-preview-kind="button"|data-ui-preview-kind\\=\"button\\"/, "button width exception is missing");
+assert.match(showcaseStyles, /\.ui-preview-card \[data-ui-preview-kind="button"\][^}]*\{[^}]*width:\s*auto/s, "button preview is still forced to full width");
 
 console.log("PASS: all component initializers reached their interaction bindings");

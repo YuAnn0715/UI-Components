@@ -62,6 +62,7 @@
     const uploadSettings = document.querySelector("[data-ui-upload-settings]");
     const uploadAccept = document.querySelector("[data-ui-upload-accept]");
     const uploadMaxSize = document.querySelector("[data-ui-upload-max-size]");
+
     // 格式化 HTML 標記。
     const formatMarkup = source => String(source || "").replace(/<([A-Za-z][\w-]*)(\s[^<>]*?)(\/?)>/g, (match, tagName, rawAttributes, close) => {
         if (match.length <= 72) return match;
