@@ -11,7 +11,7 @@ ASP.NET Core MVC／Razor Pages 可直接使用的 Bootstrap 5 靜態表單元件
 
 ## 目前元件
 
-文字與選單：`ui-text-input`、`ui-textarea`、`ui-select`、`ui-tag-select`、`ui-checkbox`、`ui-radio`、`ui-button`。
+文字與選單：`ui-text-input`、`ui-textarea`、`ui-select`、`ui-tag-input`、`ui-tag-select`、`ui-checkbox`、`ui-radio`、`ui-button`。
 
 檔案與日期：`ui-file-upload`、`ui-file-download`、`ui-date-picker`、`ui-date-time-picker`、`ui-time-picker`、`ui-date-range-picker`。
 
@@ -30,4 +30,4 @@ ASP.NET Core MVC／Razor Pages 可直接使用的 Bootstrap 5 靜態表單元件
 
 4. 從展示站複製產生的原生 HTML 到 Razor View；表單欄位使用一般 HTML `name`、`value` 與 `multiple` 屬性送出。
 
-`ui-tag-select` 支援在輸入框輸入文字後按 `Enter` 建立自訂 tag；自訂值會加入 `multiple` 欄位並隨表單送出。
+`ui-tag-input` 支援在輸入框輸入文字後按 `Enter` 建立自訂 tag；`ui-tag-select` 則專門從既有選單選取項目。兩者的自訂或選取值都會加入 `multiple` 欄位並隨表單送出。

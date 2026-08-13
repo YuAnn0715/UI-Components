@@ -108,7 +108,7 @@ textarea.ui-control {
     }
 
 /* 設定：標籤選擇器。 */
-.ui-tag-select-control {
+.ui-tag-select-control, .ui-tag-input-control {
     display: flex;
     min-height: 2.5rem;
     align-items: center;
@@ -121,13 +121,13 @@ textarea.ui-control {
 }
 
     /* 設定：標籤選擇器的互動狀態。 */
-    .ui-tag-select-control:focus-within {
+    .ui-tag-select-control:focus-within, .ui-tag-input-control:focus-within {
         border-color: var(--ui-focus-color);
         box-shadow: 0 0 0 .25rem color-mix(in srgb, var(--ui-focus-color) 25%, transparent);
     }
 
 /* 設定：標籤選擇器。 */
-.ui-tag-select-tags {
+.ui-tag-select-tags, .ui-tag-input-tags {
     display: flex;
     flex: 1 1 auto;
     flex-wrap: wrap;
@@ -136,7 +136,7 @@ textarea.ui-control {
 }
 
 /* 設定：標籤選擇器。 */
-.ui-tag-select-tag {
+.ui-tag-select-tag, .ui-tag-input-tag {
     position: relative;
     display: inline-flex;
     align-items: center;
@@ -150,14 +150,14 @@ textarea.ui-control {
 }
 
     /* 設定：標籤選擇器。 */
-    .ui-tag-select-tag span {
+    .ui-tag-select-tag span, .ui-tag-input-tag span {
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
     }
 
 /* 設定：標籤選擇器。 */
-.ui-tag-select-remove {
+.ui-tag-select-remove, .ui-tag-input-remove {
     position: absolute;
     top: -.32rem;
     right: -.32rem;
@@ -175,7 +175,7 @@ textarea.ui-control {
 }
 
     /* 設定：標籤選擇器的互動狀態。 */
-    .ui-tag-select-remove:focus-visible {
+    .ui-tag-select-remove:focus-visible, .ui-tag-input-remove:focus-visible {
         outline: 2px solid var(--ui-focus-color);
         outline-offset: 2px;
     }
@@ -192,8 +192,19 @@ textarea.ui-control {
     outline: 0;
 }
 
+/* 設定：標籤式 Input。 */
+.ui-tag-input-input {
+    flex: 1 1 10rem;
+    min-width: 8rem;
+    border: 0;
+    padding: .35rem .2rem;
+    color: var(--ui-text-color);
+    background: transparent;
+    outline: 0;
+}
+
 /* 設定：標籤選擇器。 */
-.ui-tag-select-values {
+.ui-tag-select-values, .ui-tag-input-values {
     position: absolute;
     width: 1px;
     height: 1px;
@@ -205,7 +216,7 @@ textarea.ui-control {
 
 @media (max-width: 575.98px) {
     /* 設定：標籤選擇器。 */
-    .ui-tag-select-control {
+    .ui-tag-select-control, .ui-tag-input-control {
         align-items: stretch;
         flex-wrap: wrap;
     }
@@ -1224,6 +1235,9 @@ textarea.ui-control {
 
 /* 設定：檔案上傳元件。 */
 .ui-file-upload {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
     /* 設定：上傳區邊框。 */
     --ui-upload-border-color: #8b5cf6;
     /* 設定：上傳進度。 */
@@ -1366,6 +1380,10 @@ textarea.ui-control {
 
 .ui-file-list {
     display: grid;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
     gap: .65rem;
     margin-top: .8rem;
 }
@@ -1373,7 +1391,11 @@ textarea.ui-control {
 /* 設定：檔案項目。 */
 .ui-file-item {
     display: grid;
-    grid-template-columns: 2.55rem 1fr auto;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    grid-template-columns: 2.55rem minmax(0, 1fr) auto;
     align-items: center;
     gap: .75rem;
     padding: .8rem .9rem;
@@ -1381,6 +1403,11 @@ textarea.ui-control {
     border-radius: .85rem;
     background: #fff;
     box-shadow: 0 .45rem 1.15rem rgba(15,23,42,.06);
+}
+
+/* 設定：檔案項目的內容欄，避免長檔名撐開進度區塊。 */
+.ui-file-item > div {
+    min-width: 0;
 }
 
 /* 設定：檔案項目。 */
@@ -1431,6 +1458,9 @@ textarea.ui-control {
 /* 設定：檔案上傳進度。 */
 .ui-file-progress {
     display: block;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
     height: .36rem;
     margin-top: .55rem;
     overflow: hidden;

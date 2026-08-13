@@ -33,6 +33,7 @@
                             <button class="nav-link text-start active" type="button" data-ui-show-kind="text-input">Text Input</button>
                             <button class="nav-link text-start" type="button" data-ui-show-kind="textarea">Textarea</button>
                             <button class="nav-link text-start" type="button" data-ui-show-kind="select">Select</button>
+                            <button class="nav-link text-start" type="button" data-ui-show-kind="tag-input">標籤式 Input</button>
                             <button class="nav-link text-start" type="button" data-ui-show-kind="tag-select">標籤式 Select</button>
                             <button class="nav-link text-start" type="button" data-ui-show-kind="checkbox">Checkbox</button>
                             <button class="nav-link text-start" type="button" data-ui-show-kind="radio">Radio</button>
@@ -136,12 +137,31 @@ var attachment = Request.Form.Files.GetFile("attachment");</code></pre>
                                         </select>
                                     </div>
                                 </div>
+                                <div class="col-md-8" data-ui-preview-item data-ui-preview-kind="tag-input" hidden>
+                                    <div class="ui-field ui-tag-input-field" data-ui-component="tag-input" data-ui-for="Tags" data-ui-label="標籤" style="--ui-border-color:#cbd5e1;--ui-focus-color:#4f46e5;--ui-text-color:#0f172a;--ui-background-color:#ffffff;--ui-tag-color:#4f46e5;--ui-tag-text-color:#ffffff">
+                                        <label class="form-label ui-label" for="Tags_input">標籤</label>
+                                        <div class="ui-tag-input-control" data-ui-tag-input-control>
+                                            <div class="ui-tag-input-tags" data-ui-tag-input-tags aria-live="polite"></div>
+                                            <input class="ui-tag-input-input" id="Tags_input" type="text" placeholder="輸入文字後按 Enter 新增" data-ui-tag-input-input autocomplete="off" />
+                                        </div>
+                                        <select class="ui-tag-input-values" id="Tags" name="Tags" multiple data-ui-tag-input-values>
+                                            @foreach (var option in Model.SkillOptions)
+                                            {
+                                                var value = option.Value ?? option.Text;
+                                                <option value="@value" selected="@(selectedSkills.Contains(value) ? "selected" : null)">@option.Text</option>
+                                            }
+                                            @foreach (var value in Model.Skills.Where(value => !knownSkillValues.Contains(value)))
+                                            {
+                                                <option value="@value" selected="selected">@value</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
                                 <div class="col-md-8" data-ui-preview-item data-ui-preview-kind="tag-select" hidden>
                                     <div class="ui-field ui-tag-select-field" data-ui-component="tag-select" data-ui-for="Skills" data-ui-label="技能標籤" style="--ui-border-color:#cbd5e1;--ui-focus-color:#4f46e5;--ui-text-color:#0f172a;--ui-background-color:#ffffff;--ui-tag-color:#4f46e5;--ui-tag-text-color:#ffffff">
                                         <label class="form-label ui-label" for="Skills_options">技能標籤</label>
                                         <div class="ui-tag-select-control" data-ui-tag-select-control>
                                             <div class="ui-tag-select-tags" data-ui-tag-select-tags aria-live="polite"></div>
-                                            <input class="ui-tag-select-input" id="Skills_input" type="text" placeholder="輸入技能後按 Enter 新增" data-ui-tag-select-input autocomplete="off" />
                                             <select class="ui-tag-select-menu" id="Skills_options" data-ui-tag-select-menu>
                                                 <option value="">選擇項目</option>
                                                 @foreach (var option in Model.SkillOptions)
@@ -178,12 +198,12 @@ var attachment = Request.Form.Files.GetFile("attachment");</code></pre>
                                 <div class="col-md-8" data-ui-preview-item data-ui-preview-kind="file-upload" hidden>
                                     <div class="ui-field ui-file-upload" data-ui-component="file-upload" data-ui-for="UploadFile" data-ui-label="附件" data-ui-accept=".pdf,.doc,.docx" data-ui-max-size="10" style="--ui-upload-border-color:#8b5cf6;--ui-upload-progress-color:#4f46e5;--ui-upload-button-color:#4f46e5">
                                         <label class="form-label ui-label" for="UploadFile">附件</label>
-                                        <div class="ui-file-drop-zone" data-ui-file-dropzone tabindex="0" role="button"><span class="ui-file-upload-icon" aria-hidden="true">↑</span><strong>拖放檔案到這裡</strong><span class="ui-file-or">或</span><button class="ui-file-browse" type="button" data-ui-file-browse>瀏覽檔案</button><span class="ui-file-hint">支援 .pdf、.doc、.docx · 上限 10 MB</span></div>
+                                        <div class="ui-file-drop-zone" data-ui-file-dropzone tabindex="0" role="button"><span class="ui-file-upload-icon" aria-hidden="true"><i class="bi bi-cloud-arrow-up"></i></span><strong>拖放檔案到這裡</strong><span class="ui-file-or">或</span><button class="ui-file-browse" type="button" data-ui-file-browse>瀏覽檔案</button><span class="ui-file-hint">支援 .pdf、.doc、.docx · 上限 10 MB</span></div>
                                         <input class="ui-file-input" id="UploadFile" name="UploadFile" type="file" accept=".pdf,.doc,.docx" data-ui-file-input />
                                         <div class="ui-file-list" data-ui-file-list aria-live="polite"></div>
                                     </div>
                                 </div>
-                                <div class="col-12" data-ui-preview-item data-ui-preview-kind="file-download" hidden><section class="ui-file-download" data-ui-component="file-download" data-ui-download-name="年度報告.txt" data-ui-download-url="/downloads/download-demo.txt"><div class="ui-download-card"><div class="ui-download-copy"><strong>年度報告</strong><span>年度報告.txt</span></div><div class="ui-download-actions"><button class="btn ui-button" type="button" data-ui-download-start>下載檔案</button></div></div></section></div>
+                                <div class="col-12" data-ui-preview-item data-ui-preview-kind="file-download" hidden><section class="ui-file-download" data-ui-component="file-download" data-ui-download-name="年度報告.txt" data-ui-download-url="/downloads/download-demo.txt"><div class="ui-download-card"><div class="ui-download-file-icon" aria-hidden="true"><i class="bi bi-file-earmark-arrow-down"></i></div><div class="ui-download-copy"><strong>年度報告</strong><span>年度報告.txt</span></div><div class="ui-download-actions"><button class="btn ui-button" type="button" data-ui-download-start><i class="bi bi-download" aria-hidden="true"></i>下載檔案</button></div></div><div class="ui-download-demo-actions"><span>效果示範</span><button type="button" class="btn btn-outline-success" data-ui-download-success>顯示成功</button><button type="button" class="btn btn-outline-danger" data-ui-download-failure>顯示失敗</button></div></section></div>
                                 <div class="col-12" data-ui-preview-item data-ui-preview-kind="data-table" hidden><div class="ui-data-table" data-ui-component="data-table" data-ui-data-table="true" data-ui-page-size="10" data-ui-page-size-options="10,25,50" data-ui-sortable="true" data-ui-striped="true" data-ui-hover="true" style="--ui-table-header-background:#f7e9ea;--ui-table-border:#d8dee8;--ui-table-accent:#a78bb0"><table class="ui-data-table-grid"><thead><tr><th data-ui-sort-type="number">單位代號</th><th>單位</th><th data-ui-sort-type="number">員編</th><th>姓名</th><th>職稱</th><th data-ui-sortable="false">講師身份</th></tr></thead><tbody>@foreach (var row in Model.DataTableRows) { <tr><td data-ui-sort-value="@row.UnitCode">@row.UnitCode</td><td>@row.UnitName</td><td data-ui-sort-value="@row.EmployeeCode">@row.EmployeeCode</td><td>@row.Name</td><td>@row.Title</td><td>@row.Instructor</td></tr> }</tbody></table></div></div>
                                 <div class="col-md-6" data-ui-preview-item data-ui-preview-kind="date-picker" hidden><div class="ui-field" data-ui-component="date-picker" data-ui-for="SelectedDate" data-ui-label="預約日期" style="--ui-confirm-color:#4f46e5;--ui-cancel-color:#64748b;--ui-range-endpoint-color:#4f46e5"><label class="form-label ui-label" for="SelectedDate">預約日期</label><input class="form-control ui-control ui-date-control" id="SelectedDate" name="SelectedDate" type="text" readonly autocomplete="off" data-ui-date-control="date" value="@selectedDate" /></div></div>
                                 <div class="col-md-6" data-ui-preview-item data-ui-preview-kind="date-time-picker" hidden><div class="ui-field" data-ui-component="date-time-picker" data-ui-for="SelectedDateTime" data-ui-label="開始日期與時間" style="--ui-confirm-color:#4f46e5;--ui-cancel-color:#64748b;--ui-range-endpoint-color:#4f46e5"><label class="form-label ui-label" for="SelectedDateTime">開始日期與時間</label><input class="form-control ui-control ui-date-control" id="SelectedDateTime" name="SelectedDateTime" type="text" readonly autocomplete="off" data-ui-date-control="datetime" value="@selectedDateTime" /></div></div>

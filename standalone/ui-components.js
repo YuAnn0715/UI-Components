@@ -6,7 +6,7 @@
     const colorInputs = [...editor.querySelectorAll("[data-ui-color]")];
     const colorRows = [...editor.querySelectorAll("[data-ui-color-row]")];
     const labels = {
-        "text-input": "輸入框", textarea: "多行輸入框", select: "下拉選單", "tag-select": "標籤式 Select",
+        "text-input": "輸入框", textarea: "多行輸入框", select: "下拉選單", "tag-input": "標籤式 Input", "tag-select": "標籤式 Select",
         checkbox: "核取方塊", radio: "單選按鈕", button: "按鈕",
         "date-picker": "日期選擇器", "date-time-picker": "日期＋時間", "time-picker": "時間選擇器", "date-range-picker": "日期區間"
     };
@@ -43,7 +43,7 @@
     const previewTitle = document.querySelector("#component-preview-title");
     const guideButton = document.querySelector("[data-ui-show-guide]");
     const navigationIcons = {
-        "text-input": "input-cursor-text", textarea: "textarea-t", select: "menu-button-wide", "tag-select": "tags",
+        "text-input": "input-cursor-text", textarea: "textarea-t", select: "menu-button-wide", "tag-input": "tag", "tag-select": "tags",
         checkbox: "check2-square", radio: "ui-radios", button: "cursor-fill", "file-upload": "cloud-arrow-up", "file-download": "file-earmark-arrow-down",
         "date-picker": "calendar3", "date-time-picker": "calendar2-week", "time-picker": "clock", "date-range-picker": "calendar-range", "data-table": "table"
     };
@@ -92,7 +92,8 @@
         "time-picker": { title: "時間選擇器", summary: "使用翻頁時鐘選擇時間。", data: "<p>元件會寫入 <code>input[name=selectedTime].value</code>，格式為 <code>HH:mm</code>。</p>" },
         "date-range-picker": { title: "日期區間", summary: "一次選擇起日與迄日。", data: "<p>元件會分別寫入 <code>input[name=startDate]</code> 與 <code>input[name=endDate]</code>。</p>" },
         "data-table": { title: "Data Table", summary: "可排序、可分頁的資料表。", data: "<p>一般 HTML <code>table</code> 加上 <code>data-ui-data-table</code> 後，即可啟用排序、每頁筆數選擇與分頁。</p>" },
-        "tag-select": { title: "標籤式 Select", summary: "可從選單選取項目，也可輸入文字按 Enter 建立自訂標籤。", data: "<p>在 <code>data-ui-tag-select-input</code> 輸入文字後按 <kbd>Enter</kbd> 建立自訂標籤。實際選取值由具 <code>name</code> 與 <code>multiple</code> 的隱藏 <code>select</code> 送出。</p>" },
+        "tag-input": { title: "標籤式 Input", summary: "輸入文字後按 Enter 建立自訂標籤。", data: "<p>在 <code>data-ui-tag-input-input</code> 輸入文字後按 <kbd>Enter</kbd> 建立 tag。實際值由具 <code>name</code> 與 <code>multiple</code> 的隱藏 <code>select</code> 送出。</p>" },
+        "tag-select": { title: "標籤式 Select", summary: "從選單選取多個項目並顯示為標籤。", data: "<p>使用 <code>data-ui-tag-select-menu</code> 選擇既有項目，實際選取值由具 <code>name</code> 與 <code>multiple</code> 的隱藏 <code>select</code> 送出。</p>" },
         "file-upload": { title: "檔案上傳", summary: "支援拖放與瀏覽檔案。", data: "<p>使用 <code>input[type=file]</code> 取得檔案；前端會檢查格式與大小並顯示清單，伺服器仍必須驗證檔案。</p>" },
         "file-download": { title: "檔案下載", summary: "顯示下載進度並提供檔案連結。", data: "<p><code>data-ui-download-url</code> 會用於完成後的下載連結；實際檔案傳輸由瀏覽器處理。</p>" }
     };
@@ -103,7 +104,8 @@
         checkbox: [["name / value", "勾選後送出的欄位與值"], ["checked", "預設勾選狀態"]],
         radio: [["name", "同組選項使用相同名稱"], ["value", "選項送出的值"]],
         button: [["type", "submit 提交表單；button 觸發前端動作"], ["style", "按鈕配色"]],
-        "tag-select": [["data-ui-tag-select-input", "輸入文字後按 Enter 建立自訂標籤"], ["data-ui-tag-select-menu", "選擇既有項目的選單"], ["name + multiple", "實際送出選取值的 select"], ["data-ui-tag-select-values", "包含既有與自訂 tag 的選取值"]],
+        "tag-input": [["data-ui-tag-input-input", "輸入文字後按 Enter 建立自訂標籤"], ["name + multiple", "實際送出 tag 值的 select"], ["data-ui-tag-input-values", "包含自訂 tag 的選取值"]],
+        "tag-select": [["data-ui-tag-select-menu", "選擇既有項目的選單"], ["name + multiple", "實際送出選取值的 select"], ["data-ui-tag-select-values", "包含已選項目的選取值"]],
         "file-upload": [["name", "檔案欄位名稱"], ["accept", "副檔名或 MIME 類型限制"], ["data-ui-max-size", "單一檔案容量上限（MB）"], ["multiple", "允許選擇多個檔案"]],
         "file-download": [["data-ui-download-name", "顯示的檔名"], ["data-ui-download-url", "完成後的下載連結"], ["data-ui-download-start", "觸發下載效果的按鈕"]],
         "data-table": [["data-ui-page-size", "預設每頁顯示筆數"], ["data-ui-page-size-options", "每頁筆數選項"], ["data-ui-sort-type", "欄位排序型別"]],
@@ -132,7 +134,7 @@
         if (target?.dataset.uiComponent === "date-range-picker") return allowed.range;
         if (target?.dataset.uiComponent === "file-upload") return allowed.upload;
         if (target?.dataset.uiComponent === "file-download") return allowed.download;
-        if (target?.dataset.uiComponent === "tag-select") return allowed.tagSelect;
+        if (["tag-input", "tag-select"].includes(target?.dataset.uiComponent)) return allowed.tagSelect;
         if (target?.dataset.uiComponent === "data-table") return allowed.table;
         return allowed.field;
     };
@@ -179,12 +181,13 @@
             "text-input": field("姓名", '<input class="ui-control" id="text-input-value" name="name" type="text" placeholder="請輸入姓名" />'),
             textarea: field("備註", '<textarea class="ui-control" id="textarea-value" name="notes" rows="3" placeholder="可選填"></textarea>'),
             select: field("國家", '<select class="ui-control" id="select-value" name="country">\n    <option value="TW">台灣</option>\n    <option value="JP">日本</option>\n  </select>'),
-            "tag-select": `<div class="ui-field" data-ui-component="tag-select"${style}>\n  <label class="ui-label" for="tag-select-input">技能</label>\n  <div class="ui-tag-select-control" data-ui-tag-select-control>\n    <div class="ui-tag-select-tags" data-ui-tag-select-tags></div>\n    <input class="ui-tag-select-input" id="tag-select-input" type="text" placeholder="輸入後按 Enter 新增" data-ui-tag-select-input autocomplete="off" />\n    <select class="ui-tag-select-menu" id="tag-select-menu" data-ui-tag-select-menu>\n      <option value="">選擇技能</option>\n      <option value="csharp">C#</option>\n      <option value="javascript">JavaScript</option>\n    </select>\n  </div>\n  <select class="ui-tag-select-values" name="skills" multiple data-ui-tag-select-values>\n    <option value="csharp">C#</option>\n    <option value="javascript">JavaScript</option>\n  </select>\n</div>`,
+            "tag-input": `<div class="ui-field" data-ui-component="tag-input"${style}>\n  <label class="ui-label" for="tag-input-input">標籤</label>\n  <div class="ui-tag-input-control" data-ui-tag-input-control>\n    <div class="ui-tag-input-tags" data-ui-tag-input-tags></div>\n    <input class="ui-tag-input-input" id="tag-input-input" type="text" placeholder="輸入文字後按 Enter 新增" data-ui-tag-input-input autocomplete="off" />\n  </div>\n  <select class="ui-tag-input-values" name="tags" multiple data-ui-tag-input-values>\n    <option value="csharp">C#</option>\n    <option value="javascript">JavaScript</option>\n  </select>\n</div>`,
+            "tag-select": `<div class="ui-field" data-ui-component="tag-select"${style}>\n  <label class="ui-label" for="tag-select-menu">技能</label>\n  <div class="ui-tag-select-control" data-ui-tag-select-control>\n    <div class="ui-tag-select-tags" data-ui-tag-select-tags></div>\n    <select class="ui-tag-select-menu" id="tag-select-menu" data-ui-tag-select-menu>\n      <option value="">選擇技能</option>\n      <option value="csharp">C#</option>\n      <option value="javascript">JavaScript</option>\n    </select>\n  </div>\n  <select class="ui-tag-select-values" name="skills" multiple data-ui-tag-select-values>\n    <option value="csharp">C#</option>\n    <option value="javascript">JavaScript</option>\n  </select>\n</div>`,
             checkbox: '<label class="ui-field"><input class="ui-check-control" name="emailUpdates" type="checkbox" value="true" /> 我想收到產品更新</label>',
             radio: '<label class="ui-field"><input class="ui-check-control" name="preferredContact" type="radio" value="email" /> 電子郵件</label>',
             button: `<button class="ui-button" type="button"${style}>送出表單</button>`,
-            "file-upload": `<div class="ui-file-upload" data-ui-component="file-upload" data-ui-accept=".pdf,.doc,.docx" data-ui-max-size="10"${style}>\n  <label class="ui-label" for="attachment">附件</label>\n  <div class="ui-file-drop-zone" data-ui-file-dropzone tabindex="0" role="button">\n    <span class="ui-file-upload-icon" aria-hidden="true">↑</span><strong>拖放檔案到這裡</strong><span class="ui-file-or">或</span><button class="ui-file-browse" type="button" data-ui-file-browse>瀏覽檔案</button><span class="ui-file-hint">支援 .pdf、.doc、.docx · 上限 10 MB</span>\n  </div>\n  <input class="ui-file-input" id="attachment" name="attachment" type="file" accept=".pdf,.doc,.docx" data-ui-file-input />\n  <div class="ui-file-list" data-ui-file-list aria-live="polite"></div>\n</div>`,
-            "file-download": `<section class="ui-file-download" data-ui-component="file-download" data-ui-download-name="年度報告.pdf" data-ui-download-url="/files/annual-report.pdf"${style}>\n  <div class="ui-download-card"><div class="ui-download-file-icon" aria-hidden="true">↓</div><div class="ui-download-copy"><strong>年度報告</strong><span>年度報告.pdf</span></div><div class="ui-download-actions"><button class="ui-button" type="button" data-ui-download-start>下載檔案</button></div></div>\n</section>`,
+            "file-upload": `<div class="ui-file-upload" data-ui-component="file-upload" data-ui-accept=".pdf,.doc,.docx" data-ui-max-size="10"${style}>\n  <label class="ui-label" for="attachment">附件</label>\n  <div class="ui-file-drop-zone" data-ui-file-dropzone tabindex="0" role="button">\n    <span class="ui-file-upload-icon" aria-hidden="true"><i class="bi bi-cloud-arrow-up"></i></span><strong>拖放檔案到這裡</strong><span class="ui-file-or">或</span><button class="ui-file-browse" type="button" data-ui-file-browse>瀏覽檔案</button><span class="ui-file-hint">支援 .pdf、.doc、.docx · 上限 10 MB</span>\n  </div>\n  <input class="ui-file-input" id="attachment" name="attachment" type="file" accept=".pdf,.doc,.docx" data-ui-file-input />\n  <div class="ui-file-list" data-ui-file-list aria-live="polite"></div>\n</div>`,
+            "file-download": `<section class="ui-file-download" data-ui-component="file-download" data-ui-download-name="年度報告.pdf" data-ui-download-url="/files/annual-report.pdf"${style}>\n  <div class="ui-download-card"><div class="ui-download-file-icon" aria-hidden="true"><i class="bi bi-file-earmark-arrow-down"></i></div><div class="ui-download-copy"><strong>年度報告</strong><span>年度報告.pdf</span></div><div class="ui-download-actions"><button class="ui-button" type="button" data-ui-download-start><i class="bi bi-download" aria-hidden="true"></i>下載檔案</button></div></div>\n  <div class="ui-download-demo-actions"><span>效果示範</span><button type="button" class="btn btn-outline-success" data-ui-download-success>顯示成功</button><button type="button" class="btn btn-outline-danger" data-ui-download-failure>顯示失敗</button></div>\n</section>`,
             "data-table": `<div class="ui-data-table" data-ui-component="data-table" data-ui-data-table="true" data-ui-page-size="10" data-ui-page-size-options="10,25,50" data-ui-sortable="true"${style}>\n  <table class="ui-data-table-grid">\n    <thead><tr><th data-ui-sort-type="number">單位代號</th><th>單位</th><th data-ui-sort-type="number">員編</th><th>姓名</th><th>職稱</th><th data-ui-sortable="false">講師身份</th></tr></thead>\n    <tbody><tr><td>147</td><td>虎尾分行</td><td>067378</td><td>黃＊＊</td><td>高級襄理</td><td>是</td></tr></tbody>\n  </table>\n</div>`,
             "date-picker": field("日期", '<input class="ui-control ui-date-control" id="date-picker-value" name="selectedDate" type="text" readonly autocomplete="off" data-ui-date-control="date" />'),
             "date-time-picker": field("日期與時間", '<input class="ui-control ui-date-control" id="date-time-picker-value" name="selectedDateTime" type="text" readonly autocomplete="off" data-ui-date-control="datetime" />'),
@@ -283,12 +286,65 @@
 })();
 
 (() => {
+    const tagInputs = [...document.querySelectorAll("[data-ui-component='tag-input']")];
+    if (!tagInputs.length) return;
+
+    tagInputs.forEach(tagInput => {
+        const input = tagInput.querySelector("[data-ui-tag-input-input]");
+        const values = tagInput.querySelector("[data-ui-tag-input-values]");
+        const tags = tagInput.querySelector("[data-ui-tag-input-tags]");
+        const control = tagInput.querySelector("[data-ui-tag-input-control]");
+        const selected = () => [...values.options].filter(option => option.selected);
+        const optionFor = value => [...values.options].find(option => option.value === value);
+
+        function render() {
+            tags.replaceChildren();
+            selected().forEach(option => {
+                const tag = document.createElement("span");
+                tag.className = "ui-tag-input-tag";
+                const text = document.createElement("span");
+                text.textContent = option.text;
+                const remove = document.createElement("button");
+                remove.type = "button";
+                remove.className = "ui-tag-input-remove";
+                remove.setAttribute("aria-label", `移除 ${option.text}`);
+                remove.textContent = "×";
+                remove.addEventListener("click", () => {
+                    option.selected = false;
+                    render();
+                    values.dispatchEvent(new Event("change", { bubbles: true }));
+                });
+                tag.append(text, remove);
+                tags.append(tag);
+            });
+        }
+
+        input?.addEventListener("keydown", event => {
+            if (event.key !== "Enter") return;
+            event.preventDefault();
+            const value = input.value.trim();
+            if (!value || optionFor(value)) {
+                input.value = "";
+                return;
+            }
+            values.add(new Option(value, value, false, true));
+            render();
+            values.dispatchEvent(new Event("change", { bubbles: true }));
+            input.value = "";
+        });
+        control?.addEventListener("click", event => {
+            if (!event.target.closest("button, input")) input?.focus();
+        });
+        render();
+    });
+})();
+
+(() => {
     const tagSelects = [...document.querySelectorAll("[data-ui-component='tag-select']")];
     if (!tagSelects.length) return;
 
     tagSelects.forEach(tagSelect => {
         const menu = tagSelect.querySelector("[data-ui-tag-select-menu]");
-        const input = tagSelect.querySelector("[data-ui-tag-select-input]");
         const values = tagSelect.querySelector("[data-ui-tag-select-values]");
         const tags = tagSelect.querySelector("[data-ui-tag-select-tags]");
         const control = tagSelect.querySelector("[data-ui-tag-select-control]");
@@ -331,22 +387,8 @@
             render();
             values.dispatchEvent(new Event("change", { bubbles: true }));
         });
-        input?.addEventListener("keydown", event => {
-            if (event.key !== "Enter") return;
-            event.preventDefault();
-            const value = input.value.trim();
-            if (!value || optionFor(value)) {
-                input.value = "";
-                return;
-            }
-            const option = new Option(value, value, false, true);
-            values.add(option);
-            render();
-            values.dispatchEvent(new Event("change", { bubbles: true }));
-            input.value = "";
-        });
         control.addEventListener("click", event => {
-            if (!event.target.closest("button, select, input")) input?.focus();
+            if (!event.target.closest("button, select")) menu?.focus();
         });
         render();
     });
@@ -440,8 +482,8 @@
 
     downloads.forEach(download => {
         download.querySelector("[data-ui-download-start]").addEventListener("click", () => { active = download; open("success"); });
-        download.querySelector("[data-ui-download-success]").addEventListener("click", () => { active = download; open("success"); });
-        download.querySelector("[data-ui-download-failure]").addEventListener("click", () => { active = download; open("failure"); });
+        download.querySelector("[data-ui-download-success]")?.addEventListener("click", () => { active = download; open("success"); });
+        download.querySelector("[data-ui-download-failure]")?.addEventListener("click", () => { active = download; open("failure"); });
     });
     dialog.addEventListener("click", event => { if (event.target === dialog || event.target.closest("[data-ui-download-close]")) { window.clearInterval(timer); dialog.close(); } });
 })();
@@ -727,7 +769,10 @@
                 list.append(item);
                 return;
             }
-            icon.textContent = "⇧";
+            const uploadIcon = document.createElement("i");
+            uploadIcon.className = "bi bi-cloud-arrow-up";
+            uploadIcon.setAttribute("aria-hidden", "true");
+            icon.append(uploadIcon);
             description.textContent = `${formatSize(file.size)} · 正在上傳`;
             const progressTrack = document.createElement("span");
             progressTrack.className = "ui-file-progress";

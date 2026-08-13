@@ -21,4 +21,4 @@
 
 資料表可使用一般 HTML `<table>`，外層加上 `data-ui-data-table`、`data-ui-page-size` 與 `data-ui-page-size-options`，即可啟用排序、每頁筆數選擇與分離式分頁列；欄位可用 `data-ui-sortable="false"` 停用排序。
 
-標籤式選單可在 `data-ui-tag-select-input` 輸入文字後按 `Enter` 建立自訂 tag；元件會將自訂值加入具有 `name` 與 `multiple` 的 `data-ui-tag-select-values` 選單，隨表單送出。
+`ui-tag-input` 可在 `data-ui-tag-input-input` 輸入文字後按 `Enter` 建立自訂 tag；元件會將自訂值加入具有 `name` 與 `multiple` 的 `data-ui-tag-input-values` 選單，隨表單送出。`ui-tag-select` 僅從 `data-ui-tag-select-menu` 選取既有項目。
