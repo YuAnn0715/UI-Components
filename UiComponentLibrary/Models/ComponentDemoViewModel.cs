@@ -45,4 +45,14 @@ public sealed class ComponentDemoViewModel
     public IReadOnlyList<SelectListItem> Countries { get; set; } = [];
 
     public IReadOnlyList<SelectListItem> SkillOptions { get; set; } = [];
+
+    public IReadOnlyList<DataTableDemoRow> DataTableRows { get; set; } = [];
 }
+
+public sealed record DataTableDemoRow(
+    string UnitCode,
+    string UnitName,
+    string EmployeeCode,
+    string Name,
+    string Title,
+    string Instructor);

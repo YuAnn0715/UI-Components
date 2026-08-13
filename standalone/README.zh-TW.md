@@ -18,3 +18,5 @@
 4. 在展示器完成配色後，複製「HTML 程式碼」到 Razor View。表單資料使用原生欄位名稱讀取，例如 `Request.Form["country"]`；檔案使用 `Request.Form.Files`。
 
 `ui-components.js` 必須在元件 HTML 後載入，或使用 `defer` 載入。
+
+資料表可使用一般 HTML `<table>`，外層加上 `data-ui-data-table`、`data-ui-page-size` 與 `data-ui-page-size-options`，即可啟用排序、每頁筆數選擇與分離式分頁列；欄位可用 `data-ui-sortable="false"` 停用排序。

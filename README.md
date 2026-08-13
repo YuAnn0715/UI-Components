@@ -11,4 +11,4 @@ ASP.NET Core MVC／Razor Pages 的 Bootstrap 5 表單元件庫。
 
 ## 目前元件
 
-`ui-text-input`、`ui-textarea`、`ui-select`、`ui-checkbox`、`ui-radio`、`ui-button`。
+`ui-text-input`、`ui-textarea`、`ui-select`、`ui-checkbox`、`ui-radio`、`ui-button`、`ui-data-table`。

@@ -30,6 +30,7 @@
                             <button class="nav-link text-start" type="button" data-ui-show-kind="button">Button</button>
                             <button class="nav-link text-start" type="button" data-ui-show-kind="file-upload">檔案上傳</button>
                             <button class="nav-link text-start" type="button" data-ui-show-kind="file-download">檔案下載</button>
+                            <button class="nav-link text-start" type="button" data-ui-show-kind="data-table">Data Table</button>
                             <button class="nav-link text-start" type="button" data-ui-show-kind="date-picker">日期選擇器</button>
                             <button class="nav-link text-start" type="button" data-ui-show-kind="date-time-picker">日期＋時間</button>
                             <button class="nav-link text-start" type="button" data-ui-show-kind="time-picker">時間選擇器</button>
@@ -93,6 +94,13 @@ var attachment = Request.Form.Files.GetFile("attachment");</code></pre>
                             <div class="col-md-4" data-ui-color-row><label class="form-label">標籤顏色</label><input class="form-control form-control-color" type="color" data-ui-color="--ui-tag-color" data-ui-default="#4f46e5" /></div>
                             <div class="col-md-4" data-ui-color-row><label class="form-label">標籤內文字顏色</label><input class="form-control form-control-color" type="color" data-ui-color="--ui-tag-text-color" data-ui-default="#ffffff" /></div>
                         </div>
+                        <div class="row mb-3 ui-color-controls ui-data-table-color-controls">
+                            <div class="col-md-4" data-ui-color-row><label class="form-label">表頭背景</label><input class="form-control form-control-color" type="color" data-ui-color="--ui-table-header-background" data-ui-default="#f7e9ea" /></div>
+                            <div class="col-md-4" data-ui-color-row><label class="form-label">表頭文字</label><input class="form-control form-control-color" type="color" data-ui-color="--ui-table-header-text" data-ui-default="#111827" /></div>
+                            <div class="col-md-4" data-ui-color-row><label class="form-label">表格邊框</label><input class="form-control form-control-color" type="color" data-ui-color="--ui-table-border" data-ui-default="#d8dee8" /></div>
+                            <div class="col-md-4" data-ui-color-row><label class="form-label">斑馬紋</label><input class="form-control form-control-color" type="color" data-ui-color="--ui-table-stripe" data-ui-default="#f3f4f6" /></div>
+                            <div class="col-md-4" data-ui-color-row><label class="form-label">分頁強調</label><input class="form-control form-control-color" type="color" data-ui-color="--ui-table-accent" data-ui-default="#a78bb0" /></div>
+                        </div>
                         <div class="ui-upload-settings mt-3" data-ui-upload-settings hidden>
                             <div>
                                 <label class="form-label" for="ui-upload-accept">允許檔案類型</label>
@@ -141,6 +149,35 @@ var attachment = Request.Form.Files.GetFile("attachment");</code></pre>
                                 <div class="col-12" data-ui-preview-item data-ui-preview-kind="button" hidden><ui-button background-color="#4f46e5">送出表單</ui-button></div>
                                 <div class="col-md-8" data-ui-preview-item data-ui-preview-kind="file-upload" hidden><ui-file-upload asp-for="UploadFile" label="附件" accept=".pdf,.doc,.docx" max-size-mb="10" border-color="#8b5cf6" progress-color="#4f46e5" button-color="#4f46e5" /></div>
                                 <div class="col-12" data-ui-preview-item data-ui-preview-kind="file-download" hidden><ui-file-download label="年度報告" file-name="年度報告.txt" file-url="/downloads/download-demo.txt" /></div>
+                                <div class="col-12" data-ui-preview-item data-ui-preview-kind="data-table" hidden>
+                                    <ui-data-table page-size="10" page-size-options="10,25,50" header-background-color="#f7e9ea" accent-color="#a78bb0" table-border-color="#d8dee8" stripe-background-color="#f3f4f6">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th data-ui-sort-type="number">單位代號</th>
+                                                    <th>單位</th>
+                                                    <th data-ui-sort-type="number">員編</th>
+                                                    <th>姓名</th>
+                                                    <th>職稱</th>
+                                                    <th data-ui-sortable="false">講師身份</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            @foreach (var row in Model.DataTableRows)
+                                            {
+                                                <tr>
+                                                    <td data-ui-sort-value="@row.UnitCode">@row.UnitCode</td>
+                                                    <td>@row.UnitName</td>
+                                                    <td data-ui-sort-value="@row.EmployeeCode">@row.EmployeeCode</td>
+                                                    <td>@row.Name</td>
+                                                    <td>@row.Title</td>
+                                                    <td>@row.Instructor</td>
+                                                </tr>
+                                            }
+                                            </tbody>
+                                        </table>
+                                    </ui-data-table>
+                                </div>
                                 <div class="col-md-6" data-ui-preview-item data-ui-preview-kind="date-picker" hidden><ui-date-picker asp-for="SelectedDate" confirm-color="#4f46e5" cancel-color="#64748b" endpoint-color="#4f46e5" /></div>
                                 <div class="col-md-6" data-ui-preview-item data-ui-preview-kind="date-time-picker" hidden><ui-date-time-picker asp-for="SelectedDateTime" confirm-color="#4f46e5" cancel-color="#64748b" endpoint-color="#4f46e5" /></div>
                                 <div class="col-md-6" data-ui-preview-item data-ui-preview-kind="time-picker" hidden><ui-time-picker asp-for="SelectedTime" confirm-color="#4f46e5" cancel-color="#64748b" control-color="#475569" flip-number-color="#ffffff" flip-number-background-color="#1e293b" /></div>

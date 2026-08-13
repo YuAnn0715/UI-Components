@@ -12,6 +12,7 @@
     };
     labels["file-upload"] = "檔案上傳";
     labels["file-download"] = "檔案下載";
+    labels["data-table"] = "Data Table";
     const allowed = {
         button: ["--ui-button-background", "--ui-button-text", "--ui-button-border"],
         field: ["--ui-border-color", "--ui-focus-color", "--ui-text-color", "--ui-background-color"],
@@ -20,7 +21,8 @@
         time: ["--ui-border-color", "--ui-focus-color", "--ui-text-color", "--ui-background-color", "--ui-confirm-color", "--ui-cancel-color", "--ui-time-control-color", "--ui-flip-number-color", "--ui-flip-number-background"],
         upload: ["--ui-upload-border-color", "--ui-upload-progress-color", "--ui-upload-button-color"],
         download: ["--ui-button-background", "--ui-button-text", "--ui-button-border"],
-        tagSelect: ["--ui-border-color", "--ui-focus-color", "--ui-text-color", "--ui-background-color", "--ui-tag-color", "--ui-tag-text-color"]
+        tagSelect: ["--ui-border-color", "--ui-focus-color", "--ui-text-color", "--ui-background-color", "--ui-tag-color", "--ui-tag-text-color"],
+        table: ["--ui-table-header-background", "--ui-table-header-text", "--ui-table-border", "--ui-table-stripe", "--ui-table-accent"]
     };
     const attributes = {
         "--ui-border-color": "border-color", "--ui-focus-color": "focus-color",
@@ -30,7 +32,9 @@
         "--ui-range-endpoint-color": "endpoint-color", "--ui-range-fill-color": "range-color",
         "--ui-time-control-color": "control-color", "--ui-flip-number-color": "flip-number-color", "--ui-flip-number-background": "flip-number-background-color",
         "--ui-upload-border-color": "border-color", "--ui-upload-progress-color": "progress-color", "--ui-upload-button-color": "button-color",
-        "--ui-tag-color": "tag-color", "--ui-tag-text-color": "tag-text-color"
+        "--ui-tag-color": "tag-color", "--ui-tag-text-color": "tag-text-color",
+        "--ui-table-header-background": "header-background-color", "--ui-table-header-text": "header-text-color",
+        "--ui-table-border": "table-border-color", "--ui-table-stripe": "stripe-background-color", "--ui-table-accent": "accent-color"
     };
 
     const targets = [...document.querySelectorAll("[data-ui-component]")];
@@ -41,7 +45,7 @@
     const navigationIcons = {
         "text-input": "input-cursor-text", textarea: "textarea-t", select: "menu-button-wide", "tag-select": "tags",
         checkbox: "check2-square", radio: "ui-radios", button: "cursor-fill", "file-upload": "cloud-arrow-up", "file-download": "file-earmark-arrow-down",
-        "date-picker": "calendar3", "date-time-picker": "calendar2-week", "time-picker": "clock", "date-range-picker": "calendar-range"
+        "date-picker": "calendar3", "date-time-picker": "calendar2-week", "time-picker": "clock", "date-range-picker": "calendar-range", "data-table": "table"
     };
     guideButton?.insertAdjacentHTML("afterbegin", '<i class="bi bi-book" aria-hidden="true"></i>');
     navButtons.forEach(button => {
@@ -124,6 +128,17 @@
         "time-picker": [["asp-for", "綁定 TimeOnly? 時間屬性"], ["label", "時間欄位的名稱"], ["border-color / focus-color", "時間輸入框一般／聚焦時的邊框色"], ["confirm-color", "翻頁時鐘中的確認按鈕顏色"], ["cancel-color", "翻頁時鐘中的取消按鈕顏色"], ["control-color", "時與分上下翻頁按鈕、選取數字的顏色"], ["format-color", "12／24 小時制切換按鈕顏色"], ["meridiem-color", "AM／PM 切換按鈕顏色"]],
         "date-range-picker": [["asp-for-start", "綁定起始日期的 DateOnly? 屬性"], ["asp-for-end", "綁定結束日期的 DateOnly? 屬性"], ["label", "日期區間欄位的名稱"], ["border-color / focus-color", "日期區間輸入框一般／聚焦時的邊框色"], ["confirm-color", "月曆中的確認按鈕顏色"], ["cancel-color", "月曆中的取消按鈕顏色"], ["endpoint-color", "起日與迄日的圓角方形顏色"], ["range-color", "起日與迄日之間選取區間的顏色"]]
     };
+    docs["data-table"] = {
+        title: "Data Table",
+        summary: "可排序、可分頁的資料表；每頁筆數控制與頁籤會獨立顯示在表格下方。",
+        razor: `<ui-data-table page-size="10" page-size-options="10,25,50" header-background-color="#f7e9ea" accent-color="#a78bb0">
+  <table>
+    <thead><tr><th data-ui-sort-type="number">單位代號</th><th>單位</th><th data-ui-sort-type="number">員編</th></tr></thead>
+    <tbody><tr><td>147</td><td>虎尾分行</td><td>067378</td></tr></tbody>
+  </table>
+</ui-data-table>`,
+        data: `<p>元件會自動建立每頁筆數選擇器、筆數摘要與獨立分頁列。</p><p>表頭預設可排序；在 <code>th</code> 加上 <code>data-ui-sortable="false"</code> 可停用單一欄位排序，並可用 <code>data-ui-sort-type="number|date|text"</code> 指定排序方式。</p>`
+    };
     docs["tag-select"] = {
         title: "標籤式 Select",
         summary: "從選單選取多個項目，每個選取值會顯示在框內並可用右上角的 × 移除。",
@@ -171,6 +186,14 @@ public IReadOnlyList&lt;SelectListItem&gt; SkillOptions { get; set; } =
         ["text-color / background-color", "選取框文字與背景色"],
         ["tag-color", "已選取標籤的背景色"],
         ["tag-text-color", "已選取標籤的文字與移除按鈕色"]
+    ];
+    parameterNotes["data-table"] = [
+        ["page-size", "預設每頁顯示筆數"],
+        ["page-size-options", "每頁筆數選單，例如 10,25,50"],
+        ["sortable", "是否啟用表頭排序，預設為 true"],
+        ["striped / hover / compact", "斑馬紋、滑入效果與緊湊模式"],
+        ["data-ui-sort-type", "欄位排序型別：number、date 或 text"],
+        ["header-background-color / accent-color", "標題列與目前頁籤的顏色"]
     ];
     const razorExamples = {
         "text-input": `<ui-text-input asp-for="Name"
@@ -279,6 +302,25 @@ public IReadOnlyList&lt;SelectListItem&gt; SkillOptions { get; set; } =
                background-color="#ffffff"
                tag-color="#4f46e5"
                tag-text-color="#ffffff" />`;
+    razorExamples["data-table"] = `<ui-data-table page-size="10" page-size-options="10,25,50"
+    header-background-color="#f7e9ea"
+    accent-color="#a78bb0">
+  <table>
+    <thead>
+      <tr>
+        <th data-ui-sort-type="number">單位代號</th>
+        <th>單位</th>
+        <th data-ui-sort-type="number">員編</th>
+        <th>姓名</th>
+        <th>職稱</th>
+        <th data-ui-sortable="false">講師身份</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>147</td><td>虎尾分行</td><td>067378</td><td>黃＊＊</td><td>高級襄理</td><td>是</td></tr>
+    </tbody>
+  </table>
+</ui-data-table>`;
     docs["time-picker"].summary = "使用 24 小時制的翻頁時鐘選擇時間，可按數字直接選取小時或分鐘。";
     parameterNotes["time-picker"] = parameterNotes["time-picker"].filter(([name]) => !["format-color", "meridiem-color"].includes(name));
     parameterNotes["time-picker"].push(["flip-number-color", "翻頁時鐘的數字顏色"], ["flip-number-background-color", "翻頁時鐘數字卡的底色"]);
@@ -319,6 +361,7 @@ public IReadOnlyList&lt;SelectListItem&gt; SkillOptions { get; set; } =
         button: [["type", "submit 提交表單；button 觸發前端動作"], ["style", "按鈕背景、文字與外框 CSS 變數"]],
         "file-upload": [["name", "檔案欄位名稱"], ["accept", "副檔名或 MIME 類型限制"], ["data-ui-max-size", "單一檔案容量上限（MB）"], ["multiple", "允許選擇多個檔案"], ["Request.Form.Files", "ASP.NET Core 取得檔案"]],
         "file-download": [["data-ui-download-name", "顯示於完成視窗的檔名"], ["data-ui-download-url", "相對路徑或 http/https 下載連結"], ["data-ui-download-start", "觸發下載效果的按鈕"], ["--ui-button-background / text / border", "下載按鈕背景、文字與外框配色"]],
+        "data-table": [["data-ui-page-size", "預設每頁顯示筆數"], ["data-ui-page-size-options", "每頁筆數選項，例如 10,25,50"], ["data-ui-sort-type", "指定欄位排序型別"], ["data-ui-sortable", "停用單一欄位排序"], ["data-ui-table", "啟用資料表分頁與排序"]],
         "date-picker": [["name", "表單欄位名稱"], ["data-ui-date-control=date", "啟用日期選擇器"], ["value", "YYYY-MM-DD 格式"]],
         "date-time-picker": [["name", "表單欄位名稱"], ["data-ui-date-control=datetime", "啟用日期與時間選擇器"], ["value", "YYYY-MM-DD HH:mm 格式"]],
         "time-picker": [["name", "表單欄位名稱"], ["data-ui-time-control", "啟用時間選擇器"], ["value", "HH:mm 格式"]],
@@ -347,6 +390,7 @@ public IReadOnlyList&lt;SelectListItem&gt; SkillOptions { get; set; } =
         if (target?.dataset.uiComponent === "file-upload") return allowed.upload;
         if (target?.dataset.uiComponent === "file-download") return allowed.download;
         if (target?.dataset.uiComponent === "tag-select") return allowed.tagSelect;
+        if (target?.dataset.uiComponent === "data-table") return allowed.table;
         return allowed.field;
     };
 
@@ -398,6 +442,7 @@ public IReadOnlyList&lt;SelectListItem&gt; SkillOptions { get; set; } =
             button: `<button class="ui-button" type="button"${style}>送出表單</button>`,
             "file-upload": `<div class="ui-file-upload" data-ui-component="file-upload" data-ui-accept=".pdf,.doc,.docx" data-ui-max-size="10"${style}>\n  <label class="ui-label" for="attachment">附件</label>\n  <div class="ui-file-drop-zone" data-ui-file-dropzone tabindex="0" role="button">\n    <span class="ui-file-upload-icon" aria-hidden="true">↑</span><strong>拖放檔案到這裡</strong><span class="ui-file-or">或</span><button class="ui-file-browse" type="button" data-ui-file-browse>瀏覽檔案</button><span class="ui-file-hint">支援 .pdf、.doc、.docx · 上限 10 MB</span>\n  </div>\n  <input class="ui-file-input" id="attachment" name="attachment" type="file" accept=".pdf,.doc,.docx" data-ui-file-input />\n  <div class="ui-file-list" data-ui-file-list aria-live="polite"></div>\n</div>`,
             "file-download": `<section class="ui-file-download" data-ui-component="file-download" data-ui-download-name="年度報告.pdf" data-ui-download-url="/files/annual-report.pdf"${style}>\n  <div class="ui-download-card"><div class="ui-download-file-icon" aria-hidden="true">↓</div><div class="ui-download-copy"><strong>年度報告</strong><span>年度報告.pdf</span></div><div class="ui-download-actions"><button class="ui-button" type="button" data-ui-download-start>下載檔案</button></div></div>\n</section>`,
+            "data-table": `<div class="ui-data-table" data-ui-component="data-table" data-ui-data-table="true" data-ui-page-size="10" data-ui-page-size-options="10,25,50" data-ui-sortable="true"${style}>\n  <table class="ui-data-table-grid">\n    <thead><tr><th data-ui-sort-type="number">單位代號</th><th>單位</th><th data-ui-sort-type="number">員編</th><th>姓名</th><th>職稱</th><th data-ui-sortable="false">講師身份</th></tr></thead>\n    <tbody><tr><td>147</td><td>虎尾分行</td><td>067378</td><td>黃＊＊</td><td>高級襄理</td><td>是</td></tr></tbody>\n  </table>\n</div>`,
             "date-picker": field("日期", '<input class="ui-control ui-date-control" id="date-picker-value" name="selectedDate" type="text" readonly autocomplete="off" data-ui-date-control="date" />'),
             "date-time-picker": field("日期與時間", '<input class="ui-control ui-date-control" id="date-time-picker-value" name="selectedDateTime" type="text" readonly autocomplete="off" data-ui-date-control="datetime" />'),
             "time-picker": field("時間", '<input class="ui-control ui-time-control" id="time-picker-value" name="selectedTime" type="text" readonly autocomplete="off" data-ui-time-control="true" />'),
@@ -979,7 +1024,7 @@ public IReadOnlyList&lt;SelectListItem&gt; SkillOptions { get; set; } =
 })();
 
 (() => {
-    const controls = [...document.querySelectorAll("[data-ui-time-control]")];
+  const controls = [...document.querySelectorAll("[data-ui-time-control]")];
     if (!controls.length) return;
 
     const dialog = document.createElement("dialog");
@@ -1054,5 +1099,190 @@ public IReadOnlyList&lt;SelectListItem&gt; SkillOptions { get; set; } =
         }
     });
 
-    controls.forEach(control => control.addEventListener("click", () => open(control)));
+  controls.forEach(control => control.addEventListener("click", () => open(control)));
+})();
+
+(() => {
+  const components = [...document.querySelectorAll("[data-ui-data-table]")];
+  if (!components.length) return;
+
+  // 解析每頁筆數選項。
+  const parsePageSizes = value => [...new Set(String(value || "10").split(",").map(Number).filter(number => number > 0))].sort((left, right) => left - right);
+
+  // 將文字轉成排序值。
+  const cellValue = (row, index) => row.cells[index]?.dataset.uiSortValue ?? row.cells[index]?.textContent?.trim() ?? "";
+
+  // 依欄位型別比較資料。
+  const compareCells = (left, right, type) => {
+    if (type === "number") return (Number(left.replaceAll(",", "")) || 0) - (Number(right.replaceAll(",", "")) || 0);
+    if (type === "date") return (Date.parse(left) || 0) - (Date.parse(right) || 0);
+    return left.localeCompare(right, "zh-Hant", { numeric: true, sensitivity: "base" });
+  };
+
+  // 建立資料表分頁按鈕。
+  const pageButton = (label, page, active = false) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = `ui-data-table-page-button${active ? " is-active" : ""}`;
+    button.textContent = label;
+    button.dataset.uiPage = String(page);
+    if (active) button.setAttribute("aria-current", "page");
+    return button;
+  };
+
+  // 建立頁碼範圍。
+  const pageRange = (current, total) => {
+    if (total <= 7) return Array.from({ length: total }, (_, index) => index + 1);
+    const values = [1];
+    if (current > 3) values.push("…");
+    for (let page = Math.max(2, current - 1); page <= Math.min(total - 1, current + 1); page += 1) values.push(page);
+    if (current < total - 2) values.push("…");
+    values.push(total);
+    return values;
+  };
+
+  components.forEach(component => {
+    if (component.dataset.uiDataTableReady === "true") return;
+    const table = component.querySelector("table");
+    const body = table?.tBodies[0];
+    if (!table || !body) return;
+    component.dataset.uiDataTableReady = "true";
+    table.classList.add("ui-data-table-grid");
+    const tableWrap = document.createElement("div");
+    tableWrap.className = "ui-data-table-grid-wrap";
+    table.parentElement?.insertBefore(tableWrap, table);
+    tableWrap.append(table);
+
+    const rows = [...body.rows];
+    const headers = [...(table.tHead?.rows[0]?.cells ?? [])];
+    const state = {
+      page: 1,
+      pageSize: Number(component.dataset.uiPageSize) || 10,
+      sortIndex: null,
+      sortDirection: 1
+    };
+    const pageSizes = parsePageSizes(component.dataset.uiPageSizeOptions);
+    if (!pageSizes.includes(state.pageSize)) pageSizes.push(state.pageSize);
+    pageSizes.sort((left, right) => left - right);
+
+    // 更新排序按鈕狀態。
+    function updateSortState() {
+      headers.forEach(header => {
+        const button = header.querySelector(".ui-data-table-sort-button");
+        if (!button) return;
+        const active = Number(button.dataset.uiSortIndex) === state.sortIndex;
+        button.setAttribute("aria-sort", active ? (state.sortDirection === 1 ? "ascending" : "descending") : "none");
+        const icon = button.querySelector(".ui-data-table-sort-icon");
+        if (icon) icon.textContent = active ? (state.sortDirection === 1 ? "▲" : "▼") : "↕";
+      });
+    }
+
+    // 取得排序後的資料列。
+    function sortedRows() {
+      const sorted = [...rows];
+      if (state.sortIndex === null) return sorted;
+      const header = headers[state.sortIndex];
+      const type = header?.dataset.uiSortType || "text";
+      return sorted.sort((left, right) => state.sortDirection * compareCells(cellValue(left, state.sortIndex), cellValue(right, state.sortIndex), type));
+    }
+
+    // 建立排序表頭。
+    function prepareHeader(header, index) {
+      const enabled = component.dataset.uiSortable !== "false" && header.dataset.uiSortable !== "false";
+      if (!enabled || header.querySelector(".ui-data-table-sort-button")) return;
+      const label = header.textContent.trim();
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "ui-data-table-sort-button";
+      button.dataset.uiSortIndex = String(index);
+      button.setAttribute("aria-sort", "none");
+      button.setAttribute("aria-label", `依${label}排序`);
+      const text = document.createElement("span");
+      text.className = "ui-data-table-sort-label";
+      text.textContent = label;
+      const icon = document.createElement("span");
+      icon.className = "ui-data-table-sort-icon";
+      icon.setAttribute("aria-hidden", "true");
+      icon.textContent = "↕";
+      button.append(text, icon);
+      header.replaceChildren(button);
+      button.addEventListener("click", () => {
+        if (state.sortIndex === index) state.sortDirection *= -1;
+        else { state.sortIndex = index; state.sortDirection = 1; }
+        state.page = 1;
+        render();
+      });
+    }
+
+    // 繪製資料表內容與分頁。
+    function render() {
+      const orderedRows = sortedRows();
+      const totalPages = Math.max(1, Math.ceil(orderedRows.length / state.pageSize));
+      state.page = Math.min(state.page, totalPages);
+      const start = (state.page - 1) * state.pageSize;
+      const visibleRows = orderedRows.slice(start, start + state.pageSize);
+      body.replaceChildren(...visibleRows);
+      if (!visibleRows.length) {
+        const emptyRow = document.createElement("tr");
+        const emptyCell = document.createElement("td");
+        emptyCell.className = "ui-data-table-empty";
+        emptyCell.colSpan = Math.max(1, headers.length);
+        emptyCell.textContent = "目前沒有資料";
+        emptyRow.append(emptyCell);
+        body.append(emptyRow);
+      }
+      updateSortState();
+      summary.textContent = orderedRows.length ? `顯示 ${start + 1}–${Math.min(start + state.pageSize, orderedRows.length)} 筆，共 ${orderedRows.length} 筆` : "目前沒有資料";
+      previous.disabled = state.page <= 1;
+      next.disabled = state.page >= totalPages;
+      pagination.replaceChildren();
+      pageRange(state.page, totalPages).forEach(page => {
+        if (page === "…") {
+          const ellipsis = document.createElement("span");
+          ellipsis.className = "ui-data-table-page-ellipsis";
+          ellipsis.textContent = page;
+          pagination.append(ellipsis);
+          return;
+        }
+        const button = pageButton(String(page), page, page === state.page);
+        button.addEventListener("click", () => { state.page = page; render(); });
+        pagination.append(button);
+      });
+    }
+
+    headers.forEach(prepareHeader);
+    const footer = document.createElement("div");
+    footer.className = "ui-data-table-footer";
+    const pageSizeControl = document.createElement("label");
+    pageSizeControl.className = "ui-data-table-page-size";
+    const pageSizeSelect = document.createElement("select");
+    pageSizeSelect.setAttribute("aria-label", "每頁顯示筆數");
+    pageSizes.forEach(size => {
+      const option = document.createElement("option");
+      option.value = String(size);
+      option.textContent = String(size);
+      option.selected = size === state.pageSize;
+      pageSizeSelect.append(option);
+    });
+    const pageSizeLabel = document.createElement("span");
+    pageSizeLabel.textContent = component.dataset.uiPageSizeLabel || "筆／頁";
+    pageSizeControl.append(pageSizeSelect, pageSizeLabel);
+    const summary = document.createElement("span");
+    summary.className = "ui-data-table-summary";
+    const pagination = document.createElement("nav");
+    pagination.className = "ui-data-table-pagination";
+    pagination.setAttribute("aria-label", component.dataset.uiPaginationLabel || "資料表分頁");
+    const previous = pageButton("‹", 0);
+    previous.setAttribute("aria-label", "上一頁");
+    const next = pageButton("›", 0);
+    next.setAttribute("aria-label", "下一頁");
+    previous.addEventListener("click", () => { state.page -= 1; render(); });
+    next.addEventListener("click", () => { state.page += 1; render(); });
+    pagination.prepend(previous);
+    pagination.append(next);
+    pageSizeSelect.addEventListener("change", () => { state.pageSize = Number(pageSizeSelect.value); state.page = 1; render(); });
+    footer.append(pageSizeControl, summary, pagination);
+    component.append(footer);
+    render();
+  });
 })();

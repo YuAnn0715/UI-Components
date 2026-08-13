@@ -13,6 +13,16 @@
     --ui-button-text: #fff;
     /* 設定：按鈕邊框。 */
     --ui-button-border: var(--ui-button-background);
+    /* 設定：資料表標題背景。 */
+    --ui-table-header-background: #f7e9ea;
+    /* 設定：資料表標題文字。 */
+    --ui-table-header-text: #111827;
+    /* 設定：資料表邊框。 */
+    --ui-table-border: #d8dee8;
+    /* 設定：資料表斑馬紋背景。 */
+    --ui-table-stripe: #f3f4f6;
+    /* 設定：資料表分頁強調色。 */
+    --ui-table-accent: #a78bb0;
 }
 
 /* 設定：檔案上傳元件、檔案下載元件、表單欄位。 */
@@ -205,6 +215,197 @@ textarea.ui-control {
         flex-basis: 100%;
         border-top: 1px solid color-mix(in srgb, var(--ui-border-color) 70%, transparent);
         border-left: 0;
+    }
+}
+
+/* 設定：資料表外框與分頁區。 */
+.ui-data-table {
+    color: var(--ui-text-color, #111827);
+}
+
+/* 設定：資料表內容容器。 */
+.ui-data-table-grid-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--ui-table-border, #d8dee8);
+    border-radius: .75rem;
+    background: var(--ui-background-color, #fff);
+    box-shadow: 0 .35rem 1rem rgba(15, 23, 42, .06);
+}
+
+/* 設定：資料表本體。 */
+.ui-data-table-grid {
+    width: 100%;
+    min-width: 42rem;
+    margin: 0;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: .98rem;
+}
+
+/* 設定：資料表標題列。 */
+.ui-data-table-grid thead th {
+    padding: .9rem 1rem;
+    border-bottom: 2px solid var(--ui-table-border, #d8dee8);
+    color: var(--ui-table-header-text, #111827);
+    background: var(--ui-table-header-background, #f7e9ea);
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+/* 設定：資料表排序按鈕。 */
+.ui-data-table-sort-button {
+    display: inline-flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    gap: .5rem;
+    padding: 0;
+    border: 0;
+    color: inherit;
+    background: transparent;
+    font: inherit;
+    text-align: inherit;
+    cursor: pointer;
+}
+
+/* 設定：資料表排序圖示。 */
+.ui-data-table-sort-icon {
+    color: #cbd5e1;
+    font-size: .85rem;
+    line-height: 1;
+}
+
+/* 設定：資料表啟用排序圖示。 */
+.ui-data-table-sort-button[aria-sort="ascending"] .ui-data-table-sort-icon,
+.ui-data-table-sort-button[aria-sort="descending"] .ui-data-table-sort-icon {
+    color: var(--ui-table-accent, #a78bb0);
+}
+
+/* 設定：資料表資料列。 */
+.ui-data-table-grid tbody td {
+    padding: .78rem 1rem;
+    border-bottom: 1px solid var(--ui-table-border, #d8dee8);
+    background: var(--ui-background-color, #fff);
+    vertical-align: middle;
+}
+
+/* 設定：資料表斑馬紋列。 */
+.ui-data-table[data-ui-striped="true"] .ui-data-table-grid tbody tr:nth-child(even) td {
+    background: var(--ui-table-stripe, #f3f4f6);
+}
+
+/* 設定：資料表滑入列。 */
+.ui-data-table[data-ui-hover="true"] .ui-data-table-grid tbody tr:hover td {
+    background: color-mix(in srgb, var(--ui-table-accent, #a78bb0) 8%, var(--ui-background-color, #fff));
+}
+
+/* 設定：資料表最後一列。 */
+.ui-data-table-grid tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+/* 設定：資料表緊湊模式。 */
+.ui-data-table[data-ui-compact="true"] .ui-data-table-grid thead th,
+.ui-data-table[data-ui-compact="true"] .ui-data-table-grid tbody td {
+    padding: .55rem .7rem;
+}
+
+/* 設定：資料表分頁列。 */
+.ui-data-table-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 1.25rem;
+    padding: 0 .15rem;
+}
+
+/* 設定：資料表每頁筆數控制。 */
+.ui-data-table-page-size {
+    display: inline-flex;
+    align-items: center;
+    gap: .55rem;
+    color: var(--ui-text-color, #111827);
+    white-space: nowrap;
+}
+
+/* 設定：資料表每頁筆數選單。 */
+.ui-data-table-page-size select {
+    min-width: 4.5rem;
+    padding: .55rem 2rem .55rem .8rem;
+    border: 1px solid var(--ui-table-border, #d8dee8);
+    border-radius: .65rem;
+    color: inherit;
+    background-color: var(--ui-background-color, #fff);
+    font: inherit;
+}
+
+/* 設定：資料表分頁按鈕群組。 */
+.ui-data-table-pagination {
+    display: flex;
+    align-items: center;
+    gap: .45rem;
+}
+
+/* 設定：資料表分頁按鈕。 */
+.ui-data-table-page-button {
+    display: inline-grid;
+    min-width: 2.7rem;
+    height: 2.7rem;
+    place-items: center;
+    padding: .35rem .65rem;
+    border: 1px solid var(--ui-table-border, #d8dee8);
+    border-radius: .65rem;
+    color: var(--ui-text-color, #111827);
+    background: var(--ui-background-color, #fff);
+    font: inherit;
+    cursor: pointer;
+}
+
+/* 設定：資料表目前頁籤。 */
+.ui-data-table-page-button.is-active {
+    border-color: var(--ui-table-accent, #a78bb0);
+    color: #fff;
+    background: var(--ui-table-accent, #a78bb0);
+}
+
+/* 設定：資料表停用分頁按鈕。 */
+.ui-data-table-page-button:disabled {
+    opacity: .45;
+    cursor: not-allowed;
+}
+
+/* 設定：資料表省略頁碼。 */
+.ui-data-table-page-ellipsis {
+    display: inline-grid;
+    min-width: 1.25rem;
+    height: 2.7rem;
+    place-items: center;
+    color: #64748b;
+}
+
+/* 設定：資料表筆數摘要。 */
+.ui-data-table-summary {
+    color: #64748b;
+    font-size: .88rem;
+}
+
+/* 設定：資料表無資料提示。 */
+.ui-data-table-empty {
+    padding: 2.5rem 1rem !important;
+    color: #64748b;
+    text-align: center;
+}
+
+/* 設定：資料表手機版分頁列。 */
+@media (max-width: 640px) {
+    .ui-data-table-footer {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .ui-data-table-pagination {
+        justify-content: flex-end;
     }
 }
 

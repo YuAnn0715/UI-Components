@@ -216,6 +216,35 @@ public IReadOnlyList<SelectListItem> SkillOptions { get; set; } =
 
 ## 建置 NuGet 套件
 
+## Data Table：`ui-data-table`
+
+`ui-data-table` 會將一般 HTML `<table>` 增強為可排序、可分頁的資料表；每頁筆數選擇器、資料摘要與頁籤會獨立顯示在表格下方。
+
+```cshtml
+<ui-data-table page-size="10"
+               page-size-options="10,25,50"
+               header-background-color="#f7e9ea"
+               accent-color="#a78bb0">
+    <table>
+        <thead>
+            <tr>
+                <th data-ui-sort-type="number">單位代號</th>
+                <th>單位</th>
+                <th data-ui-sort-type="number">員編</th>
+                <th>姓名</th>
+                <th>職稱</th>
+                <th data-ui-sortable="false">講師身份</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>147</td><td>虎尾分行</td><td>067378</td><td>黃＊＊</td><td>高級襄理</td><td>是</td></tr>
+        </tbody>
+    </table>
+</ui-data-table>
+```
+
+`page-size` 設定預設筆數；`page-size-options` 設定選單；`page-size-label` 與 `pagination-label` 可自訂控制項文字；`sortable="false"` 可關閉所有排序；個別欄位可用 `data-ui-sortable="false"` 停用排序，並用 `data-ui-sort-type="number|date|text"` 指定比較方式。可自訂 `header-background-color`、`header-text-color`、`table-border-color`、`stripe-background-color` 與 `accent-color`。
+
 ```bash
 dotnet pack UiComponentLibrary.Components/UiComponentLibrary.Components.csproj -c Release -o local-nuget
 ```
