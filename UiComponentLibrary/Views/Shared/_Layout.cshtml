@@ -6,7 +6,7 @@
     <title>@ViewData["Title"] - UiComponentLibrary</title>
     <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/lib/bootstrap-icons/font/bootstrap-icons.min.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/_content/UiComponentLibrary.Components/ui-components.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/ui-components/ui-components.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/showcase.css" asp-append-version="true" />
 </head>
 <body class="ui-showcase-body">
@@ -21,7 +21,7 @@
     </header>
     <main class="container-fluid ui-showcase-shell">@RenderBody()</main>
     <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js" asp-append-version="true"></script>
-    <script src="~/_content/UiComponentLibrary.Components/ui-components.js" asp-append-version="true"></script>
+    <script src="~/lib/ui-components/ui-components.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

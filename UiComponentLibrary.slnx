@@ -1,5 +1,3 @@
 <Solution>
-  <Project Path="UiComponentLibrary.Components/UiComponentLibrary.Components.csproj" />
-  <Project Path="UiComponentLibrary.Tests/UiComponentLibrary.Tests.csproj" />
   <Project Path="UiComponentLibrary/UiComponentLibrary.csproj" />
 </Solution>

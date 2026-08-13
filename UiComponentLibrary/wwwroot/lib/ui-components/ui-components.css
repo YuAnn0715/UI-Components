@@ -944,26 +944,6 @@ textarea.ui-control {
     font-weight: 800;
 }
 
-/* 設定：Vue 時間欄位。 */
-.ui-vue-time-fields {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    align-items: center;
-    gap: .65rem;
-    margin-top: 1rem;
-}
-
-/* 設定：Vue 時間欄位。 */
-.ui-vue-time-select {
-    width: 100%;
-    border: 1px solid #e5e7eb;
-    border-radius: .65rem;
-    padding: .7rem;
-    color: var(--ui-time-control-color, #475569);
-    background: #fff;
-    font: 700 1.1rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
-}
-
 /* 設定：時間選擇器、表單欄位。 */
 .ui-field:has(.ui-time-trigger) {
     position: relative;

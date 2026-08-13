@@ -81,294 +81,37 @@
         });
     };
     const docs = {
-        "text-input": { title: "Text Input", summary: "文字、Email、密碼等單行欄位。", razor: `<ui-text-input asp-for="Name" label="姓名" type="text" placeholder="請輸入姓名" />`, data: `<p><code>asp-for</code> 綁定字串屬性，例如 <code>public string? Name { get; set; }</code>。</p><p>可設定：label、type、placeholder 與四種輸入框配色。</p>` },
-        textarea: { title: "Textarea", summary: "用於多行備註或說明內容。", razor: `<ui-textarea asp-for="Notes" label="備註" rows="4" placeholder="可選填" />`, data: `<p><code>asp-for</code> 綁定字串屬性，例如 <code>public string? Notes { get; set; }</code>。</p><p>可設定：label、rows、placeholder 與四種輸入框配色。</p>` },
-        select: {
-            title: "Select", summary: "用於從伺服器提供的選項集合選擇一個值。", razor: `<ui-select asp-for="Country"
-           label="國家／地區"
-           items="Model.Countries"
-           items-expression="Model.Countries" />`, data: `<p><code>asp-for</code> 綁定選取值；<code>items</code> 綁定 <code>IEnumerable&lt;SelectListItem&gt;</code>。</p><p><code>items-expression</code> 只供程式碼產生器保留資料來源名稱。</p>`
-        },
-        checkbox: { title: "Checkbox", summary: "用於單一 true／false 開關。", razor: `<ui-checkbox asp-for="EmailUpdates" label="我想收到產品更新" />`, data: `<p><code>asp-for</code> 綁定布林屬性，例如 <code>public bool EmailUpdates { get; set; }</code>。</p><p>可設定：label、邊框、焦點、文字與背景顏色。</p>` },
-        radio: {
-            title: "Radio", summary: "同一個欄位提供多個互斥選項。", razor: `<ui-radio asp-for="PreferredContact" value="Email" label="電子郵件" />
-<ui-radio asp-for="PreferredContact" value="Phone" label="電話" />`, data: `<p>所有 Radio 使用相同的 <code>asp-for</code>，每個選項使用不同 <code>value</code>。</p><p>例如：<code>public string? PreferredContact { get; set; }</code>。</p>`
-        },
-        button: {
-            title: "Button", summary: "提交表單或觸發頁面動作的按鈕。", razor: `<ui-button type="submit"
-           background-color="#4f46e5"
-           text-color="#ffffff"
-           border-color="#312e81">儲存</ui-button>`, data: `<p>預設 <code>type</code> 是 <code>submit</code>；一般按鈕可設為 <code>type="button"</code>。</p><p>可分別設定背景、文字與外框顏色。</p>`
-        },
-        "date-picker": { title: "日期選擇器", summary: "選擇單一日期；可從月曆標題直接切換年份與月份。", razor: `<ui-date-picker asp-for="SelectedDate" label="預約日期" />`, data: `<p>建議使用 <code>DateOnly?</code>：<code>public DateOnly? SelectedDate { get; set; }</code>。</p><p>可設定輸入框、確認、取消與選取日期顏色。</p>` },
-        "date-time-picker": { title: "日期＋時間", summary: "先選日期，再從較大的時／分控制區設定時間。", razor: `<ui-date-time-picker asp-for="SelectedDateTime" label="開始日期與時間" />`, data: `<p>建議使用 <code>DateTime?</code>：<code>public DateTime? SelectedDateTime { get; set; }</code>。</p><p>可設定輸入框、確認、取消與選取日期顏色。</p>` },
-        "time-picker": {
-            title: "時間選擇器", summary: "翻頁時鐘式的純時間輸入，支援 12／24 小時制與 AM／PM。", razor: `<ui-time-picker asp-for="SelectedTime"
-                label="開始時間"
-                confirm-color="#4f46e5"
-                cancel-color="#64748b" />`, data: `<p>建議使用 <code>TimeOnly?</code>：<code>public TimeOnly? SelectedTime { get; set; }</code>。</p><p>可設定輸入框、確認、取消、翻頁、12／24 與 AM／PM 顏色。</p>`
-        },
-        "date-range-picker": {
-            title: "日期區間", summary: "一次選擇起日與迄日；端點與中間區間可使用不同顏色。", razor: `<ui-date-range-picker asp-for-start="StartDate"
-                      asp-for-end="EndDate"
-                      label="住宿日期"
-                      endpoint-color="#4f46e5"
-                      range-color="#ddd6fe" />`, data: `<p>起日與迄日分別綁定兩個 <code>DateOnly?</code> 屬性。</p><p>例如：<code>public DateOnly? StartDate { get; set; }</code> 與 <code>public DateOnly? EndDate { get; set; }</code>。</p>`
-        }
+        "text-input": { title: "Text Input", summary: "文字、Email、密碼等單行欄位。", data: "<p>使用原生 <code>input</code>，以 <code>name</code> 與 <code>value</code> 設定和取得資料。</p><p>可設定輸入型別、提示文字與四種輸入框配色。</p>" },
+        textarea: { title: "Textarea", summary: "用於多行備註或說明內容。", data: "<p>使用原生 <code>textarea</code>，以 <code>name</code> 取得多行文字。</p><p>可設定顯示行數、提示文字與輸入框配色。</p>" },
+        select: { title: "Select", summary: "從 option 選項中選擇一個值。", data: "<p>直接在 <code>select</code> 中加入 <code>option</code>；使用者選取值可由 <code>select.value</code> 或表單欄位取得。</p>" },
+        checkbox: { title: "Checkbox", summary: "用於單一 true／false 開關。", data: "<p>使用原生 checkbox；以 <code>checked</code> 設定初始值，並從 <code>input.checked</code> 取得狀態。</p>" },
+        radio: { title: "Radio", summary: "同一個欄位提供多個互斥選項。", data: "<p>同一組 Radio 使用相同 <code>name</code>，每個選項使用不同 <code>value</code>。</p>" },
+        button: { title: "Button", summary: "提交表單或觸發頁面動作的按鈕。", data: "<p>使用原生 <code>button</code>；<code>type=\"submit\"</code> 可提交表單，<code>type=\"button\"</code> 可觸發前端動作。</p>" },
+        "date-picker": { title: "日期選擇器", summary: "選擇單一日期。", data: "<p>元件會寫入 <code>input[name=selectedDate].value</code>，格式為 <code>YYYY-MM-DD</code>。</p>" },
+        "date-time-picker": { title: "日期＋時間", summary: "選擇日期與時間。", data: "<p>元件會寫入 <code>input[name=selectedDateTime].value</code>，格式為 <code>YYYY-MM-DD HH:mm</code>。</p>" },
+        "time-picker": { title: "時間選擇器", summary: "使用翻頁時鐘選擇時間。", data: "<p>元件會寫入 <code>input[name=selectedTime].value</code>，格式為 <code>HH:mm</code>。</p>" },
+        "date-range-picker": { title: "日期區間", summary: "一次選擇起日與迄日。", data: "<p>元件會分別寫入 <code>input[name=startDate]</code> 與 <code>input[name=endDate]</code>。</p>" },
+        "data-table": { title: "Data Table", summary: "可排序、可分頁的資料表。", data: "<p>一般 HTML <code>table</code> 加上 <code>data-ui-data-table</code> 後，即可啟用排序、每頁筆數選擇與分頁。</p>" },
+        "tag-select": { title: "標籤式 Select", summary: "可從選單選取項目，也可輸入文字按 Enter 建立自訂標籤。", data: "<p>在 <code>data-ui-tag-select-input</code> 輸入文字後按 <kbd>Enter</kbd> 建立自訂標籤。實際選取值由具 <code>name</code> 與 <code>multiple</code> 的隱藏 <code>select</code> 送出。</p>" },
+        "file-upload": { title: "檔案上傳", summary: "支援拖放與瀏覽檔案。", data: "<p>使用 <code>input[type=file]</code> 取得檔案；前端會檢查格式與大小並顯示清單，伺服器仍必須驗證檔案。</p>" },
+        "file-download": { title: "檔案下載", summary: "顯示下載進度並提供檔案連結。", data: "<p><code>data-ui-download-url</code> 會用於完成後的下載連結；實際檔案傳輸由瀏覽器處理。</p>" }
     };
     const parameterNotes = {
-        "text-input": [["asp-for", "綁定 View Model 的字串屬性"], ["label", "欄位上方顯示的名稱"], ["type", "HTML 輸入型別，例如 text、email、password"], ["placeholder", "未輸入時顯示的提示文字"], ["border-color / focus-color", "輸入框一般／聚焦時的邊框色"]],
-        textarea: [["asp-for", "綁定 View Model 的字串屬性"], ["label", "欄位上方顯示的名稱"], ["rows", "Textarea 的顯示行數"], ["placeholder", "未輸入時的提示文字"], ["border-color / focus-color", "輸入框一般／聚焦時的邊框色"]],
-        select: [["asp-for", "綁定使用者選取的值"], ["items", "實際選項集合，型別為 IEnumerable&lt;SelectListItem&gt;"], ["items-expression", "供程式碼產生器保留資料來源名稱"], ["label", "欄位上方顯示的名稱"]],
-        checkbox: [["asp-for", "綁定 bool 屬性"], ["label", "核取方塊右側的文字"], ["border-color / focus-color", "核取方塊一般／聚焦與勾選時的色彩基礎"]],
-        radio: [["asp-for", "同一組 Radio 共用的模型屬性"], ["value", "此選項送出的實際值"], ["label", "此選項旁顯示的文字"], ["focus-color", "選取與聚焦時的主要顏色"]],
-        button: [["type", "submit 送出表單；button 僅觸發前端動作"], ["background-color", "按鈕背景色"], ["text-color", "按鈕文字色"], ["border-color", "按鈕外框色"]],
-        "date-picker": [["asp-for", "綁定 DateOnly? 日期屬性"], ["label", "日期欄位的名稱"], ["border-color / focus-color", "日期輸入框一般／聚焦時的邊框色"], ["confirm-color", "月曆中的確認按鈕顏色"], ["cancel-color", "月曆中的取消按鈕顏色"], ["endpoint-color", "目前選取日期的圓角方形顏色"]],
-        "date-time-picker": [["asp-for", "綁定 DateTime? 日期時間屬性"], ["label", "日期時間欄位的名稱"], ["border-color / focus-color", "日期時間輸入框一般／聚焦時的邊框色"], ["confirm-color", "月曆中的確認按鈕顏色"], ["cancel-color", "月曆中的取消按鈕顏色"], ["endpoint-color", "目前選取日期的圓角方形顏色"]],
-        "time-picker": [["asp-for", "綁定 TimeOnly? 時間屬性"], ["label", "時間欄位的名稱"], ["border-color / focus-color", "時間輸入框一般／聚焦時的邊框色"], ["confirm-color", "翻頁時鐘中的確認按鈕顏色"], ["cancel-color", "翻頁時鐘中的取消按鈕顏色"], ["control-color", "時與分上下翻頁按鈕、選取數字的顏色"], ["format-color", "12／24 小時制切換按鈕顏色"], ["meridiem-color", "AM／PM 切換按鈕顏色"]],
-        "date-range-picker": [["asp-for-start", "綁定起始日期的 DateOnly? 屬性"], ["asp-for-end", "綁定結束日期的 DateOnly? 屬性"], ["label", "日期區間欄位的名稱"], ["border-color / focus-color", "日期區間輸入框一般／聚焦時的邊框色"], ["confirm-color", "月曆中的確認按鈕顏色"], ["cancel-color", "月曆中的取消按鈕顏色"], ["endpoint-color", "起日與迄日的圓角方形顏色"], ["range-color", "起日與迄日之間選取區間的顏色"]]
-    };
-    docs["data-table"] = {
-        title: "Data Table",
-        summary: "可排序、可分頁的資料表；每頁筆數控制與頁籤會獨立顯示在表格下方。",
-        razor: `<ui-data-table page-size="10" page-size-options="10,25,50" header-background-color="#f7e9ea" accent-color="#a78bb0">
-  <table>
-    <thead><tr><th data-ui-sort-type="number">單位代號</th><th>單位</th><th data-ui-sort-type="number">員編</th></tr></thead>
-    <tbody><tr><td>147</td><td>虎尾分行</td><td>067378</td></tr></tbody>
-  </table>
-</ui-data-table>`,
-        data: `<p>元件會自動建立每頁筆數選擇器、筆數摘要與獨立分頁列。</p><p>表頭預設可排序；在 <code>th</code> 加上 <code>data-ui-sortable="false"</code> 可停用單一欄位排序，並可用 <code>data-ui-sort-type="number|date|text"</code> 指定排序方式。</p>`
-    };
-    docs["tag-select"] = {
-        title: "標籤式 Select",
-        summary: "從選單選取多個項目，每個選取值會顯示在框內並可用右上角的 × 移除。",
-        razor: "",
-        data: `<p><code>asp-for</code> 綁定字串集合，例如 <code>List&lt;string&gt;</code>；<code>items</code> 提供 <code>IEnumerable&lt;SelectListItem&gt;</code> 選項。</p><p>在 View Model 建立選項集合，並把它傳給 <code>items</code>：</p><pre class="ui-doc-code"><code>public List&lt;string&gt; Skills { get; set; } = [];
-public IReadOnlyList&lt;SelectListItem&gt; SkillOptions { get; set; } =
-[
-    new("C#", "csharp"),
-    new("ASP.NET Core", "aspnet-core")
-];</code></pre><p>選取與移除標籤會同步更新元件內的多選欄位，因此會隨一般表單 POST 送出。</p>`
-    };
-    docs["file-upload"] = {
-        title: "檔案上傳",
-        summary: "支援拖放與瀏覽檔案；前端會檢查格式與單一檔案大小，並顯示模擬進度與移除按鈕。",
-        razor: "",
-        data: "<p><code>asp-for</code> 綁定 <code>IFormFile?</code>；表單必須使用 <code>enctype=\"multipart/form-data\"</code>。</p><p><code>accept</code> 與 <code>max-size-mb</code> 僅為前端選檔限制，實際 POST 前仍須在伺服器驗證檔案格式與大小。元件顯示的進度為前端視覺效果，並不會自行上傳檔案。</p>"
-    };
-    docs["file-download"] = {
-        title: "檔案下載",
-        summary: "顯示下載進度視窗；完成後提供連往指定檔案 URL 的「開啟文件」連結。",
-        razor: "",
-        data: "<p><code>file-url</code> 會成為成功狀態中「開啟文件」連結的 <code>href</code>，可指向網站下載端點或完整 URL。</p><p>元件本身只模擬下載進度，不會自行請求或下載 <code>file-url</code>；實際檔案傳輸在使用者點選該連結後由瀏覽器處理。</p>"
-    };
-    parameterNotes["file-upload"] = [
-        ["asp-for", "綁定 View Model 的 IFormFile? 屬性"],
-        ["label", "上傳區塊上方的欄位名稱"],
-        ["accept", "允許選擇的副檔名或 MIME 類型，例如 .pdf,.doc,.docx"],
-        ["max-size-mb", "單一檔案的最大容量（MB）"],
-        ["multiple", "允許一次選擇多個檔案"],
-        ["border-color", "拖放區與外層卡片的外框色"],
-        ["progress-color", "檔案上傳進度條色彩"],
-        ["button-color", "瀏覽檔案按鈕色彩"]
-    ];
-    parameterNotes["file-download"] = [
-        ["label", "下載項目的顯示名稱"],
-        ["file-name", "卡片與下載狀態視窗中顯示的檔名"],
-        ["file-url", "成功後「開啟文件」連結的 href，可使用網站內或完整 URL"]
-    ];
-    parameterNotes["tag-select"] = [
-        ["asp-for", "綁定 List&lt;string&gt; 等多值集合"],
-        ["items", "實際選項集合，型別為 IEnumerable&lt;SelectListItem&gt;"],
-        ["items-expression", "供程式碼產生器保留資料來源名稱"],
-        ["label", "欄位上方顯示的名稱"],
-        ["border-color / focus-color", "選取框一般／焦點時的邊框色"],
-        ["text-color / background-color", "選取框文字與背景色"],
-        ["tag-color", "已選取標籤的背景色"],
-        ["tag-text-color", "已選取標籤的文字與移除按鈕色"]
-    ];
-    parameterNotes["data-table"] = [
-        ["page-size", "預設每頁顯示筆數"],
-        ["page-size-options", "每頁筆數選單，例如 10,25,50"],
-        ["sortable", "是否啟用表頭排序，預設為 true"],
-        ["striped / hover / compact", "斑馬紋、滑入效果與緊湊模式"],
-        ["data-ui-sort-type", "欄位排序型別：number、date 或 text"],
-        ["header-background-color / accent-color", "標題列與目前頁籤的顏色"]
-    ];
-    const razorExamples = {
-        "text-input": `<ui-text-input asp-for="Name"
-               label="姓名"
-               type="text"
-               placeholder="請輸入姓名"
-               border-color="#cbd5e1"
-               focus-color="#4f46e5"
-               text-color="#0f172a"
-               background-color="#ffffff" />`,
-        textarea: `<ui-textarea asp-for="Notes"
-             label="備註"
-             rows="4"
-             placeholder="請輸入內容"
-             border-color="#cbd5e1"
-             focus-color="#4f46e5"
-             text-color="#0f172a"
-             background-color="#ffffff" />`,
-        select: `<ui-select asp-for="Country"
-           label="國家／地區"
-           items="Model.Countries"
-           items-expression="Model.Countries"
-           border-color="#cbd5e1"
-           focus-color="#4f46e5"
-           text-color="#0f172a"
-           background-color="#ffffff" />`,
-        checkbox: `<ui-checkbox asp-for="EmailUpdates"
-             label="接收電子報"
-             border-color="#cbd5e1"
-             focus-color="#4f46e5"
-             text-color="#0f172a"
-             background-color="#ffffff" />`,
-        radio: `<ui-radio asp-for="PreferredContact"
-          value="Email"
-          label="電子郵件"
-          border-color="#cbd5e1"
-          focus-color="#4f46e5"
-          text-color="#0f172a"
-          background-color="#ffffff" />`,
-        button: `<ui-button type="submit"
-           background-color="#4f46e5"
-           text-color="#ffffff"
-           border-color="#312e81">送出</ui-button>`,
-        "date-picker": `<ui-date-picker asp-for="SelectedDate"
-                label="預約日期"
-                border-color="#cbd5e1"
-                focus-color="#4f46e5"
-                text-color="#0f172a"
-                background-color="#ffffff"
-                confirm-color="#4f46e5"
-                cancel-color="#64748b"
-                endpoint-color="#4f46e5" />`,
-        "date-time-picker": `<ui-date-time-picker asp-for="SelectedDateTime"
-                     label="預約日期與時間"
-                     border-color="#cbd5e1"
-                     focus-color="#4f46e5"
-                     text-color="#0f172a"
-                     background-color="#ffffff"
-                     confirm-color="#4f46e5"
-                     cancel-color="#64748b"
-                     endpoint-color="#4f46e5" />`,
-        "time-picker": `<ui-time-picker asp-for="SelectedTime"
-                label="預約時間"
-                border-color="#cbd5e1"
-                focus-color="#4f46e5"
-                text-color="#0f172a"
-                background-color="#ffffff"
-                confirm-color="#4f46e5"
-                cancel-color="#64748b"
-                control-color="#0f172a"
-                format-color="#4f46e5"
-                meridiem-color="#4f46e5" />`,
-        "date-range-picker": `<ui-date-range-picker asp-for-start="StartDate"
-                      asp-for-end="EndDate"
-                      label="旅行日期"
-                      border-color="#cbd5e1"
-                      focus-color="#4f46e5"
-                      text-color="#0f172a"
-                      background-color="#ffffff"
-                      confirm-color="#4f46e5"
-                      cancel-color="#64748b"
-                      endpoint-color="#4f46e5"
-                      range-color="#ddd6fe" />`
-    };
-
-    razorExamples["file-upload"] = `<form asp-action="Upload" method="post" enctype="multipart/form-data">
-  <ui-file-upload asp-for="UploadFile"
-                  label="附件"
-                  accept=".pdf,.doc,.docx"
-                  max-size-mb="10"
-                  border-color="#8b5cf6"
-                  progress-color="#4f46e5"
-                  button-color="#4f46e5" />
-  <button class="btn btn-primary" type="submit">上傳</button>
-</form>`;
-    razorExamples["file-download"] = `<ui-file-download label="年度報告"
-                  file-name="年度報告.pdf"
-                  file-url="/downloads/annual-report.pdf" />`;
-    razorExamples["tag-select"] = `<ui-tag-select asp-for="Skills"
-               label="技能標籤"
-               items="Model.SkillOptions"
-               items-expression="Model.SkillOptions"
-               border-color="#cbd5e1"
-               focus-color="#4f46e5"
-               text-color="#0f172a"
-               background-color="#ffffff"
-               tag-color="#4f46e5"
-               tag-text-color="#ffffff" />`;
-    razorExamples["data-table"] = `<ui-data-table page-size="10" page-size-options="10,25,50"
-    header-background-color="#f7e9ea"
-    accent-color="#a78bb0">
-  <table>
-    <thead>
-      <tr>
-        <th data-ui-sort-type="number">單位代號</th>
-        <th>單位</th>
-        <th data-ui-sort-type="number">員編</th>
-        <th>姓名</th>
-        <th>職稱</th>
-        <th data-ui-sortable="false">講師身份</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr><td>147</td><td>虎尾分行</td><td>067378</td><td>黃＊＊</td><td>高級襄理</td><td>是</td></tr>
-    </tbody>
-  </table>
-</ui-data-table>`;
-    docs["time-picker"].summary = "使用 24 小時制的翻頁時鐘選擇時間，可按數字直接選取小時或分鐘。";
-    parameterNotes["time-picker"] = parameterNotes["time-picker"].filter(([name]) => !["format-color", "meridiem-color"].includes(name));
-    parameterNotes["time-picker"].push(["flip-number-color", "翻頁時鐘的數字顏色"], ["flip-number-background-color", "翻頁時鐘數字卡的底色"]);
-    razorExamples["time-picker"] = `<ui-time-picker asp-for="SelectedTime"
-                label="預約時間"
-                border-color="#cbd5e1"
-                focus-color="#4f46e5"
-                text-color="#0f172a"
-                background-color="#ffffff"
-                confirm-color="#4f46e5"
-                cancel-color="#64748b"
-                control-color="#475569"
-                flip-number-color="#ffffff"
-                flip-number-background-color="#1e293b" />`;
-
-    Object.assign(docs, {
-        "text-input": { ...docs["text-input"], data: "<p>用原生 <code>name</code> 與 <code>value</code> 設定與取得資料，例如 <code>document.querySelector('[name=name]').value</code>。</p>" },
-        textarea: { ...docs.textarea, data: "<p>用原生 <code>textarea[name=notes]</code> 設定與取得多行文字。</p>" },
-        select: { ...docs.select, data: "<p>將選項直接寫成 <code>&lt;option value=\"...\"&gt;</code>；使用者選取值在 <code>select.value</code>，ASP.NET Core 可由 <code>Request.Form[\"country\"]</code> 取得。</p>" },
-        checkbox: { ...docs.checkbox, data: "<p>使用 <code>checked</code> 設定初始值，並從 <code>input.checked</code> 取得狀態。</p>" },
-        radio: { ...docs.radio, data: "<p>同一組 Radio 使用相同 <code>name</code>；從 <code>document.querySelector('[name=preferredContact]:checked').value</code> 取得值。</p>" },
-        button: { ...docs.button, data: "<p>使用原生 <code>click</code> 事件；<code>type=\"submit\"</code> 可提交表單。</p>" },
-        "date-picker": { ...docs["date-picker"], data: "<p>點選後元件會寫入 <code>input[name=selectedDate].value</code>，格式為 <code>YYYY-MM-DD</code>。</p>" },
-        "date-time-picker": { ...docs["date-time-picker"], data: "<p>元件會寫入 <code>input[name=selectedDateTime].value</code>，格式為 <code>YYYY-MM-DD HH:mm</code>。</p>" },
-        "time-picker": { ...docs["time-picker"], data: "<p>元件會寫入 <code>input[name=selectedTime].value</code>，格式為 <code>HH:mm</code>。</p>" },
-        "date-range-picker": { ...docs["date-range-picker"], data: "<p>元件會分別寫入 <code>input[name=startDate]</code> 與 <code>input[name=endDate]</code>。</p>" }
-    });
-    docs["tag-select"].data = "<p>兩個 <code>select</code> 要放相同的選項：第一個是選擇選單，第二個具 <code>name=\"skills\" multiple</code>，實際選取值由它送出。可用 <code>[...document.querySelector('[name=skills]').selectedOptions].map(x =&gt; x.value)</code> 取得。</p>";
-    docs["file-upload"].data = "<p>使用 <code>input[type=file][name=attachment]</code> 取得檔案；ASP.NET Core 使用 <code>Request.Form.Files</code>。<code>accept</code> 與容量限制只改善前端體驗，伺服器仍必須驗證檔案。</p>";
-    docs["file-download"].data = "<p><code>data-ui-download-url</code> 會用於成功後的下載連結，僅接受網站相對路徑或 <code>http/https</code> URL。</p>";
-    Object.assign(parameterNotes, {
-        "text-input": [["name", "表單欄位名稱"], ["type / placeholder", "原生輸入型別與提示文字"], ["value", "初始值；可由 input.value 取得"], ["style", "配色編輯器產生的 CSS 變數"]],
-        textarea: [["name", "表單欄位名稱"], ["rows / placeholder", "顯示行數與提示文字"], ["value", "由 textarea.value 取得"]],
-        select: [["name", "表單欄位名稱"], ["option", "每個選項的顯示文字與 value"], ["selected", "預先選取的選項"], ["value", "由 select.value 取得"]],
-        "tag-select": [["data-ui-tag-select-menu", "使用者選擇項目的選單"], ["name + multiple", "實際送出選取值的 select"], ["option", "兩個 select 都需具有相同 value 選項"], ["tag-color / tag-text-color", "標籤背景與文字色"]],
-        checkbox: [["name", "表單欄位名稱"], ["value", "勾選後送出的值"], ["checked", "預設勾選；以 input.checked 取得狀態"]],
-        radio: [["name", "同組選項使用相同名稱"], ["value", "選項送出的實際值"], ["checked", "預設選取；以 :checked 取得目前選項"]],
-        button: [["type", "submit 提交表單；button 觸發前端動作"], ["style", "按鈕背景、文字與外框 CSS 變數"]],
-        "file-upload": [["name", "檔案欄位名稱"], ["accept", "副檔名或 MIME 類型限制"], ["data-ui-max-size", "單一檔案容量上限（MB）"], ["multiple", "允許選擇多個檔案"], ["Request.Form.Files", "ASP.NET Core 取得檔案"]],
-        "file-download": [["data-ui-download-name", "顯示於完成視窗的檔名"], ["data-ui-download-url", "相對路徑或 http/https 下載連結"], ["data-ui-download-start", "觸發下載效果的按鈕"], ["--ui-button-background / text / border", "下載按鈕背景、文字與外框配色"]],
-        "data-table": [["data-ui-page-size", "預設每頁顯示筆數"], ["data-ui-page-size-options", "每頁筆數選項，例如 10,25,50"], ["data-ui-sort-type", "指定欄位排序型別"], ["data-ui-sortable", "停用單一欄位排序"], ["data-ui-table", "啟用資料表分頁與排序"]],
+        "text-input": [["name", "表單欄位名稱"], ["type / placeholder", "原生輸入型別與提示文字"], ["value", "初始值"]],
+        textarea: [["name", "表單欄位名稱"], ["rows / placeholder", "顯示行數與提示文字"]],
+        select: [["name", "表單欄位名稱"], ["option", "選項顯示文字與 value"], ["value", "目前選取值"]],
+        checkbox: [["name / value", "勾選後送出的欄位與值"], ["checked", "預設勾選狀態"]],
+        radio: [["name", "同組選項使用相同名稱"], ["value", "選項送出的值"]],
+        button: [["type", "submit 提交表單；button 觸發前端動作"], ["style", "按鈕配色"]],
+        "tag-select": [["data-ui-tag-select-input", "輸入文字後按 Enter 建立自訂標籤"], ["data-ui-tag-select-menu", "選擇既有項目的選單"], ["name + multiple", "實際送出選取值的 select"], ["data-ui-tag-select-values", "包含既有與自訂 tag 的選取值"]],
+        "file-upload": [["name", "檔案欄位名稱"], ["accept", "副檔名或 MIME 類型限制"], ["data-ui-max-size", "單一檔案容量上限（MB）"], ["multiple", "允許選擇多個檔案"]],
+        "file-download": [["data-ui-download-name", "顯示的檔名"], ["data-ui-download-url", "完成後的下載連結"], ["data-ui-download-start", "觸發下載效果的按鈕"]],
+        "data-table": [["data-ui-page-size", "預設每頁顯示筆數"], ["data-ui-page-size-options", "每頁筆數選項"], ["data-ui-sort-type", "欄位排序型別"]],
         "date-picker": [["name", "表單欄位名稱"], ["data-ui-date-control=date", "啟用日期選擇器"], ["value", "YYYY-MM-DD 格式"]],
         "date-time-picker": [["name", "表單欄位名稱"], ["data-ui-date-control=datetime", "啟用日期與時間選擇器"], ["value", "YYYY-MM-DD HH:mm 格式"]],
         "time-picker": [["name", "表單欄位名稱"], ["data-ui-time-control", "啟用時間選擇器"], ["value", "HH:mm 格式"]],
-        "date-range-picker": [["data-ui-range-start", "起日隱藏欄位"], ["data-ui-range-end", "迄日隱藏欄位"], ["name", "兩個欄位名稱"], ["value", "YYYY-MM-DD 格式"]]
-    });
-
-    targets.forEach((target, index) => {
+        "date-range-picker": [["data-ui-range-start", "起日隱藏欄位"], ["data-ui-range-end", "迄日隱藏欄位"], ["name", "起日與迄日欄位名稱"]]
+    };    targets.forEach((target, index) => {
         const id = `ui-preview-${index + 1}`;
         target.id = id;
         const kind = target.dataset.uiComponent;
@@ -436,7 +179,7 @@ public IReadOnlyList&lt;SelectListItem&gt; SkillOptions { get; set; } =
             "text-input": field("姓名", '<input class="ui-control" id="text-input-value" name="name" type="text" placeholder="請輸入姓名" />'),
             textarea: field("備註", '<textarea class="ui-control" id="textarea-value" name="notes" rows="3" placeholder="可選填"></textarea>'),
             select: field("國家", '<select class="ui-control" id="select-value" name="country">\n    <option value="TW">台灣</option>\n    <option value="JP">日本</option>\n  </select>'),
-            "tag-select": `<div class="ui-field" data-ui-component="tag-select"${style}>\n  <label class="ui-label" for="tag-select-menu">技能</label>\n  <div class="ui-tag-select-control" data-ui-tag-select-control>\n    <div class="ui-tag-select-tags" data-ui-tag-select-tags></div>\n    <select class="ui-tag-select-menu" id="tag-select-menu" data-ui-tag-select-menu>\n      <option value="">選擇技能</option>\n      <option value="csharp">C#</option>\n      <option value="javascript">JavaScript</option>\n    </select>\n  </div>\n  <select class="ui-tag-select-values" name="skills" multiple data-ui-tag-select-values>\n    <option value="csharp">C#</option>\n    <option value="javascript">JavaScript</option>\n  </select>\n</div>`,
+            "tag-select": `<div class="ui-field" data-ui-component="tag-select"${style}>\n  <label class="ui-label" for="tag-select-input">技能</label>\n  <div class="ui-tag-select-control" data-ui-tag-select-control>\n    <div class="ui-tag-select-tags" data-ui-tag-select-tags></div>\n    <input class="ui-tag-select-input" id="tag-select-input" type="text" placeholder="輸入後按 Enter 新增" data-ui-tag-select-input autocomplete="off" />\n    <select class="ui-tag-select-menu" id="tag-select-menu" data-ui-tag-select-menu>\n      <option value="">選擇技能</option>\n      <option value="csharp">C#</option>\n      <option value="javascript">JavaScript</option>\n    </select>\n  </div>\n  <select class="ui-tag-select-values" name="skills" multiple data-ui-tag-select-values>\n    <option value="csharp">C#</option>\n    <option value="javascript">JavaScript</option>\n  </select>\n</div>`,
             checkbox: '<label class="ui-field"><input class="ui-check-control" name="emailUpdates" type="checkbox" value="true" /> 我想收到產品更新</label>',
             radio: '<label class="ui-field"><input class="ui-check-control" name="preferredContact" type="radio" value="email" /> 電子郵件</label>',
             button: `<button class="ui-button" type="button"${style}>送出表單</button>`,
@@ -457,7 +200,7 @@ public IReadOnlyList&lt;SelectListItem&gt; SkillOptions { get; set; } =
         if (!doc || !componentDoc) return;
         docTitle.textContent = `${doc.title} 設定`;
         docSummary.textContent = doc.summary;
-        formatCode(docRazor, codeOutput.textContent || razorExamples[kind] || doc.razor);
+        formatCode(docRazor, codeOutput.textContent || "");
         const parameters = parameterNotes[kind] || [];
         docData.innerHTML = `${doc.data}<h4 class="h6 mt-3">參數對照</h4><dl class="ui-doc-parameters">${parameters.map(([name, description]) => `<dt><code>${name}</code></dt><dd>${description}</dd>`).join("")}</dl>`;
     }
@@ -545,6 +288,7 @@ public IReadOnlyList&lt;SelectListItem&gt; SkillOptions { get; set; } =
 
     tagSelects.forEach(tagSelect => {
         const menu = tagSelect.querySelector("[data-ui-tag-select-menu]");
+        const input = tagSelect.querySelector("[data-ui-tag-select-input]");
         const values = tagSelect.querySelector("[data-ui-tag-select-values]");
         const tags = tagSelect.querySelector("[data-ui-tag-select-tags]");
         const control = tagSelect.querySelector("[data-ui-tag-select-control]");
@@ -587,8 +331,22 @@ public IReadOnlyList&lt;SelectListItem&gt; SkillOptions { get; set; } =
             render();
             values.dispatchEvent(new Event("change", { bubbles: true }));
         });
+        input?.addEventListener("keydown", event => {
+            if (event.key !== "Enter") return;
+            event.preventDefault();
+            const value = input.value.trim();
+            if (!value || optionFor(value)) {
+                input.value = "";
+                return;
+            }
+            const option = new Option(value, value, false, true);
+            values.add(option);
+            render();
+            values.dispatchEvent(new Event("change", { bubbles: true }));
+            input.value = "";
+        });
         control.addEventListener("click", event => {
-            if (!event.target.closest("button, select")) menu.focus();
+            if (!event.target.closest("button, select, input")) input?.focus();
         });
         render();
     });

@@ -1,6 +1,6 @@
 # UiComponentLibrary 靜態版
 
-這個資料夾可直接複製到任何 ASP.NET Core 專案的 `wwwroot/lib/ui-components/`，不需要 NuGet、Razor Tag Helper 或 Vue。standalone 版只提供 `ui-components.css` 與 `ui-components.js`，不包含 Vue adapter 或 Vue 3 runtime；需要 Vue 3 時，請改用 RCL／NuGet 版本，並由應用程式自行提供本機 Vue 3 檔案。
+這個資料夾包含可直接複製到任何 ASP.NET Core 專案 `wwwroot/lib/ui-components/` 的靜態元件檔案。使用方式只需要 `ui-components.css`、`ui-components.js` 與元件 HTML。
 
 1. 複製 `ui-components.css` 和 `ui-components.js` 到目標專案的 `wwwroot/lib/ui-components/`。
 2. 在 `Views/Shared/_Layout.cshtml` 的 `<head>` 加入：
@@ -20,3 +20,5 @@
 `ui-components.js` 必須在元件 HTML 後載入，或使用 `defer` 載入。
 
 資料表可使用一般 HTML `<table>`，外層加上 `data-ui-data-table`、`data-ui-page-size` 與 `data-ui-page-size-options`，即可啟用排序、每頁筆數選擇與分離式分頁列；欄位可用 `data-ui-sortable="false"` 停用排序。
+
+標籤式選單可在 `data-ui-tag-select-input` 輸入文字後按 `Enter` 建立自訂 tag；元件會將自訂值加入具有 `name` 與 `multiple` 的 `data-ui-tag-select-values` 選單，隨表單送出。
