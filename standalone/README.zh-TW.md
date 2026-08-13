@@ -1,6 +1,6 @@
 # UiComponentLibrary 靜態版
 
-這個資料夾可直接複製到任何 ASP.NET Core 專案的 `wwwroot/lib/ui-components/`，不需要 NuGet、Razor Tag Helper 或 Vue。
+這個資料夾可直接複製到任何 ASP.NET Core 專案的 `wwwroot/lib/ui-components/`，不需要 NuGet、Razor Tag Helper 或 Vue。standalone 版只提供 `ui-components.css` 與 `ui-components.js`，不包含 Vue adapter 或 Vue 3 runtime；需要 Vue 3 時，請改用 RCL／NuGet 版本，並由應用程式自行提供本機 Vue 3 檔案。
 
 1. 複製 `ui-components.css` 和 `ui-components.js` 到目標專案的 `wwwroot/lib/ui-components/`。
 2. 在 `Views/Shared/_Layout.cshtml` 的 `<head>` 加入：

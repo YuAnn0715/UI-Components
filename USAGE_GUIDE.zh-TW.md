@@ -1,6 +1,6 @@
 # UiComponentLibrary 繁中使用指南
 
-UiComponentLibrary 是目標框架為 `net10.0` 的 Razor Class Library（RCL）。.NET 網站必須同樣使用 `net10.0`，並可選擇使用 Razor Tag Helper 或 Vue 3 adapter；兩種方式共用同一份 CSS。
+UiComponentLibrary 是目標框架為 `net10.0` 的 Razor Class Library（RCL）。.NET 網站必須同樣使用 `net10.0`，主要使用 Razor Tag Helper；套件另附可選的 Vue 3 adapter，但不包含 Vue 3 runtime。若應用程式已自行以本機檔案提供 Vue 3，才可依第 3 節整合；兩種方式共用同一份 CSS。
 
 ## 1. 將元件庫引用至 .NET 網站
 
@@ -50,9 +50,11 @@ app.UseRouting();
 
 此路徑使用 `asp-for`、`items` 等 Tag Helper 屬性，適合 Razor View 或 Razor Page 的伺服器端模型繫結。
 
-## 3. Vue 3 Adapter 整合
+## 3. Vue 3 Adapter 整合（可選，需自行提供 Vue 3）
 
-Vue 3 adapter 不使用 `asp-for`。在承載 Vue 的 Razor Layout 或 View 中，先載入 CSS、Vue 3 與 adapter，再建立 Vue app。`~` 路徑由 Razor 處理；若是獨立 HTML，請改用絕對路徑 `/_content/...`。
+`UiComponentLibrary.Components` 只提供 `ui-components-vue.js` adapter，不提供 Vue 3 runtime，也不會從 CDN 載入 Vue。因此本節與 standalone 版及展示站的純原生 JavaScript 用法隔離；若應用程式沒有自己的本機 Vue 3 檔案，請跳過本節。
+
+以下範例的 `wwwroot/lib/vue/vue.global.prod.js` 必須由應用程式自行放置，並且必須先載入 Vue，再載入套件 adapter。這是「應用程式已提供 Vue」時的整合範例，不代表 Vue runtime 隨 NuGet 套件提供；`~` 路徑由 Razor 處理，若是獨立 HTML，請改用對應的本機絕對路徑。
 
 ```cshtml
 @* _Layout.cshtml 的 <head> *@
@@ -63,7 +65,7 @@ Vue 3 adapter 不使用 `asp-for`。在承載 Vue 的 Razor Layout 或 View 中�
   <ui-select v-model="country" :items="countries" label="國家／地區"></ui-select>
 </div>
 
-<script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+<script src="~/lib/vue/vue.global.prod.js" asp-append-version="true"></script>
 <script src="~/_content/UiComponentLibrary.Components/ui-components-vue.js" asp-append-version="true"></script>
 <script>
   const app = Vue.createApp({
