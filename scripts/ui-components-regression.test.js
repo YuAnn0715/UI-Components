@@ -181,7 +181,14 @@ function makeFixtures() {
     const checkboxTarget = makeTarget("checkbox", "EmailUpdates", { "--ui-focus-color": "#ea580c" });
     const radioTarget = makeTarget("radio", "PreferredContact", { "--ui-focus-color": "#2563eb" });
     const secondRadioTarget = makeTarget("radio", "PreferredContact", { "--ui-focus-color": "#2563eb" });
-    const targets = [textTarget, checkboxTarget, radioTarget, secondRadioTarget];
+    const breadcrumbIconOne = new FakeElement("i", { uiBreadcrumbSeparatorIcon: "" });
+    breadcrumbIconOne.className = "bi bi-chevron-right";
+    const breadcrumbIconTwo = new FakeElement("i", { uiBreadcrumbSeparatorIcon: "" });
+    breadcrumbIconTwo.className = "bi bi-chevron-right";
+    const breadcrumb = makeTarget("breadcrumb", "", {});
+    breadcrumb.dataset.uiBreadcrumbSeparator = "chevron-right";
+    breadcrumb.selectors["[data-ui-breadcrumb-separator-icon], .ui-breadcrumb-separator > .bi"] = [breadcrumbIconOne, breadcrumbIconTwo];
+    const targets = [textTarget, checkboxTarget, radioTarget, secondRadioTarget, breadcrumb];
 
     const codeOutput = new FakeElement("code", { uiGeneratedCode: "" });
     const copyButton = new FakeElement("button", { uiCopy: "" });
@@ -220,7 +227,11 @@ function makeFixtures() {
     const previewTitle = new FakeElement("h2");
     const checkboxNav = new FakeElement("button", { uiShowKind: "checkbox" });
     const radioNav = new FakeElement("button", { uiShowKind: "radio" });
-    const navButtons = [checkboxNav, radioNav];
+    const breadcrumbNav = new FakeElement("button", { uiShowKind: "breadcrumb" });
+    const navButtons = [checkboxNav, radioNav, breadcrumbNav];
+    const breadcrumbSettings = new FakeElement("div", { uiBreadcrumbSettings: "" });
+    const breadcrumbSeparator = new FakeElement("select", { uiBreadcrumbSeparator: "" });
+    breadcrumbSeparator.value = "chevron-right";
 
     const downloadStart = new FakeElement("button", { uiDownloadStart: "" });
     const download = new FakeElement("section", { uiComponent: "file-download" }, {
@@ -299,6 +310,7 @@ function makeFixtures() {
         ["[data-ui-premium-time-control]", []],
         ["[data-ui-date-control]", dateControls],
         ["[data-ui-component='file-upload']", [upload]],
+        ["[data-ui-component='breadcrumb']", [breadcrumb]],
         ["[data-ui-time-control]", [timeControl]],
         ["[data-ui-data-table]", [tableComponent]]
     ]);
@@ -313,7 +325,9 @@ function makeFixtures() {
         ["[data-ui-doc-summary]", docSummary],
         ["[data-ui-doc-razor]", docRazor],
         ["[data-ui-doc-data]", docData],
-        ["#component-preview-title", previewTitle]
+        ["#component-preview-title", previewTitle],
+        ["[data-ui-breadcrumb-settings]", breadcrumbSettings],
+        ["[data-ui-breadcrumb-separator]", breadcrumbSeparator]
     ]);
     const document = {
         body: new FakeElement("body"),
@@ -329,7 +343,7 @@ function makeFixtures() {
         clearTimeout: () => {},
         setTimeout: callback => callback()
     };
-    return { document, window, downloadStart, download, dateControls, timeControl, tagInputText, tagInputValues, uploadInput, uploadDropZone, tableComponent, colorInput, codeOutput, checkboxNav, radioNav, checkboxTarget, radioTarget, secondRadioTarget };
+    return { document, window, downloadStart, download, dateControls, timeControl, tagInputText, tagInputValues, uploadInput, uploadDropZone, tableComponent, colorInput, codeOutput, checkboxNav, radioNav, breadcrumbNav, breadcrumb, breadcrumbIconOne, breadcrumbIconTwo, breadcrumbSeparator, checkboxTarget, radioTarget, secondRadioTarget };
 }
 
 const source = fs.readFileSync("standalone/ui-components.js", "utf8");
@@ -372,6 +386,14 @@ fixtures.colorInput.dispatchEvent(new FakeEvent("input"));
 assert.equal(fixtures.radioTarget.style.getPropertyValue("--ui-focus-color"), "#0f766e", "radio preview did not receive the selected theme");
 assert.equal(fixtures.secondRadioTarget.style.getPropertyValue("--ui-focus-color"), "#0f766e", "radio group did not receive the selected theme");
 assert.match(generatedCode(), /data-ui-component="radio"[\s\S]*style="[^"]*--ui-focus-color:#0f766e/, "radio copy HTML did not receive the selected theme");
+fixtures.breadcrumbNav.dispatchEvent(new FakeEvent("click"));
+assert.equal(fixtures.breadcrumbSeparator.value, "chevron-right", "breadcrumb separator selector did not load its default value");
+fixtures.breadcrumbSeparator.value = "slash-lg";
+fixtures.breadcrumbSeparator.dispatchEvent(new FakeEvent("change"));
+assert.equal(fixtures.breadcrumb.dataset.uiBreadcrumbSeparator, "slash-lg", "breadcrumb preview did not receive the selected separator");
+assert.equal(fixtures.breadcrumbIconOne.className, "bi bi-slash-lg", "breadcrumb preview icon did not update");
+assert.match(generatedCode(), /data-ui-breadcrumb-separator="slash-lg"/, "breadcrumb copy HTML omitted the selected separator");
+assert.match(generatedCode(), /bi bi-slash-lg/, "breadcrumb copy HTML omitted the selected separator icon");
 fixtures.downloadStart.dispatchEvent(new FakeEvent("click"));
 const downloadDialog = fixtures.document.body.children.find(child => child.className.startsWith("ui-download-dialog"));
 assert.equal(downloadDialog?.style.getPropertyValue("--ui-download-progress-color"), "#c026d3", "download dialog did not receive the selected progress color");
@@ -403,6 +425,14 @@ assert.match(showcaseStyles, /\.ui-preview-card \[data-ui-preview-item\]\s*\{[^}
 assert.match(showcaseStyles, /\.ui-preview-card \[data-ui-preview-item\]\s*\{[^}]*flex:\s*0 0 100%/s, "preview grid columns are not expanded to full width");
 assert.match(showcaseStyles, /data-ui-preview-kind="button"|data-ui-preview-kind\\=\"button\\"/, "button width exception is missing");
 assert.match(showcaseStyles, /\.ui-preview-card \[data-ui-preview-kind="button"\][^}]*\{[^}]*width:\s*auto/s, "button preview is still forced to full width");
+assert.match(showcaseMarkup, /data-ui-show-kind="breadcrumb"/, "breadcrumb is missing from the showcase navigation");
+assert.match(showcaseMarkup, /data-ui-preview-kind="breadcrumb"[\s\S]*class="breadcrumb ui-breadcrumb-list"/, "breadcrumb showcase markup is missing Bootstrap breadcrumb semantics");
+assert.match(showcaseMarkup, /data-ui-breadcrumb-settings[\s\S]*data-ui-breadcrumb-separator/, "breadcrumb separator selector is missing from the showcase editor");
+assert.match(showcaseMarkup, /data-ui-breadcrumb-separator="chevron-right"/, "breadcrumb preview has no default separator setting");
+assert.match(styles, /\.ui-breadcrumb-list[\s\S]*\.ui-breadcrumb-current/, "breadcrumb visual treatment is missing");
+assert.match(source, /separatorIcons[\s\S]*slash-lg[\s\S]*dash-lg/, "breadcrumb separator icon choices are missing");
+assert.match(source, /data-ui-breadcrumb-separator/, "breadcrumb generated HTML has no separator setting");
+assert.match(source, /breadcrumb:\s*`<nav class="ui-breadcrumb"[\s\S]*aria-current="page"/, "breadcrumb generated HTML is missing accessible current-page markup");
 
 const expectedThemeVariables = [
     "--ui-border-color", "--ui-focus-color", "--ui-text-color", "--ui-background-color",
@@ -412,7 +442,8 @@ const expectedThemeVariables = [
     "--ui-time-control-color",
     "--ui-flip-number-color", "--ui-flip-number-background",
     "--ui-upload-border-color", "--ui-upload-progress-color", "--ui-upload-button-color", "--ui-download-icon-color", "--ui-download-progress-color",
-    "--ui-table-header-background", "--ui-table-header-text", "--ui-table-border", "--ui-table-stripe", "--ui-table-accent"
+    "--ui-table-header-background", "--ui-table-header-text", "--ui-table-border", "--ui-table-stripe", "--ui-table-accent",
+    "--ui-breadcrumb-accent", "--ui-breadcrumb-accent-soft", "--ui-breadcrumb-text", "--ui-breadcrumb-current-background", "--ui-breadcrumb-current-text"
 ];
 const escapedVariable = variable => variable.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 const allowedBlock = source.match(/const allowed = \{([\s\S]*?)\n\s*\};/)?.[1] ?? "";

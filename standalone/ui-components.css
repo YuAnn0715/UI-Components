@@ -23,6 +23,131 @@
     --ui-table-stripe: #f3f4f6;
     /* 設定：資料表分頁強調色。 */
     --ui-table-accent: #a78bb0;
+    --ui-breadcrumb-accent: #0f766e;
+    --ui-breadcrumb-accent-soft: #ccfbf1;
+    --ui-breadcrumb-text: #334155;
+    --ui-breadcrumb-current-background: #0f766e;
+    --ui-breadcrumb-current-text: #ffffff;
+}
+
+/* A polished Bootstrap 5 breadcrumb with a soft surface, icon anchor and current-page pill. */
+.ui-breadcrumb {
+    display: block;
+    width: 100%;
+    margin: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+.ui-breadcrumb-list {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .35rem .55rem;
+    overflow: hidden;
+    margin: 0;
+    padding: .8rem 1rem .8rem 1.15rem;
+    border: 1px solid color-mix(in srgb, var(--ui-breadcrumb-accent) 18%, #e2e8f0);
+    border-radius: 1rem;
+    background: linear-gradient(135deg, #ffffff 0%, color-mix(in srgb, var(--ui-breadcrumb-accent-soft) 42%, #ffffff) 100%);
+    box-shadow: 0 .65rem 1.5rem color-mix(in srgb, var(--ui-breadcrumb-accent) 10%, transparent);
+    list-style: none;
+}
+
+.ui-breadcrumb-list::before {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: .28rem;
+    border-radius: 1rem 0 0 1rem;
+    background: var(--ui-breadcrumb-accent);
+    content: "";
+}
+
+.ui-breadcrumb-list .breadcrumb-item + .breadcrumb-item::before {
+    display: none;
+}
+
+.ui-breadcrumb-item {
+    display: flex;
+    min-width: 0;
+    align-items: center;
+}
+
+.ui-breadcrumb-link,
+.ui-breadcrumb-current {
+    display: inline-flex;
+    min-height: 2.3rem;
+    align-items: center;
+    gap: .45rem;
+    max-width: 100%;
+    padding: .4rem .7rem;
+    border-radius: .7rem;
+    font-size: .92rem;
+    font-weight: 650;
+    line-height: 1.25;
+}
+
+.ui-breadcrumb-link {
+    color: var(--ui-breadcrumb-text);
+    text-decoration: none;
+    transition: color .18s ease, background-color .18s ease, transform .18s ease;
+}
+
+.ui-breadcrumb-link:hover,
+.ui-breadcrumb-link:focus-visible {
+    color: var(--ui-breadcrumb-accent);
+    background: #ffffff;
+    transform: translateY(-1px);
+}
+
+.ui-breadcrumb-home {
+    display: inline-grid;
+    width: 1.85rem;
+    height: 1.85rem;
+    flex: 0 0 auto;
+    place-items: center;
+    border-radius: .6rem;
+    color: var(--ui-breadcrumb-accent);
+    background: var(--ui-breadcrumb-accent-soft);
+    font-size: .95rem;
+}
+
+.ui-breadcrumb-separator {
+    display: inline-grid;
+    width: 1.1rem;
+    flex: 0 0 auto;
+    place-items: center;
+    color: color-mix(in srgb, var(--ui-breadcrumb-accent) 52%, #94a3b8);
+    font-size: .8rem;
+}
+
+.ui-breadcrumb-current {
+    color: var(--ui-breadcrumb-current-text);
+    background: var(--ui-breadcrumb-current-background);
+    box-shadow: 0 .35rem .8rem color-mix(in srgb, var(--ui-breadcrumb-current-background) 22%, transparent);
+}
+
+.ui-breadcrumb-current .bi {
+    color: color-mix(in srgb, var(--ui-breadcrumb-current-text) 82%, transparent);
+}
+
+@media (max-width: 575.98px) {
+    .ui-breadcrumb-list {
+        gap: .2rem .35rem;
+        padding: .65rem .7rem .65rem .85rem;
+    }
+
+    .ui-breadcrumb-link,
+    .ui-breadcrumb-current {
+        min-height: 2.1rem;
+        padding: .3rem .5rem;
+        font-size: .84rem;
+    }
+
+    .ui-breadcrumb-home {
+        width: 1.7rem;
+        height: 1.7rem;
+    }
 }
 
 /* 設定：檔案上傳元件、檔案下載元件、表單欄位。 */
@@ -1247,7 +1372,8 @@ textarea.ui-control {
 }
 
 /* 設定：上傳設定區。 */
-.ui-upload-settings {
+.ui-upload-settings,
+.ui-breadcrumb-settings {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(10rem, .42fr);
     gap: .75rem;
@@ -1258,7 +1384,8 @@ textarea.ui-control {
 }
 
     /* 設定：上傳設定區。 */
-    .ui-upload-settings .form-label {
+    .ui-upload-settings .form-label,
+    .ui-breadcrumb-settings .form-label {
         margin-bottom: .35rem;
         color: #475569;
         font-size: .85rem;
@@ -1266,7 +1393,8 @@ textarea.ui-control {
     }
 
     /* 設定：上傳設定區。 */
-    .ui-upload-settings .form-text {
+    .ui-upload-settings .form-text,
+    .ui-breadcrumb-settings .form-text {
         font-size: .78rem;
     }
 

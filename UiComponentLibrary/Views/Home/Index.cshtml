@@ -1,7 +1,7 @@
 @model ComponentDemoViewModel
 @using System.Globalization
 @{
-    ViewData["Title"] = "元件展示";
+    ViewData["Title"] = "元件展示庫";
     var selectedSkills = new HashSet<string>(Model.Skills, StringComparer.Ordinal);
     var knownSkillValues = Model.SkillOptions.Select(option => option.Value ?? option.Text).ToHashSet(StringComparer.Ordinal);
     var selectedDate = Model.SelectedDate?.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture) ?? string.Empty;
@@ -17,7 +17,7 @@
         <section class="ui-showcase-intro" aria-labelledby="showcase-title">
             <div>
                 <p class="ui-showcase-eyebrow">Design workspace</p>
-                <h1 id="showcase-title">元件展示</h1>
+                <h1 id="showcase-title">元件展示庫</h1>
                 <p>選擇元件、調整配色，直接取得可放入 Razor View 的原生 HTML。</p>
             </div>
             <div class="ui-showcase-intro-status"><i class="bi bi-palette2" aria-hidden="true"></i><span>即時配色預覽</span></div>
@@ -36,6 +36,10 @@
                                 <button class="nav-link text-start" type="button" data-ui-show-kind="textarea">Textarea</button>
                                 <button class="nav-link text-start" type="button" data-ui-show-kind="select">Select</button>
                                 <button class="nav-link text-start" type="button" data-ui-show-kind="button">Button</button>
+                            </div>
+                            <div class="ui-nav-group">
+                                <div class="ui-nav-group-label">導覽</div>
+                                <button class="nav-link text-start" type="button" data-ui-show-kind="breadcrumb">麵包屑</button>
                             </div>
                             <div class="ui-nav-group">
                                 <div class="ui-nav-group-label">標籤與選擇</div>
@@ -114,12 +118,28 @@ var attachment = Request.Form.Files.GetFile("attachment");</code></pre>
                             <div class="col-md-4" data-ui-color-row><label class="form-label">資料表表頭</label><input class="form-control form-control-color" type="color" data-ui-color="--ui-table-header-background" data-ui-default="#f7e9ea" /></div>
                             <div class="col-md-4" data-ui-color-row><label class="form-label">資料表邊框</label><input class="form-control form-control-color" type="color" data-ui-color="--ui-table-border" data-ui-default="#d8dee8" /></div>
                             <div class="col-md-4" data-ui-color-row><label class="form-label">資料表強調</label><input class="form-control form-control-color" type="color" data-ui-color="--ui-table-accent" data-ui-default="#a78bb0" /></div>
+                            <div class="col-md-4" data-ui-color-row><label class="form-label">麵包屑強調色</label><input class="form-control form-control-color" type="color" data-ui-color="--ui-breadcrumb-accent" data-ui-default="#0f766e" /></div>
+                            <div class="col-md-4" data-ui-color-row><label class="form-label">麵包屑柔和底色</label><input class="form-control form-control-color" type="color" data-ui-color="--ui-breadcrumb-accent-soft" data-ui-default="#ccfbf1" /></div>
+                            <div class="col-md-4" data-ui-color-row><label class="form-label">麵包屑文字</label><input class="form-control form-control-color" type="color" data-ui-color="--ui-breadcrumb-text" data-ui-default="#334155" /></div>
+                            <div class="col-md-4" data-ui-color-row><label class="form-label">目前頁面背景</label><input class="form-control form-control-color" type="color" data-ui-color="--ui-breadcrumb-current-background" data-ui-default="#0f766e" /></div>
+                            <div class="col-md-4" data-ui-color-row><label class="form-label">目前頁面文字</label><input class="form-control form-control-color" type="color" data-ui-color="--ui-breadcrumb-current-text" data-ui-default="#ffffff" /></div>
                         </div>
                         <div class="ui-upload-settings mt-3" data-ui-upload-settings hidden>
                             <label class="form-label" for="ui-upload-accept">允許檔案類型</label>
                             <input class="form-control" id="ui-upload-accept" type="text" value=".pdf,.doc,.docx" data-ui-upload-accept />
                             <label class="form-label mt-2" for="ui-upload-max-size">單一檔案上限（MB）</label>
                             <input class="form-control" id="ui-upload-max-size" type="number" min="1" max="2048" value="10" data-ui-upload-max-size />
+                        </div>
+                        <div class="ui-breadcrumb-settings mt-3" data-ui-breadcrumb-settings hidden>
+                            <label class="form-label" for="ui-breadcrumb-separator">分隔圖示</label>
+                            <select class="form-select" id="ui-breadcrumb-separator" data-ui-breadcrumb-separator>
+                                <option value="chevron-right">Chevron right（›）</option>
+                                <option value="arrow-right">Arrow right（→）</option>
+                                <option value="caret-right-fill">Caret right（▸）</option>
+                                <option value="slash-lg">Slash（／）</option>
+                                <option value="dash-lg">Dash（—）</option>
+                            </select>
+                            <div class="form-text">選擇後會同步更新預覽與可複製的 HTML。</div>
                         </div>
                         <details class="ui-code-details">
                             <summary>顯示可複製的 HTML 程式碼</summary>
@@ -219,6 +239,17 @@ var attachment = Request.Form.Files.GetFile("attachment");</code></pre>
                                     </fieldset>
                                 </div>
                                 <div class="col-12" data-ui-preview-item data-ui-preview-kind="button" hidden><button class="btn ui-button" data-ui-component="button" type="submit" style="--ui-button-background:#4f46e5">送出表單</button></div>
+                                <div class="col-12" data-ui-preview-item data-ui-preview-kind="breadcrumb" hidden>
+                                    <nav class="ui-breadcrumb" data-ui-component="breadcrumb" data-ui-breadcrumb-separator="chevron-right" aria-label="目前位置" style="--ui-breadcrumb-accent:#0f766e;--ui-breadcrumb-accent-soft:#ccfbf1;--ui-breadcrumb-text:#334155;--ui-breadcrumb-current-background:#0f766e;--ui-breadcrumb-current-text:#ffffff">
+                                        <ol class="breadcrumb ui-breadcrumb-list">
+                                            <li class="breadcrumb-item ui-breadcrumb-item"><a class="ui-breadcrumb-link" href="/"><span class="ui-breadcrumb-home" aria-hidden="true"><i class="bi bi-house-door-fill"></i></span><span>首頁</span></a></li>
+                                            <li class="ui-breadcrumb-separator" aria-hidden="true"><i class="bi bi-chevron-right" data-ui-breadcrumb-separator-icon></i></li>
+                                            <li class="breadcrumb-item ui-breadcrumb-item"><a class="ui-breadcrumb-link" href="/components"><span>元件</span></a></li>
+                                            <li class="ui-breadcrumb-separator" aria-hidden="true"><i class="bi bi-chevron-right" data-ui-breadcrumb-separator-icon></i></li>
+                                            <li class="breadcrumb-item ui-breadcrumb-item"><span class="ui-breadcrumb-current" aria-current="page"><i class="bi bi-grid-1x2-fill" aria-hidden="true"></i><span>元件總覽</span></span></li>
+                                        </ol>
+                                    </nav>
+                                </div>
                                 <div class="col-md-8" data-ui-preview-item data-ui-preview-kind="file-upload" hidden>
                                     <div class="ui-field ui-file-upload" data-ui-component="file-upload" data-ui-for="UploadFile" data-ui-label="附件" data-ui-accept=".pdf,.doc,.docx" data-ui-max-size="10" style="--ui-upload-border-color:#8b5cf6;--ui-upload-progress-color:#4f46e5;--ui-upload-button-color:#4f46e5">
                                         <label class="form-label ui-label" for="UploadFile">附件</label>

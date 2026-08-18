@@ -13,6 +13,7 @@
     labels["file-upload"] = "檔案上傳";
     labels["file-download"] = "檔案下載";
     labels["data-table"] = "Data Table";
+    labels["breadcrumb"] = "麵包屑";
     const allowed = {
         button: ["--ui-button-background", "--ui-button-text", "--ui-button-border"],
         field: ["--ui-border-color", "--ui-focus-color", "--ui-text-color", "--ui-background-color"],
@@ -22,7 +23,8 @@
         upload: ["--ui-upload-border-color", "--ui-upload-progress-color", "--ui-upload-button-color"],
         download: ["--ui-button-background", "--ui-button-text", "--ui-button-border", "--ui-download-icon-color", "--ui-download-progress-color"],
         tagSelect: ["--ui-border-color", "--ui-focus-color", "--ui-text-color", "--ui-background-color", "--ui-tag-color", "--ui-tag-text-color"],
-        table: ["--ui-table-header-background", "--ui-table-header-text", "--ui-table-border", "--ui-table-stripe", "--ui-table-accent"]
+        table: ["--ui-table-header-background", "--ui-table-header-text", "--ui-table-border", "--ui-table-stripe", "--ui-table-accent"],
+        breadcrumb: ["--ui-breadcrumb-accent", "--ui-breadcrumb-accent-soft", "--ui-breadcrumb-text", "--ui-breadcrumb-current-background", "--ui-breadcrumb-current-text"]
     };
     const attributes = {
         "--ui-border-color": "border-color", "--ui-focus-color": "focus-color",
@@ -35,7 +37,9 @@
         "--ui-download-icon-color": "icon-color", "--ui-download-progress-color": "progress-color",
         "--ui-tag-color": "tag-color", "--ui-tag-text-color": "tag-text-color",
         "--ui-table-header-background": "header-background-color", "--ui-table-header-text": "header-text-color",
-        "--ui-table-border": "table-border-color", "--ui-table-stripe": "stripe-background-color", "--ui-table-accent": "accent-color"
+        "--ui-table-border": "table-border-color", "--ui-table-stripe": "stripe-background-color", "--ui-table-accent": "accent-color",
+        "--ui-breadcrumb-accent": "accent-color", "--ui-breadcrumb-accent-soft": "accent-soft-color", "--ui-breadcrumb-text": "text-color",
+        "--ui-breadcrumb-current-background": "current-background-color", "--ui-breadcrumb-current-text": "current-text-color"
     };
 
     const targets = [...document.querySelectorAll("[data-ui-component]")];
@@ -46,7 +50,7 @@
     const navigationIcons = {
         "text-input": "input-cursor-text", textarea: "textarea-t", select: "menu-button-wide", "tag-input": "tag", "tag-select": "tags",
         checkbox: "check2-square", radio: "ui-radios", button: "cursor-fill", "file-upload": "cloud-arrow-up", "file-download": "file-earmark-arrow-down",
-        "date-picker": "calendar3", "date-time-picker": "calendar2-week", "time-picker": "clock", "date-range-picker": "calendar-range", "data-table": "table"
+        "date-picker": "calendar3", "date-time-picker": "calendar2-week", "time-picker": "clock", "date-range-picker": "calendar-range", "data-table": "table", breadcrumb: "signpost-split"
     };
     guideButton?.insertAdjacentHTML("afterbegin", '<i class="bi bi-book" aria-hidden="true"></i>');
     navButtons.forEach(button => {
@@ -63,6 +67,8 @@
     const uploadSettings = document.querySelector("[data-ui-upload-settings]");
     const uploadAccept = document.querySelector("[data-ui-upload-accept]");
     const uploadMaxSize = document.querySelector("[data-ui-upload-max-size]");
+    const breadcrumbSettings = document.querySelector("[data-ui-breadcrumb-settings]");
+    const breadcrumbSeparator = document.querySelector("[data-ui-breadcrumb-separator]");
 
     // 格式化 HTML 標記。
     const formatMarkup = source => String(source || "").replace(/<([A-Za-z][\w-]*)(\s[^<>]*?)(\/?)>/g, (match, tagName, rawAttributes, close) => {
@@ -97,7 +103,8 @@
         "tag-input": { title: "標籤式 Input", summary: "輸入文字後按 Enter 建立自訂標籤。", data: "<p>在 <code>data-ui-tag-input-input</code> 輸入文字後按 <kbd>Enter</kbd> 建立 tag。實際值由具 <code>name</code> 與 <code>multiple</code> 的隱藏 <code>select</code> 送出。</p>" },
         "tag-select": { title: "標籤式 Select", summary: "從選單選取多個項目並顯示為標籤。", data: "<p>使用 <code>data-ui-tag-select-menu</code> 選擇既有項目，實際選取值由具 <code>name</code> 與 <code>multiple</code> 的隱藏 <code>select</code> 送出。</p>" },
         "file-upload": { title: "檔案上傳", summary: "支援拖放與瀏覽檔案。", data: "<p>使用 <code>input[type=file]</code> 取得檔案；前端會檢查格式與大小並顯示清單，伺服器仍必須驗證檔案。</p>" },
-        "file-download": { title: "檔案下載", summary: "顯示下載進度並提供檔案連結。", data: "<p><code>data-ui-download-url</code> 會用於完成後的下載連結；實際檔案傳輸由瀏覽器處理。</p>" }
+        "file-download": { title: "檔案下載", summary: "顯示下載進度並提供檔案連結。", data: "<p><code>data-ui-download-url</code> 會用於完成後的下載連結；實際檔案傳輸由瀏覽器處理。</p>" },
+        breadcrumb: { title: "麵包屑", summary: "以圖示、色彩與目前位置膠囊，讓頁面層級更容易掃讀。", data: "<p>使用 Bootstrap 5 的 <code>breadcrumb</code> 與 <code>breadcrumb-item</code> 語意結構，搭配 UI Component Library 的視覺樣式。</p><p>連結項目使用 <code>a</code>，目前頁面使用 <code>aria-current=\"page\"</code>；分隔圖示可由 <code>data-ui-breadcrumb-separator</code> 選擇。</p>" }
     };
     const parameterNotes = {
         "text-input": [["name", "表單欄位名稱"], ["type / placeholder", "原生輸入型別與提示文字"], ["value", "初始值"]],
@@ -114,7 +121,8 @@
         "date-picker": [["name", "表單欄位名稱"], ["data-ui-date-control=date", "啟用日期選擇器"], ["value", "YYYY-MM-DD 格式"]],
         "date-time-picker": [["name", "表單欄位名稱"], ["data-ui-date-control=datetime", "啟用日期與時間選擇器"], ["value", "YYYY-MM-DD HH:mm 格式"]],
         "time-picker": [["name", "表單欄位名稱"], ["data-ui-time-control", "啟用時間選擇器"], ["value", "HH:mm 格式"]],
-        "date-range-picker": [["data-ui-range-start", "起日隱藏欄位"], ["data-ui-range-end", "迄日隱藏欄位"], ["name", "起日與迄日欄位名稱"]]
+        "date-range-picker": [["data-ui-range-start", "起日隱藏欄位"], ["data-ui-range-end", "迄日隱藏欄位"], ["name", "起日與迄日欄位名稱"]],
+        breadcrumb: [["aria-label", "描述目前導覽位置"], ["data-ui-breadcrumb-separator", "選擇中間分隔圖示"], ["breadcrumb-item", "每一層的語意項目"], ["aria-current=page", "標示目前所在頁面"]]
     };    targets.forEach((target, index) => {
         const id = `ui-preview-${index + 1}`;
         target.id = id;
@@ -138,6 +146,7 @@
         if (target?.dataset.uiComponent === "file-download") return allowed.download;
         if (["tag-input", "tag-select"].includes(target?.dataset.uiComponent)) return allowed.tagSelect;
         if (target?.dataset.uiComponent === "data-table") return allowed.table;
+        if (target?.dataset.uiComponent === "breadcrumb") return allowed.breadcrumb;
         return allowed.field;
     };
 
@@ -146,10 +155,15 @@
         const target = selected();
         const variables = variablesFor(target);
         const isUpload = target?.dataset.uiComponent === "file-upload";
+        const isBreadcrumb = target?.dataset.uiComponent === "breadcrumb";
         if (uploadSettings) uploadSettings.hidden = !isUpload;
+        if (breadcrumbSettings) breadcrumbSettings.hidden = !isBreadcrumb;
         if (isUpload) {
             uploadAccept.value = target.dataset.uiAccept || "";
             uploadMaxSize.value = target.dataset.uiMaxSize || "10";
+        }
+        if (isBreadcrumb && breadcrumbSeparator) {
+            breadcrumbSeparator.value = target.dataset.uiBreadcrumbSeparator || "chevron-right";
         }
         colorInputs.forEach(input => {
             const variable = input.dataset.uiColor;
@@ -172,6 +186,8 @@
         const target = selected();
         if (!target) return;
         const kind = target.dataset.uiComponent;
+        const separator = target.dataset.uiBreadcrumbSeparator || "chevron-right";
+        const separatorIcon = window.UiComponentLibrary?.breadcrumbSeparatorIcons?.[separator] || "chevron-right";
         const cssVariables = variablesFor(target)
             .map(variable => {
                 const configured = target.style.getPropertyValue(variable).trim();
@@ -197,11 +213,15 @@
             "file-upload": `<div class="ui-file-upload" data-ui-component="file-upload" data-ui-accept=".pdf,.doc,.docx" data-ui-max-size="10"${style}>\n  <label class="ui-label" for="attachment">附件</label>\n  <div class="ui-file-drop-zone" data-ui-file-dropzone tabindex="0" role="button">\n    <span class="ui-file-upload-icon" aria-hidden="true"><i class="bi bi-cloud-arrow-up"></i></span><strong>拖放檔案到這裡</strong><span class="ui-file-or">或</span><button class="ui-file-browse" type="button" data-ui-file-browse>瀏覽檔案</button><span class="ui-file-hint">支援 .pdf、.doc、.docx · 上限 10 MB</span>\n  </div>\n  <input class="ui-file-input" id="attachment" name="attachment" type="file" accept=".pdf,.doc,.docx" data-ui-file-input />\n  <div class="ui-file-list" data-ui-file-list aria-live="polite"></div>\n</div>`,
             "file-download": `<section class="ui-file-download" data-ui-component="file-download" data-ui-download-name="年度報告.pdf" data-ui-download-url="/files/annual-report.pdf"${style}>\n  <div class="ui-download-card"><div class="ui-download-file-icon" aria-hidden="true"><i class="bi bi-file-earmark-arrow-down"></i></div><div class="ui-download-copy"><strong>年度報告</strong><span>年度報告.pdf</span></div><div class="ui-download-actions"><button class="ui-button" type="button" data-ui-download-start><i class="bi bi-download" aria-hidden="true"></i>下載檔案</button></div></div>\n  <div class="ui-download-demo-actions"><span>效果示範</span><button type="button" class="btn btn-outline-success" data-ui-download-success>顯示成功</button><button type="button" class="btn btn-outline-danger" data-ui-download-failure>顯示失敗</button></div>\n</section>`,
             "data-table": `<div class="ui-data-table" data-ui-component="data-table" data-ui-data-table="true" data-ui-page-size="10" data-ui-page-size-options="10,25,50" data-ui-sortable="true"${style}>\n  <table class="ui-data-table-grid">\n    <thead><tr><th data-ui-sort-type="number">單位代號</th><th>單位</th><th data-ui-sort-type="number">員編</th><th>姓名</th><th>職稱</th><th data-ui-sortable="false">講師身份</th></tr></thead>\n    <tbody><tr><td>147</td><td>虎尾分行</td><td>067378</td><td>黃＊＊</td><td>高級襄理</td><td>是</td></tr></tbody>\n  </table>\n</div>`,
+            breadcrumb: `<nav class="ui-breadcrumb" data-ui-component="breadcrumb" aria-label="目前位置"${style}>\n  <ol class="breadcrumb ui-breadcrumb-list">\n    <li class="breadcrumb-item ui-breadcrumb-item"><a class="ui-breadcrumb-link" href="/"><span class="ui-breadcrumb-home" aria-hidden="true"><i class="bi bi-house-door-fill"></i></span><span>首頁</span></a></li>\n    <li class="ui-breadcrumb-separator" aria-hidden="true"><i class="bi bi-chevron-right"></i></li>\n    <li class="breadcrumb-item ui-breadcrumb-item"><a class="ui-breadcrumb-link" href="/components"><span>元件</span></a></li>\n    <li class="ui-breadcrumb-separator" aria-hidden="true"><i class="bi bi-chevron-right"></i></li>\n    <li class="breadcrumb-item ui-breadcrumb-item"><span class="ui-breadcrumb-current" aria-current="page"><i class="bi bi-grid-1x2-fill" aria-hidden="true"></i><span>元件總覽</span></span></li>\n  </ol>\n</nav>`,
             "date-picker": field("日期", '<input class="ui-control ui-date-control" id="date-picker-value" name="selectedDate" type="text" readonly autocomplete="off" data-ui-date-control="date" />'),
             "date-time-picker": field("日期與時間", '<input class="ui-control ui-date-control" id="date-time-picker-value" name="selectedDateTime" type="text" readonly autocomplete="off" data-ui-date-control="datetime" />'),
             "time-picker": field("時間", '<input class="ui-control ui-time-control" id="time-picker-value" name="selectedTime" type="text" readonly autocomplete="off" data-ui-time-control="true" />'),
             "date-range-picker": `<div class="ui-field" data-ui-component="date-range-picker"${style}>\n  <label class="ui-label" for="date-range-value">住宿日期</label>\n  <input class="ui-control ui-date-control" id="date-range-value" type="text" readonly autocomplete="off" data-ui-date-control="range" />\n  <input name="startDate" type="hidden" data-ui-range-start />\n  <input name="endDate" type="hidden" data-ui-range-end />\n</div>`
         };
+        snippets.breadcrumb = snippets.breadcrumb
+            .replace('data-ui-component="breadcrumb"', `data-ui-component="breadcrumb" data-ui-breadcrumb-separator="${separator}"`)
+            .replaceAll('class="bi bi-chevron-right"', `class="bi bi-${separatorIcon}" data-ui-breadcrumb-separator-icon`);
         const themeSnippet = (snippet, component) => snippet.replace(
             '<label class="ui-field">',
             `<label class="ui-field" data-ui-component="${component}"${style}>`
@@ -243,6 +263,14 @@
     }
     uploadAccept?.addEventListener("input", updateUploadSettings);
     uploadMaxSize?.addEventListener("input", updateUploadSettings);
+
+    breadcrumbSeparator?.addEventListener("change", () => {
+        const target = selected();
+        if (target?.dataset.uiComponent !== "breadcrumb") return;
+        target.dataset.uiBreadcrumbSeparator = breadcrumbSeparator.value;
+        window.UiComponentLibrary?.setBreadcrumbSeparator(target, breadcrumbSeparator.value);
+        updateCode();
+    });
 
     colorRows.forEach(row => {
         const input = row.querySelector("[data-ui-color]");
@@ -297,6 +325,30 @@
         guideButton.classList.add("active");
     });
     showPreview("text-input");
+})();
+
+(() => {
+    const separatorIcons = Object.freeze({
+        "chevron-right": "chevron-right",
+        "arrow-right": "arrow-right",
+        "caret-right-fill": "caret-right-fill",
+        "slash-lg": "slash-lg",
+        "dash-lg": "dash-lg"
+    });
+    const setBreadcrumbSeparator = (breadcrumb, value) => {
+        if (!breadcrumb) return;
+        const separator = separatorIcons[value] ? value : "chevron-right";
+        breadcrumb.dataset.uiBreadcrumbSeparator = separator;
+        breadcrumb.querySelectorAll("[data-ui-breadcrumb-separator-icon], .ui-breadcrumb-separator > .bi").forEach(icon => {
+            icon.className = `bi bi-${separatorIcons[separator]}`;
+        });
+    };
+    window.UiComponentLibrary = window.UiComponentLibrary || {};
+    window.UiComponentLibrary.breadcrumbSeparatorIcons = separatorIcons;
+    window.UiComponentLibrary.setBreadcrumbSeparator = setBreadcrumbSeparator;
+    document.querySelectorAll("[data-ui-component='breadcrumb']").forEach(breadcrumb => {
+        if (breadcrumb.dataset.uiBreadcrumbSeparator) setBreadcrumbSeparator(breadcrumb, breadcrumb.dataset.uiBreadcrumbSeparator);
+    });
 })();
 
 (() => {

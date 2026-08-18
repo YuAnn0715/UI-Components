@@ -15,6 +15,8 @@ ASP.NET Core MVC／Razor Pages 可直接使用的 Bootstrap 5 靜態表單元件
 
 檔案與日期：`ui-file-upload`、`ui-file-download`、`ui-date-picker`、`ui-date-time-picker`、`ui-time-picker`、`ui-date-range-picker`。
 
+導覽：`ui-breadcrumb`。
+
 資料：`ui-data-table`。
 
 ## 使用方式
