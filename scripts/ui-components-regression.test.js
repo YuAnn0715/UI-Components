@@ -426,6 +426,9 @@ assert.match(showcaseStyles, /\.ui-preview-card \[data-ui-preview-item\]\s*\{[^}
 assert.match(showcaseStyles, /data-ui-preview-kind="button"|data-ui-preview-kind\\=\"button\\"/, "button width exception is missing");
 assert.match(showcaseStyles, /\.ui-preview-card \[data-ui-preview-kind="button"\][^}]*\{[^}]*width:\s*auto/s, "button preview is still forced to full width");
 assert.match(showcaseMarkup, /data-ui-show-kind="breadcrumb"/, "breadcrumb is missing from the showcase navigation");
+assert.match(showcaseMarkup, /data-ui-show-kind="switch"/, "switch is missing from the showcase navigation");
+assert.match(showcaseMarkup, /data-ui-preview-kind="switch"[\s\S]*ui-switch-input/, "switch showcase markup is missing the native checkbox input");
+assert.doesNotMatch(showcaseMarkup, /data-ui-preview-kind="switch"[\s\S]*ui-switch-card/, "switch showcase is still wrapped in a card");
 assert.match(showcaseMarkup, /data-ui-preview-kind="breadcrumb"[\s\S]*class="breadcrumb ui-breadcrumb-list"/, "breadcrumb showcase markup is missing Bootstrap breadcrumb semantics");
 assert.match(showcaseMarkup, /data-ui-breadcrumb-settings[\s\S]*data-ui-breadcrumb-separator/, "breadcrumb separator selector is missing from the showcase editor");
 assert.match(showcaseMarkup, /data-ui-breadcrumb-separator="chevron-right"/, "breadcrumb preview has no default separator setting");
@@ -433,6 +436,12 @@ assert.match(styles, /\.ui-breadcrumb-list[\s\S]*\.ui-breadcrumb-current/, "brea
 assert.match(source, /separatorIcons[\s\S]*slash-lg[\s\S]*dash-lg/, "breadcrumb separator icon choices are missing");
 assert.match(source, /data-ui-breadcrumb-separator/, "breadcrumb generated HTML has no separator setting");
 assert.match(source, /breadcrumb:\s*`<nav class="ui-breadcrumb"[\s\S]*aria-current="page"/, "breadcrumb generated HTML is missing accessible current-page markup");
+assert.match(source, /switch:\s*`<div class="ui-switch"[\s\S]*ui-switch-input/, "switch generated HTML is missing");
+assert.match(styles, /\.ui-switch-input:checked \+ \.ui-switch-track/, "switch checked state styling is missing");
+assert.match(styles, /\.ui-switch-input:focus-visible \+ \.ui-switch-track/, "switch keyboard focus styling is missing");
+assert.match(styles, /\.ui-switch-input:checked \+ \.ui-switch-track \.ui-switch-on-icon/, "switch checked state does not show the check icon");
+assert.match(styles, /\.ui-switch-input:checked \+ \.ui-switch-track \.ui-switch-off-icon/, "switch checked state does not hide the X icon");
+assert.match(source, /radio:\s*\["--ui-border-color", "--ui-focus-color", "--ui-text-color"\]/, "radio editor still exposes background color");
 
 const expectedThemeVariables = [
     "--ui-border-color", "--ui-focus-color", "--ui-text-color", "--ui-background-color",
@@ -443,7 +452,8 @@ const expectedThemeVariables = [
     "--ui-flip-number-color", "--ui-flip-number-background",
     "--ui-upload-border-color", "--ui-upload-progress-color", "--ui-upload-button-color", "--ui-download-icon-color", "--ui-download-progress-color",
     "--ui-table-header-background", "--ui-table-header-text", "--ui-table-border", "--ui-table-stripe", "--ui-table-accent",
-    "--ui-breadcrumb-accent", "--ui-breadcrumb-accent-soft", "--ui-breadcrumb-text", "--ui-breadcrumb-current-background", "--ui-breadcrumb-current-text"
+    "--ui-breadcrumb-accent", "--ui-breadcrumb-accent-soft", "--ui-breadcrumb-text", "--ui-breadcrumb-current-background", "--ui-breadcrumb-current-text",
+    "--ui-switch-on-color", "--ui-switch-off-color", "--ui-switch-thumb-color"
 ];
 const escapedVariable = variable => variable.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 const allowedBlock = source.match(/const allowed = \{([\s\S]*?)\n\s*\};/)?.[1] ?? "";

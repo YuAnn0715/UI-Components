@@ -24,7 +24,7 @@ var attachment = Request.Form.Files.GetFile("attachment");
 
 目前提供：
 
-- 文字與選單：`ui-text-input`、`ui-textarea`、`ui-select`、`ui-tag-input`、`ui-tag-select`、`ui-checkbox`、`ui-radio`、`ui-button`
+- 文字與選單：`ui-text-input`、`ui-textarea`、`ui-select`、`ui-tag-input`、`ui-tag-select`、`ui-checkbox`、`ui-switch`、`ui-radio`、`ui-button`
 - 檔案與日期：`ui-file-upload`、`ui-file-download`、`ui-date-picker`、`ui-date-time-picker`、`ui-time-picker`、`ui-date-range-picker`
 - 導覽：`ui-breadcrumb`
 - 資料：`ui-data-table`

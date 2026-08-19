@@ -7,7 +7,7 @@
     const colorRows = [...editor.querySelectorAll("[data-ui-color-row]")];
     const labels = {
         "text-input": "輸入框", textarea: "多行輸入框", select: "下拉選單", "tag-input": "標籤式 Input", "tag-select": "標籤式 Select",
-        checkbox: "核取方塊", radio: "單選按鈕", button: "按鈕",
+        checkbox: "核取方塊", switch: "Switch", radio: "單選按鈕", button: "按鈕",
         "date-picker": "日期選擇器", "date-time-picker": "日期＋時間", "time-picker": "時間選擇器", "date-range-picker": "日期區間"
     };
     labels["file-upload"] = "檔案上傳";
@@ -17,12 +17,14 @@
     const allowed = {
         button: ["--ui-button-background", "--ui-button-text", "--ui-button-border"],
         field: ["--ui-border-color", "--ui-focus-color", "--ui-text-color", "--ui-background-color"],
+        radio: ["--ui-border-color", "--ui-focus-color", "--ui-text-color"],
         date: ["--ui-border-color", "--ui-focus-color", "--ui-text-color", "--ui-background-color", "--ui-confirm-color", "--ui-cancel-color", "--ui-range-endpoint-color"],
         range: ["--ui-border-color", "--ui-focus-color", "--ui-text-color", "--ui-background-color", "--ui-confirm-color", "--ui-cancel-color", "--ui-range-endpoint-color", "--ui-range-fill-color"],
         time: ["--ui-border-color", "--ui-focus-color", "--ui-text-color", "--ui-background-color", "--ui-confirm-color", "--ui-cancel-color", "--ui-time-control-color", "--ui-flip-number-color", "--ui-flip-number-background"],
         upload: ["--ui-upload-border-color", "--ui-upload-progress-color", "--ui-upload-button-color"],
         download: ["--ui-button-background", "--ui-button-text", "--ui-button-border", "--ui-download-icon-color", "--ui-download-progress-color"],
         tagSelect: ["--ui-border-color", "--ui-focus-color", "--ui-text-color", "--ui-background-color", "--ui-tag-color", "--ui-tag-text-color"],
+        switch: ["--ui-switch-on-color", "--ui-switch-off-color", "--ui-switch-thumb-color"],
         table: ["--ui-table-header-background", "--ui-table-header-text", "--ui-table-border", "--ui-table-stripe", "--ui-table-accent"],
         breadcrumb: ["--ui-breadcrumb-accent", "--ui-breadcrumb-accent-soft", "--ui-breadcrumb-text", "--ui-breadcrumb-current-background", "--ui-breadcrumb-current-text"]
     };
@@ -36,6 +38,7 @@
         "--ui-upload-border-color": "border-color", "--ui-upload-progress-color": "progress-color", "--ui-upload-button-color": "button-color",
         "--ui-download-icon-color": "icon-color", "--ui-download-progress-color": "progress-color",
         "--ui-tag-color": "tag-color", "--ui-tag-text-color": "tag-text-color",
+        "--ui-switch-on-color": "switch-on-color", "--ui-switch-off-color": "switch-off-color", "--ui-switch-thumb-color": "switch-thumb-color",
         "--ui-table-header-background": "header-background-color", "--ui-table-header-text": "header-text-color",
         "--ui-table-border": "table-border-color", "--ui-table-stripe": "stripe-background-color", "--ui-table-accent": "accent-color",
         "--ui-breadcrumb-accent": "accent-color", "--ui-breadcrumb-accent-soft": "accent-soft-color", "--ui-breadcrumb-text": "text-color",
@@ -49,7 +52,7 @@
     const guideButton = document.querySelector("[data-ui-show-guide]");
     const navigationIcons = {
         "text-input": "input-cursor-text", textarea: "textarea-t", select: "menu-button-wide", "tag-input": "tag", "tag-select": "tags",
-        checkbox: "check2-square", radio: "ui-radios", button: "cursor-fill", "file-upload": "cloud-arrow-up", "file-download": "file-earmark-arrow-down",
+        checkbox: "check2-square", switch: "toggle-on", radio: "ui-radios", button: "cursor-fill", "file-upload": "cloud-arrow-up", "file-download": "file-earmark-arrow-down",
         "date-picker": "calendar3", "date-time-picker": "calendar2-week", "time-picker": "clock", "date-range-picker": "calendar-range", "data-table": "table", breadcrumb: "signpost-split"
     };
     guideButton?.insertAdjacentHTML("afterbegin", '<i class="bi bi-book" aria-hidden="true"></i>');
@@ -93,6 +96,7 @@
         textarea: { title: "Textarea", summary: "用於多行備註或說明內容。", data: "<p>使用原生 <code>textarea</code>，以 <code>name</code> 取得多行文字。</p><p>可設定顯示行數、提示文字與輸入框配色。</p>" },
         select: { title: "Select", summary: "從 option 選項中選擇一個值。", data: "<p>直接在 <code>select</code> 中加入 <code>option</code>；使用者選取值可由 <code>select.value</code> 或表單欄位取得。</p>" },
         checkbox: { title: "Checkbox", summary: "用於單一 true／false 開關。", data: "<p>使用原生 checkbox；以 <code>checked</code> 設定初始值，並從 <code>input.checked</code> 取得狀態。</p>" },
+        switch: { title: "Switch", summary: "把單一 true／false 設定變成清楚、好操作的滑動開關。", data: "<p>保留原生 <code>input[type=checkbox]</code>，因此可以直接放進表單；以 <code>checked</code> 設定初始狀態。</p><p>可用三個 <code>--ui-switch-*</code> CSS 變數調整開啟、關閉與滑塊配色。</p>" },
         radio: { title: "Radio", summary: "同一個欄位提供多個互斥選項。", data: "<p>同一組 Radio 使用相同 <code>name</code>，每個選項使用不同 <code>value</code>。</p>" },
         button: { title: "Button", summary: "提交表單或觸發頁面動作的按鈕。", data: "<p>使用原生 <code>button</code>；<code>type=\"submit\"</code> 可提交表單，<code>type=\"button\"</code> 可觸發前端動作。</p>" },
         "date-picker": { title: "日期選擇器", summary: "選擇單一日期。", data: "<p>元件會寫入 <code>input[name=selectedDate].value</code>，格式為 <code>YYYY-MM-DD</code>。</p>" },
@@ -111,6 +115,7 @@
         textarea: [["name", "表單欄位名稱"], ["rows / placeholder", "顯示行數與提示文字"]],
         select: [["name", "表單欄位名稱"], ["option", "選項顯示文字與 value"], ["value", "目前選取值"]],
         checkbox: [["name / value", "勾選後送出的欄位與值"], ["checked", "預設勾選狀態"]],
+        switch: [["name / value", "開啟後送出的欄位與值"], ["checked", "預設開啟狀態"], ["disabled", "停用切換"]],
         radio: [["name", "同組選項使用相同名稱"], ["value", "選項送出的值"]],
         button: [["type", "submit 提交表單；button 觸發前端動作"], ["style", "按鈕配色"]],
         "tag-input": [["data-ui-tag-input-input", "輸入文字後按 Enter 建立自訂標籤"], ["name + multiple", "實際送出 tag 值的 select"], ["data-ui-tag-input-values", "包含自訂 tag 的選取值"]],
@@ -145,6 +150,8 @@
         if (target?.dataset.uiComponent === "file-upload") return allowed.upload;
         if (target?.dataset.uiComponent === "file-download") return allowed.download;
         if (["tag-input", "tag-select"].includes(target?.dataset.uiComponent)) return allowed.tagSelect;
+        if (target?.dataset.uiComponent === "switch") return allowed.switch;
+        if (target?.dataset.uiComponent === "radio") return allowed.radio;
         if (target?.dataset.uiComponent === "data-table") return allowed.table;
         if (target?.dataset.uiComponent === "breadcrumb") return allowed.breadcrumb;
         return allowed.field;
@@ -208,6 +215,7 @@
             "tag-input": `<div class="ui-field" data-ui-component="tag-input"${style}>\n  <label class="ui-label" for="tag-input-input">標籤</label>\n  <div class="ui-tag-input-control" data-ui-tag-input-control>\n    <div class="ui-tag-input-tags" data-ui-tag-input-tags></div>\n    <input class="ui-tag-input-input" id="tag-input-input" type="text" placeholder="輸入文字後按 Enter 新增" data-ui-tag-input-input autocomplete="off" />\n  </div>\n  <select class="ui-tag-input-values" name="tags" multiple data-ui-tag-input-values>\n    <option value="csharp">C#</option>\n    <option value="javascript">JavaScript</option>\n  </select>\n</div>`,
             "tag-select": `<div class="ui-field" data-ui-component="tag-select"${style}>\n  <label class="ui-label" for="tag-select-menu">技能</label>\n  <div class="ui-tag-select-control" data-ui-tag-select-control>\n    <div class="ui-tag-select-tags" data-ui-tag-select-tags></div>\n    <select class="ui-tag-select-menu" id="tag-select-menu" data-ui-tag-select-menu>\n      <option value="">選擇技能</option>\n      <option value="csharp">C#</option>\n      <option value="javascript">JavaScript</option>\n    </select>\n  </div>\n  <select class="ui-tag-select-values" name="skills" multiple data-ui-tag-select-values>\n    <option value="csharp">C#</option>\n    <option value="javascript">JavaScript</option>\n  </select>\n</div>`,
             checkbox: '<label class="ui-field"><input class="ui-check-control" name="emailUpdates" type="checkbox" value="true" /> 我想收到產品更新</label>',
+            switch: `<div class="ui-switch" data-ui-component="switch"${style}>\n  <input class="ui-switch-input" id="notifications-switch" name="notifications" type="checkbox" value="true" />\n  <label class="ui-switch-track" for="notifications-switch" aria-label="切換產品更新通知"><span class="ui-switch-thumb" aria-hidden="true"><i class="bi bi-check-lg ui-switch-on-icon"></i><i class="bi bi-x-lg ui-switch-off-icon"></i></span></label>\n  <span class="ui-switch-state" aria-hidden="true"><span class="ui-switch-on-text">已開啟</span><span class="ui-switch-off-text">已關閉</span></span>\n</div>`,
             radio: '<label class="ui-field"><input class="ui-check-control" name="preferredContact" type="radio" value="email" /> 電子郵件</label>',
             button: `<button class="ui-button" type="button"${style}>送出表單</button>`,
             "file-upload": `<div class="ui-file-upload" data-ui-component="file-upload" data-ui-accept=".pdf,.doc,.docx" data-ui-max-size="10"${style}>\n  <label class="ui-label" for="attachment">附件</label>\n  <div class="ui-file-drop-zone" data-ui-file-dropzone tabindex="0" role="button">\n    <span class="ui-file-upload-icon" aria-hidden="true"><i class="bi bi-cloud-arrow-up"></i></span><strong>拖放檔案到這裡</strong><span class="ui-file-or">或</span><button class="ui-file-browse" type="button" data-ui-file-browse>瀏覽檔案</button><span class="ui-file-hint">支援 .pdf、.doc、.docx · 上限 10 MB</span>\n  </div>\n  <input class="ui-file-input" id="attachment" name="attachment" type="file" accept=".pdf,.doc,.docx" data-ui-file-input />\n  <div class="ui-file-list" data-ui-file-list aria-live="polite"></div>\n</div>`,

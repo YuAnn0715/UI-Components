@@ -23,4 +23,6 @@
 
 `ui-tag-input` 可在 `data-ui-tag-input-input` 輸入文字後按 `Enter` 建立自訂 tag；元件會將自訂值加入具有 `name` 與 `multiple` 的 `data-ui-tag-input-values` 選單，隨表單送出。`ui-tag-select` 僅從 `data-ui-tag-select-menu` 選取既有項目。
 
+`ui-switch` 使用原生 `input[type="checkbox"]`，因此可直接放進表單並支援鍵盤操作。請將輸入框放在 `.ui-switch-track` 前面，並用同一個 `id`／`for` 連結滑塊；外層使用 `.ui-switch` 即可取得滑動動畫與狀態文字。開啟時顯示打勾，關閉時顯示 X。可用 `--ui-switch-on-color`、`--ui-switch-off-color` 與 `--ui-switch-thumb-color` 覆寫配色。
+
 `ui-breadcrumb` 使用 Bootstrap 5 的 `breadcrumb` 與 `breadcrumb-item` 語意結構，提供首頁圖示、圖示分隔與目前頁面膠囊；連結項目請使用 `<a>`，目前頁面請加上 `aria-current="page"`。可用 `data-ui-breadcrumb-separator` 選擇 `chevron-right`、`arrow-right`、`caret-right-fill`、`slash-lg` 或 `dash-lg`，再由 `ui-components.js` 自動替換分隔圖示；也可用 `--ui-breadcrumb-accent` 等 CSS 變數覆寫配色。

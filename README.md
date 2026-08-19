@@ -11,7 +11,7 @@ ASP.NET Core MVC／Razor Pages 可直接使用的 Bootstrap 5 靜態表單元件
 
 ## 目前元件
 
-文字與選單：`ui-text-input`、`ui-textarea`、`ui-select`、`ui-tag-input`、`ui-tag-select`、`ui-checkbox`、`ui-radio`、`ui-button`。
+文字與選單：`ui-text-input`、`ui-textarea`、`ui-select`、`ui-tag-input`、`ui-tag-select`、`ui-checkbox`、`ui-switch`、`ui-radio`、`ui-button`。
 
 檔案與日期：`ui-file-upload`、`ui-file-download`、`ui-date-picker`、`ui-date-time-picker`、`ui-time-picker`、`ui-date-range-picker`。
 
