@@ -99,8 +99,8 @@
         switch: { title: "Switch", summary: "把單一 true／false 設定變成清楚、好操作的滑動開關。", data: "<p>保留原生 <code>input[type=checkbox]</code>，因此可以直接放進表單；以 <code>checked</code> 設定初始狀態。</p><p>可用三個 <code>--ui-switch-*</code> CSS 變數調整開啟、關閉與滑塊配色。</p>" },
         radio: { title: "Radio", summary: "同一個欄位提供多個互斥選項。", data: "<p>同一組 Radio 使用相同 <code>name</code>，每個選項使用不同 <code>value</code>。</p><p>ASP.NET Core 可用 <code>Request.Form[\"preferredContact\"]</code> 取得目前選取值。</p>" },
         button: { title: "Button", summary: "提交表單或觸發頁面動作的按鈕。", data: "<p>使用原生 <code>button</code>；<code>type=\"submit\"</code> 可提交表單，<code>type=\"button\"</code> 可觸發前端動作。</p>" },
-        "date-picker": { title: "日期選擇器", summary: "選擇單一日期。", data: "<p>元件會寫入 <code>input[name=selectedDate].value</code>，格式為 <code>YYYY-MM-DD</code>。</p>" },
-        "date-time-picker": { title: "日期＋時間", summary: "選擇日期與時間。", data: "<p>元件會寫入 <code>input[name=selectedDateTime].value</code>，格式為 <code>YYYY-MM-DD HH:mm</code>。</p>" },
+        "date-picker": { title: "日期選擇器", summary: "選擇單一日期。", data: "<p>元件會寫入 <code>input[name=selectedDate].value</code>，格式為 <code>YYYY/MM/DD</code>。</p>" },
+        "date-time-picker": { title: "日期＋時間", summary: "選擇日期與時間。", data: "<p>元件會寫入 <code>input[name=selectedDateTime].value</code>，格式為 <code>YYYY/MM/DD HH:mm</code>。</p>" },
         "time-picker": { title: "時間選擇器", summary: "使用翻頁時鐘選擇時間。", data: "<p>元件會寫入 <code>input[name=selectedTime].value</code>，格式為 <code>HH:mm</code>。</p>" },
         "date-range-picker": { title: "日期區間", summary: "一次選擇起日與迄日。", data: "<p>元件會分別寫入 <code>input[name=startDate]</code> 與 <code>input[name=endDate]</code>。</p>" },
         "data-table": { title: "Data Table", summary: "可排序、可分頁的資料表。", data: "<p>一般 HTML <code>table</code> 加上 <code>data-ui-data-table=\"true\"</code> 後，即可啟用排序、每頁筆數選擇與分頁。</p><p>可用 <code>data-ui-striped</code> 開關斑馬紋、用 <code>data-ui-hover</code> 開關滑入列高亮；排序欄位可在標題上使用 <code>data-ui-sortable=\"true\"</code> 或 <code>data-ui-sortable=\"false\"</code>。</p>" },
@@ -123,8 +123,8 @@
         "file-upload": [["name", "檔案欄位名稱"], ["accept / data-ui-accept", "副檔名或 MIME 類型限制；兩者應保持一致"], ["data-ui-max-size", "單一檔案容量上限（MB）"], ["data-ui-file-dropzone", "拖放檔案區，請保留此屬性"], ["data-ui-file-browse", "觸發檔案選擇器的按鈕，請保留此屬性"], ["data-ui-file-input", "原生檔案 input 的初始化 hook，請保留此屬性"], ["data-ui-file-list", "顯示檔案與上傳進度的容器，請保留此屬性"], ["multiple", "允許選擇多個檔案"]],
         "file-download": [["data-ui-download-name", "顯示的檔名"], ["data-ui-download-url", "完成後的下載連結"], ["data-ui-download-start", "觸發下載效果的按鈕"], ["data-ui-download-success", "展示頁專用的成功效果示範按鈕"], ["data-ui-download-failure", "展示頁專用的失敗效果示範按鈕"]],
         "data-table": [["data-ui-data-table", "使用 true 啟用資料表排序、分頁與筆數控制"], ["data-ui-page-size", "預設每頁顯示筆數"], ["data-ui-page-size-options", "每頁筆數選項，例如 1,10,25,50"], ["data-ui-sortable", "外層使用 true／false 開關排序；標題 th 也可用 true／false 控制個別欄位"], ["data-ui-sort-type", "標題欄位排序型別，例如 number、date 或 text"], ["data-ui-sort-value", "指定與畫面文字不同的實際排序值"], ["data-ui-striped", "使用 true 顯示斑馬紋列，使用 false 關閉"], ["data-ui-hover", "使用 true 顯示滑入列高亮，使用 false 關閉"]],
-        "date-picker": [["name", "表單欄位名稱"], ["data-ui-date-control=date", "啟用日期選擇器"], ["value", "YYYY-MM-DD 格式"]],
-        "date-time-picker": [["name", "表單欄位名稱"], ["data-ui-date-control=datetime", "啟用日期與時間選擇器"], ["value", "YYYY-MM-DD HH:mm 格式"]],
+        "date-picker": [["name", "表單欄位名稱"], ["data-ui-date-control=date", "啟用日期選擇器"], ["value", "YYYY/MM/DD 格式"]],
+        "date-time-picker": [["name", "表單欄位名稱"], ["data-ui-date-control=datetime", "啟用日期與時間選擇器"], ["value", "YYYY/MM/DD HH:mm 格式"]],
         "time-picker": [["name", "表單欄位名稱"], ["data-ui-time-control", "啟用時間選擇器"], ["value", "HH:mm 格式"]],
         "date-range-picker": [["data-ui-end-for", "指定迄日欄位的 data-ui-for 值"], ["data-ui-range-start", "起日隱藏欄位"], ["data-ui-range-end", "迄日隱藏欄位"], ["name", "起日與迄日欄位名稱"]],
         breadcrumb: [["aria-label", "描述目前導覽位置"], ["data-ui-breadcrumb-separator", "選擇中間分隔圖示"], ["data-ui-breadcrumb-separator-icon", "分隔圖示的初始化 hook，請保留此屬性"], ["breadcrumb-item", "每一層的語意項目"], ["aria-current=page", "標示目前所在頁面"]]
@@ -222,10 +222,10 @@
             "file-download": `<section class="ui-file-download" data-ui-component="file-download" data-ui-download-name="年度報告.pdf" data-ui-download-url="/files/annual-report.pdf"${style}>\n  <div class="ui-download-card"><div class="ui-download-file-icon" aria-hidden="true"><i class="bi bi-file-earmark-arrow-down"></i></div><div class="ui-download-copy"><strong>年度報告</strong><span>年度報告.pdf</span></div><div class="ui-download-actions"><button class="ui-button" type="button" data-ui-download-start><i class="bi bi-download" aria-hidden="true"></i>下載檔案</button></div></div>\n  <div class="ui-download-demo-actions"><span>效果示範</span><button type="button" class="btn btn-outline-success" data-ui-download-success>顯示成功</button><button type="button" class="btn btn-outline-danger" data-ui-download-failure>顯示失敗</button></div>\n</section>`,
             "data-table": `<div class="ui-data-table" data-ui-component="data-table" data-ui-data-table="true" data-ui-page-size="10" data-ui-page-size-options="1,10,25,50" data-ui-sortable="true" data-ui-striped="true" data-ui-hover="true"${style}>\n  <table class="ui-data-table-grid">\n    <thead><tr><th data-ui-sort-type="number">單位代號</th><th>單位</th><th data-ui-sort-type="number">員編</th><th>姓名</th><th>職稱</th><th data-ui-sortable="false">講師身份</th></tr></thead>\n    <tbody><tr><td>147</td><td>虎尾分行</td><td>067378</td><td>黃＊＊</td><td>高級襄理</td><td>是</td></tr></tbody>\n  </table>\n</div>`,
             breadcrumb: `<nav class="ui-breadcrumb" data-ui-component="breadcrumb" aria-label="目前位置"${style}>\n  <ol class="breadcrumb ui-breadcrumb-list">\n    <li class="breadcrumb-item ui-breadcrumb-item"><a class="ui-breadcrumb-link" href="/"><span class="ui-breadcrumb-home" aria-hidden="true"><i class="bi bi-house-door-fill"></i></span><span>首頁</span></a></li>\n    <li class="ui-breadcrumb-separator" aria-hidden="true"><i class="bi bi-chevron-right"></i></li>\n    <li class="breadcrumb-item ui-breadcrumb-item"><a class="ui-breadcrumb-link" href="/components"><span>元件</span></a></li>\n    <li class="ui-breadcrumb-separator" aria-hidden="true"><i class="bi bi-chevron-right"></i></li>\n    <li class="breadcrumb-item ui-breadcrumb-item"><span class="ui-breadcrumb-current" aria-current="page"><i class="bi bi-grid-1x2-fill" aria-hidden="true"></i><span>元件總覽</span></span></li>\n  </ol>\n</nav>`,
-            "date-picker": field("日期", '<input class="ui-control ui-date-control" id="date-picker-value" name="selectedDate" type="text" readonly autocomplete="off" data-ui-date-control="date" />'),
-            "date-time-picker": field("日期與時間", '<input class="ui-control ui-date-control" id="date-time-picker-value" name="selectedDateTime" type="text" readonly autocomplete="off" data-ui-date-control="datetime" />'),
-            "time-picker": field("時間", '<input class="ui-control ui-time-control" id="time-picker-value" name="selectedTime" type="text" readonly autocomplete="off" data-ui-time-control="true" />'),
-            "date-range-picker": `<div class="ui-field" data-ui-component="date-range-picker" data-ui-end-for="EndDate"${style}>\n  <label class="ui-label" for="date-range-value">住宿日期</label>\n  <input class="ui-control ui-date-control" id="date-range-value" type="text" readonly autocomplete="off" data-ui-date-control="range" />\n  <input name="startDate" type="hidden" data-ui-range-start />\n  <input name="endDate" type="hidden" data-ui-range-end />\n</div>`
+            "date-picker": field("日期", '<input class="ui-control ui-date-control" id="date-picker-value" name="selectedDate" type="text" readonly autocomplete="off" data-ui-date-control="date" placeholder="YYYY/MM/DD" />'),
+            "date-time-picker": field("日期與時間", '<input class="ui-control ui-date-control" id="date-time-picker-value" name="selectedDateTime" type="text" readonly autocomplete="off" data-ui-date-control="datetime" placeholder="YYYY/MM/DD HH:mm" />'),
+            "time-picker": field("時間", '<input class="ui-control ui-time-control" id="time-picker-value" name="selectedTime" type="text" readonly autocomplete="off" data-ui-time-control="true" placeholder="HH:mm" />'),
+            "date-range-picker": `<div class="ui-field" data-ui-component="date-range-picker" data-ui-end-for="EndDate"${style}>\n  <label class="ui-label" for="date-range-value">住宿日期</label>\n  <input class="ui-control ui-date-control" id="date-range-value" type="text" readonly autocomplete="off" data-ui-date-control="range" placeholder="YYYY/MM/DD 至 YYYY/MM/DD" />\n  <input name="startDate" type="hidden" data-ui-range-start />\n  <input name="endDate" type="hidden" data-ui-range-end />\n</div>`
         };
         snippets.breadcrumb = snippets.breadcrumb
             .replace('data-ui-component="breadcrumb"', `data-ui-component="breadcrumb" data-ui-breadcrumb-separator="${separator}"`)
@@ -685,10 +685,15 @@
     document.body.append(dialog);
     let state;
 
-    // 轉為 ISO 日期。
+    // 轉為內部使用的 ISO 日期。
     const iso = date => `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
-    // 解析 ISO 日期。
-    const parse = value => value && /^\d{4}-\d{2}-\d{2}$/.test(value) ? new Date(`${value}T12:00:00`) : null;
+    // 轉為日期欄位的顯示格式。
+    const displayDate = date => iso(date).replace(/-/g, "/");
+    // 解析日期欄位，並相容舊的 ISO 日期格式。
+    const parse = value => {
+        const normalized = String(value || "").replace(/\//g, "-");
+        return /^\d{4}-\d{2}-\d{2}$/.test(normalized) ? new Date(`${normalized}T12:00:00`) : null;
+    };
     // 比較是否同一天。
     const same = (left, right) => left && right && iso(left) === iso(right);
     // 判斷日期是否在區間內。
@@ -790,9 +795,9 @@
                 if (!state.start || !state.end) return;
                 state.startInput.value = iso(state.start);
                 state.endInput.value = iso(state.end);
-                state.control.value = `${iso(state.start)} 至 ${iso(state.end)}`;
+                state.control.value = `${displayDate(state.start)} 至 ${displayDate(state.end)}`;
             } else if (state.selected) {
-                state.control.value = state.mode === "datetime" ? `${iso(state.selected)} ${state.time}` : iso(state.selected);
+                state.control.value = state.mode === "datetime" ? `${displayDate(state.selected)} ${state.time}` : displayDate(state.selected);
             }
             state.control.dispatchEvent(new Event("change", { bubbles: true }));
             dialog.close();

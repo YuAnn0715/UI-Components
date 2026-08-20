@@ -423,6 +423,15 @@ assert.equal(downloadDialog?.style.getPropertyValue("--ui-download-progress-colo
 assert.ok(fixtures.downloadStart.listeners.has("click"), "download start interaction was not initialized");
 fixtures.dateControls.forEach(control => assert.ok(control.listeners.has("click"), `${control.dataset.uiDateControl} picker interaction was not initialized`));
 assert.ok(fixtures.timeControl.listeners.has("click"), "time picker interaction was not initialized");
+const dateDialog = fixtures.document.body.children.find(child => child.className === "ui-date-dialog");
+fixtures.dateControls[0].value = "2026-08-20";
+fixtures.dateControls[0].dispatchEvent(new FakeEvent("click"));
+dateDialog.dispatchEvent(new FakeEvent("click", { target: new FakeElement("button", { uiDateConfirm: "" }) }));
+assert.equal(fixtures.dateControls[0].value, "2026/08/20", "date picker did not use the default slash display format");
+fixtures.dateControls[1].value = "2026/08/20 09:30";
+fixtures.dateControls[1].dispatchEvent(new FakeEvent("click"));
+dateDialog.dispatchEvent(new FakeEvent("click", { target: new FakeElement("button", { uiDateConfirm: "" }) }));
+assert.equal(fixtures.dateControls[1].value, "2026/08/20 09:30", "date-time picker did not use the default slash display format");
 assert.ok(fixtures.tagInputText.listeners.has("keydown"), "tag input Enter interaction was not initialized");
 fixtures.tagInputText.value = "custom-tag";
 fixtures.tagInputText.dispatchEvent(new FakeEvent("keydown", { key: "Enter", preventDefault: () => {} }));
@@ -449,6 +458,11 @@ const parameterNotesBlock = source.match(/const parameterNotes = \{([\s\S]*?)\n\
     assert.match(parameterNotesBlock, new RegExp(attribute.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")), `${attribute} is missing from component parameter notes`);
 });
 assert.match(source, /const commonData = [\s\S]*data-ui-component[\s\S]*data-ui-for[\s\S]*data-ui-label/, "common data-ui guidance is missing from component documentation");
+assert.match(source, /YYYY\/MM\/DD HH:mm/, "date-time picker documentation is missing the slash display format");
+assert.match(source, /"date-picker": field\([\s\S]*data-ui-date-control="date" placeholder="YYYY\/MM\/DD"/, "default date picker copy code is missing its format placeholder");
+assert.match(source, /"date-time-picker": field\([\s\S]*data-ui-date-control="datetime" placeholder="YYYY\/MM\/DD HH:mm"/, "default date-time picker copy code is missing its format placeholder");
+assert.match(source, /"time-picker": field\([\s\S]*data-ui-time-control="true" placeholder="HH:mm"/, "default time picker copy code is missing its format placeholder");
+assert.match(source, /data-ui-date-control="range" placeholder="YYYY\/MM\/DD 至 YYYY\/MM\/DD"[\s\S]*data-ui-range-start \/>[\s\S]*data-ui-range-end \/>/, "default date-range picker copy code is missing its format placeholder or has a default value");
 
 const cssRule = selector => {
     const escaped = selector.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");

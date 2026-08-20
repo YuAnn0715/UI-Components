@@ -4,12 +4,14 @@
     ViewData["Title"] = "元件展示庫";
     var selectedSkills = new HashSet<string>(Model.Skills, StringComparer.Ordinal);
     var knownSkillValues = Model.SkillOptions.Select(option => option.Value ?? option.Text).ToHashSet(StringComparer.Ordinal);
-    var selectedDate = Model.SelectedDate?.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture) ?? string.Empty;
-    var selectedDateTime = Model.SelectedDateTime?.ToString("yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture) ?? string.Empty;
+    var selectedDate = Model.SelectedDate?.ToString("yyyy/MM/dd", CultureInfo.InvariantCulture) ?? string.Empty;
+    var selectedDateTime = Model.SelectedDateTime?.ToString("yyyy/MM/dd HH:mm", CultureInfo.InvariantCulture) ?? string.Empty;
     var selectedTime = Model.SelectedTime?.ToString("HH:mm", CultureInfo.InvariantCulture) ?? string.Empty;
     var startDate = Model.StartDate?.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture) ?? string.Empty;
     var endDate = Model.EndDate?.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture) ?? string.Empty;
-    var dateRange = string.IsNullOrWhiteSpace(startDate) && string.IsNullOrWhiteSpace(endDate) ? string.Empty : $"{startDate} 至 {endDate}";
+    var displayStartDate = Model.StartDate?.ToString("yyyy/MM/dd", CultureInfo.InvariantCulture) ?? string.Empty;
+    var displayEndDate = Model.EndDate?.ToString("yyyy/MM/dd", CultureInfo.InvariantCulture) ?? string.Empty;
+    var dateRange = string.IsNullOrWhiteSpace(displayStartDate) && string.IsNullOrWhiteSpace(displayEndDate) ? string.Empty : $"{displayStartDate} 至 {displayEndDate}";
 }
 
 <div class="row justify-content-center ui-showcase-page">
