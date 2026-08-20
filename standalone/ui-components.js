@@ -103,7 +103,7 @@
         "date-time-picker": { title: "日期＋時間", summary: "選擇日期與時間。", data: "<p>元件會寫入 <code>input[name=selectedDateTime].value</code>，格式為 <code>YYYY-MM-DD HH:mm</code>。</p>" },
         "time-picker": { title: "時間選擇器", summary: "使用翻頁時鐘選擇時間。", data: "<p>元件會寫入 <code>input[name=selectedTime].value</code>，格式為 <code>HH:mm</code>。</p>" },
         "date-range-picker": { title: "日期區間", summary: "一次選擇起日與迄日。", data: "<p>元件會分別寫入 <code>input[name=startDate]</code> 與 <code>input[name=endDate]</code>。</p>" },
-        "data-table": { title: "Data Table", summary: "可排序、可分頁的資料表。", data: "<p>一般 HTML <code>table</code> 加上 <code>data-ui-data-table</code> 後，即可啟用排序、每頁筆數選擇與分頁。</p>" },
+        "data-table": { title: "Data Table", summary: "可排序、可分頁的資料表。", data: "<p>一般 HTML <code>table</code> 加上 <code>data-ui-data-table=\"true\"</code> 後，即可啟用排序、每頁筆數選擇與分頁。</p><p>可用 <code>data-ui-striped</code> 開關斑馬紋、用 <code>data-ui-hover</code> 開關滑入列高亮；排序欄位可在標題上使用 <code>data-ui-sortable=\"true\"</code> 或 <code>data-ui-sortable=\"false\"</code>。</p>" },
         "tag-input": { title: "標籤式 Input", summary: "輸入文字後按 Enter 建立自訂標籤。", data: "<p>在 <code>data-ui-tag-input-input</code> 輸入文字後按 <kbd>Enter</kbd> 建立 tag。實際值由具 <code>name</code> 與 <code>multiple</code> 的隱藏 <code>select</code> 送出。</p>" },
         "tag-select": { title: "標籤式 Select", summary: "從選單選取多個項目並顯示為標籤。", data: "<p>使用 <code>data-ui-tag-select-menu</code> 選擇既有項目，實際選取值由具 <code>name</code> 與 <code>multiple</code> 的隱藏 <code>select</code> 送出。</p>" },
         "file-upload": { title: "檔案上傳", summary: "支援拖放與瀏覽檔案。", data: "<p>使用 <code>input[type=file]</code> 取得檔案；前端會檢查格式與大小並顯示清單，伺服器仍必須驗證檔案。</p>" },
@@ -118,16 +118,16 @@
         switch: [["name / value", "開啟後送出的欄位與值"], ["checked", "預設開啟狀態"], ["disabled", "停用切換"]],
         radio: [["name", "同組選項使用相同名稱"], ["value", "選項送出的值"]],
         button: [["type", "submit 提交表單；button 觸發前端動作"], ["style", "按鈕配色"]],
-        "tag-input": [["data-ui-tag-input-input", "輸入文字後按 Enter 建立自訂標籤"], ["name + multiple", "實際送出 tag 值的 select"], ["data-ui-tag-input-values", "包含自訂 tag 的選取值"]],
-        "tag-select": [["data-ui-tag-select-menu", "選擇既有項目的選單"], ["name + multiple", "實際送出選取值的 select"], ["data-ui-tag-select-values", "包含已選項目的選取值"]],
-        "file-upload": [["name", "檔案欄位名稱"], ["accept", "副檔名或 MIME 類型限制"], ["data-ui-max-size", "單一檔案容量上限（MB）"], ["multiple", "允許選擇多個檔案"]],
-        "file-download": [["data-ui-download-name", "顯示的檔名"], ["data-ui-download-url", "完成後的下載連結"], ["data-ui-download-start", "觸發下載效果的按鈕"]],
-        "data-table": [["data-ui-page-size", "預設每頁顯示筆數"], ["data-ui-page-size-options", "每頁筆數選項"], ["data-ui-sort-type", "欄位排序型別"]],
+        "tag-input": [["data-ui-tag-input-control", "標籤輸入控制區，請保留此屬性"], ["data-ui-tag-input-tags", "顯示目前標籤的容器，請保留此屬性"], ["data-ui-tag-input-input", "輸入文字後按 Enter 建立自訂標籤"], ["name + multiple", "實際送出 tag 值的 select"], ["data-ui-tag-input-values", "包含自訂 tag 的選取值"]],
+        "tag-select": [["data-ui-tag-select-control", "標籤選擇控制區，請保留此屬性"], ["data-ui-tag-select-tags", "顯示目前標籤的容器，請保留此屬性"], ["data-ui-tag-select-menu", "選擇既有項目的選單"], ["name + multiple", "實際送出選取值的 select"], ["data-ui-tag-select-values", "包含已選項目的選取值"]],
+        "file-upload": [["name", "檔案欄位名稱"], ["accept / data-ui-accept", "副檔名或 MIME 類型限制；兩者應保持一致"], ["data-ui-max-size", "單一檔案容量上限（MB）"], ["data-ui-file-dropzone", "拖放檔案區，請保留此屬性"], ["data-ui-file-browse", "觸發檔案選擇器的按鈕，請保留此屬性"], ["data-ui-file-input", "原生檔案 input 的初始化 hook，請保留此屬性"], ["data-ui-file-list", "顯示檔案與上傳進度的容器，請保留此屬性"], ["multiple", "允許選擇多個檔案"]],
+        "file-download": [["data-ui-download-name", "顯示的檔名"], ["data-ui-download-url", "完成後的下載連結"], ["data-ui-download-start", "觸發下載效果的按鈕"], ["data-ui-download-success", "展示頁專用的成功效果示範按鈕"], ["data-ui-download-failure", "展示頁專用的失敗效果示範按鈕"]],
+        "data-table": [["data-ui-data-table", "使用 true 啟用資料表排序、分頁與筆數控制"], ["data-ui-page-size", "預設每頁顯示筆數"], ["data-ui-page-size-options", "每頁筆數選項，例如 1,10,25,50"], ["data-ui-sortable", "外層使用 true／false 開關排序；標題 th 也可用 true／false 控制個別欄位"], ["data-ui-sort-type", "標題欄位排序型別，例如 number、date 或 text"], ["data-ui-sort-value", "指定與畫面文字不同的實際排序值"], ["data-ui-striped", "使用 true 顯示斑馬紋列，使用 false 關閉"], ["data-ui-hover", "使用 true 顯示滑入列高亮，使用 false 關閉"]],
         "date-picker": [["name", "表單欄位名稱"], ["data-ui-date-control=date", "啟用日期選擇器"], ["value", "YYYY-MM-DD 格式"]],
         "date-time-picker": [["name", "表單欄位名稱"], ["data-ui-date-control=datetime", "啟用日期與時間選擇器"], ["value", "YYYY-MM-DD HH:mm 格式"]],
         "time-picker": [["name", "表單欄位名稱"], ["data-ui-time-control", "啟用時間選擇器"], ["value", "HH:mm 格式"]],
-        "date-range-picker": [["data-ui-range-start", "起日隱藏欄位"], ["data-ui-range-end", "迄日隱藏欄位"], ["name", "起日與迄日欄位名稱"]],
-        breadcrumb: [["aria-label", "描述目前導覽位置"], ["data-ui-breadcrumb-separator", "選擇中間分隔圖示"], ["breadcrumb-item", "每一層的語意項目"], ["aria-current=page", "標示目前所在頁面"]]
+        "date-range-picker": [["data-ui-end-for", "指定迄日欄位的 data-ui-for 值"], ["data-ui-range-start", "起日隱藏欄位"], ["data-ui-range-end", "迄日隱藏欄位"], ["name", "起日與迄日欄位名稱"]],
+        breadcrumb: [["aria-label", "描述目前導覽位置"], ["data-ui-breadcrumb-separator", "選擇中間分隔圖示"], ["data-ui-breadcrumb-separator-icon", "分隔圖示的初始化 hook，請保留此屬性"], ["breadcrumb-item", "每一層的語意項目"], ["aria-current=page", "標示目前所在頁面"]]
     };    targets.forEach((target, index) => {
         const id = `ui-preview-${index + 1}`;
         target.id = id;
@@ -220,12 +220,12 @@
             button: `<button class="ui-button" type="button"${style}>送出表單</button>`,
             "file-upload": `<div class="ui-file-upload" data-ui-component="file-upload" data-ui-accept=".pdf,.doc,.docx" data-ui-max-size="10"${style}>\n  <label class="ui-label" for="attachment">附件</label>\n  <div class="ui-file-drop-zone" data-ui-file-dropzone tabindex="0" role="button">\n    <span class="ui-file-upload-icon" aria-hidden="true"><i class="bi bi-cloud-arrow-up"></i></span><strong>拖放檔案到這裡</strong><span class="ui-file-or">或</span><button class="ui-file-browse" type="button" data-ui-file-browse>瀏覽檔案</button><span class="ui-file-hint">支援 .pdf、.doc、.docx · 上限 10 MB</span>\n  </div>\n  <input class="ui-file-input" id="attachment" name="attachment" type="file" accept=".pdf,.doc,.docx" data-ui-file-input />\n  <div class="ui-file-list" data-ui-file-list aria-live="polite"></div>\n</div>`,
             "file-download": `<section class="ui-file-download" data-ui-component="file-download" data-ui-download-name="年度報告.pdf" data-ui-download-url="/files/annual-report.pdf"${style}>\n  <div class="ui-download-card"><div class="ui-download-file-icon" aria-hidden="true"><i class="bi bi-file-earmark-arrow-down"></i></div><div class="ui-download-copy"><strong>年度報告</strong><span>年度報告.pdf</span></div><div class="ui-download-actions"><button class="ui-button" type="button" data-ui-download-start><i class="bi bi-download" aria-hidden="true"></i>下載檔案</button></div></div>\n  <div class="ui-download-demo-actions"><span>效果示範</span><button type="button" class="btn btn-outline-success" data-ui-download-success>顯示成功</button><button type="button" class="btn btn-outline-danger" data-ui-download-failure>顯示失敗</button></div>\n</section>`,
-            "data-table": `<div class="ui-data-table" data-ui-component="data-table" data-ui-data-table="true" data-ui-page-size="10" data-ui-page-size-options="10,25,50" data-ui-sortable="true"${style}>\n  <table class="ui-data-table-grid">\n    <thead><tr><th data-ui-sort-type="number">單位代號</th><th>單位</th><th data-ui-sort-type="number">員編</th><th>姓名</th><th>職稱</th><th data-ui-sortable="false">講師身份</th></tr></thead>\n    <tbody><tr><td>147</td><td>虎尾分行</td><td>067378</td><td>黃＊＊</td><td>高級襄理</td><td>是</td></tr></tbody>\n  </table>\n</div>`,
+            "data-table": `<div class="ui-data-table" data-ui-component="data-table" data-ui-data-table="true" data-ui-page-size="10" data-ui-page-size-options="1,10,25,50" data-ui-sortable="true" data-ui-striped="true" data-ui-hover="true"${style}>\n  <table class="ui-data-table-grid">\n    <thead><tr><th data-ui-sort-type="number">單位代號</th><th>單位</th><th data-ui-sort-type="number">員編</th><th>姓名</th><th>職稱</th><th data-ui-sortable="false">講師身份</th></tr></thead>\n    <tbody><tr><td>147</td><td>虎尾分行</td><td>067378</td><td>黃＊＊</td><td>高級襄理</td><td>是</td></tr></tbody>\n  </table>\n</div>`,
             breadcrumb: `<nav class="ui-breadcrumb" data-ui-component="breadcrumb" aria-label="目前位置"${style}>\n  <ol class="breadcrumb ui-breadcrumb-list">\n    <li class="breadcrumb-item ui-breadcrumb-item"><a class="ui-breadcrumb-link" href="/"><span class="ui-breadcrumb-home" aria-hidden="true"><i class="bi bi-house-door-fill"></i></span><span>首頁</span></a></li>\n    <li class="ui-breadcrumb-separator" aria-hidden="true"><i class="bi bi-chevron-right"></i></li>\n    <li class="breadcrumb-item ui-breadcrumb-item"><a class="ui-breadcrumb-link" href="/components"><span>元件</span></a></li>\n    <li class="ui-breadcrumb-separator" aria-hidden="true"><i class="bi bi-chevron-right"></i></li>\n    <li class="breadcrumb-item ui-breadcrumb-item"><span class="ui-breadcrumb-current" aria-current="page"><i class="bi bi-grid-1x2-fill" aria-hidden="true"></i><span>元件總覽</span></span></li>\n  </ol>\n</nav>`,
             "date-picker": field("日期", '<input class="ui-control ui-date-control" id="date-picker-value" name="selectedDate" type="text" readonly autocomplete="off" data-ui-date-control="date" />'),
             "date-time-picker": field("日期與時間", '<input class="ui-control ui-date-control" id="date-time-picker-value" name="selectedDateTime" type="text" readonly autocomplete="off" data-ui-date-control="datetime" />'),
             "time-picker": field("時間", '<input class="ui-control ui-time-control" id="time-picker-value" name="selectedTime" type="text" readonly autocomplete="off" data-ui-time-control="true" />'),
-            "date-range-picker": `<div class="ui-field" data-ui-component="date-range-picker"${style}>\n  <label class="ui-label" for="date-range-value">住宿日期</label>\n  <input class="ui-control ui-date-control" id="date-range-value" type="text" readonly autocomplete="off" data-ui-date-control="range" />\n  <input name="startDate" type="hidden" data-ui-range-start />\n  <input name="endDate" type="hidden" data-ui-range-end />\n</div>`
+            "date-range-picker": `<div class="ui-field" data-ui-component="date-range-picker" data-ui-end-for="EndDate"${style}>\n  <label class="ui-label" for="date-range-value">住宿日期</label>\n  <input class="ui-control ui-date-control" id="date-range-value" type="text" readonly autocomplete="off" data-ui-date-control="range" />\n  <input name="startDate" type="hidden" data-ui-range-start />\n  <input name="endDate" type="hidden" data-ui-range-end />\n</div>`
         };
         snippets.breadcrumb = snippets.breadcrumb
             .replace('data-ui-component="breadcrumb"', `data-ui-component="breadcrumb" data-ui-breadcrumb-separator="${separator}"`)
@@ -247,7 +247,8 @@
         docSummary.textContent = doc.summary;
         formatCode(docRazor, codeOutput.textContent || "");
         const parameters = parameterNotes[kind] || [];
-        docData.innerHTML = `${doc.data}<h4 class="h6 mt-3">參數對照</h4><dl class="ui-doc-parameters">${parameters.map(([name, description]) => `<dt><code>${name}</code></dt><dd>${description}</dd>`).join("")}</dl>`;
+        const commonData = "<p><code>data-ui-component</code> 請保留並設定為目前元件類型，讓元件初始化與展示器正確辨識。展示頁預覽用的 <code>data-ui-for</code> 與 <code>data-ui-label</code> 僅供配色編輯器使用，複製到一般頁面時可省略。</p>";
+        docData.innerHTML = `${doc.data}${commonData}<h4 class="h6 mt-3">參數對照</h4><dl class="ui-doc-parameters">${parameters.map(([name, description]) => `<dt><code>${name}</code></dt><dd>${description}</dd>`).join("")}</dl>`;
     }
 
     colorInputs.forEach(input => input.addEventListener("input", () => {
@@ -1118,7 +1119,7 @@
       summary.textContent = orderedRows.length ? `顯示 ${start + 1}–${Math.min(start + state.pageSize, orderedRows.length)} 筆，共 ${orderedRows.length} 筆` : "目前沒有資料";
       previous.disabled = state.page <= 1;
       next.disabled = state.page >= totalPages;
-      pagination.replaceChildren();
+      pagination.replaceChildren(previous);
       pageRange(state.page, totalPages).forEach(page => {
         if (page === "…") {
           const ellipsis = document.createElement("span");
@@ -1131,6 +1132,7 @@
         button.addEventListener("click", () => { state.page = page; render(); });
         pagination.append(button);
       });
+      pagination.append(next);
     }
 
     headers.forEach(prepareHeader);
@@ -1155,9 +1157,9 @@
     const pagination = document.createElement("nav");
     pagination.className = "ui-data-table-pagination";
     pagination.setAttribute("aria-label", component.dataset.uiPaginationLabel || "資料表分頁");
-    const previous = pageButton("‹", 0);
+    const previous = pageButton("<", 0);
     previous.setAttribute("aria-label", "上一頁");
-    const next = pageButton("›", 0);
+    const next = pageButton(">", 0);
     next.setAttribute("aria-label", "下一頁");
     previous.addEventListener("click", () => { state.page -= 1; render(); });
     next.addEventListener("click", () => { state.page += 1; render(); });

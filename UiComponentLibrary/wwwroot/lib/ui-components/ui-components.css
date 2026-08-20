@@ -500,6 +500,24 @@ textarea.ui-control {
     background: var(--ui-background-color, #fff);
     font: inherit;
     cursor: pointer;
+    transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease, background-color .18s ease;
+}
+
+/* 設定：資料表分頁按鈕的滑入與鍵盤狀態。 */
+.ui-data-table-page-button:not(:disabled):hover {
+    border-color: color-mix(in srgb, var(--ui-table-accent, #a78bb0) 55%, var(--ui-table-border, #d8dee8));
+    box-shadow: 0 .45rem 1rem color-mix(in srgb, var(--ui-table-accent, #a78bb0) 20%, transparent);
+    transform: translateY(-2px);
+}
+
+.ui-data-table-page-button:not(:disabled):active {
+    box-shadow: 0 .15rem .35rem color-mix(in srgb, var(--ui-table-accent, #a78bb0) 15%, transparent);
+    transform: translateY(0);
+}
+
+.ui-data-table-page-button:focus-visible {
+    outline: 3px solid color-mix(in srgb, var(--ui-table-accent, #a78bb0) 30%, transparent);
+    outline-offset: 2px;
 }
 
 /* 設定：資料表目前頁籤。 */

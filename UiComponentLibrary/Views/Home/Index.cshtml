@@ -20,120 +20,432 @@
                 <h1 id="showcase-title">元件展示庫</h1>
                 <p>選擇元件、調整配色，直接取得可放入 Razor View 的原生 HTML。</p>
             </div>
-            <div class="ui-showcase-intro-status"><i class="bi bi-palette2" aria-hidden="true"></i><span>即時配色預覽</span></div>
+            <div class="ui-showcase-intro-status">
+                <i class="bi bi-palette2" aria-hidden="true"></i>
+                <span>即時配色預覽</span>
+            </div>
         </section>
 
         <div class="row g-4 align-items-start">
+            @* 左側元件導覽列區塊 *@
             <aside class="col-lg-3">
-                <nav class="card shadow-sm ui-component-nav" data-ui-component-nav aria-label="元件導覽">
+                <nav class="card shadow-sm ui-component-nav"
+                     data-ui-component-nav aria-label="元件導覽">
                     <div class="card-body p-3">
                         <div class="ui-nav-heading">元件瀏覽器</div>
                         <div class="nav nav-pills flex-column gap-1">
-                            <button class="nav-link text-start" type="button" data-ui-show-guide>使用說明</button>
+                            <button class="nav-link text-start"
+                                    type="button"
+                                    data-ui-show-guide>
+                                使用說明
+                            </button>
                             <div class="ui-nav-group">
                                 <div class="ui-nav-group-label">基礎輸入</div>
-                                <button class="nav-link text-start active" type="button" data-ui-show-kind="text-input">Text Input</button>
-                                <button class="nav-link text-start" type="button" data-ui-show-kind="textarea">Textarea</button>
-                                <button class="nav-link text-start" type="button" data-ui-show-kind="select">Select</button>
-                                <button class="nav-link text-start" type="button" data-ui-show-kind="button">Button</button>
+                                <button class="nav-link text-start active"
+                                        type="button"
+                                        data-ui-show-kind="text-input">
+                                    Text Input
+                                </button>
+                                <button class="nav-link text-start"
+                                        type="button"
+                                        data-ui-show-kind="textarea">
+                                    Textarea
+                                </button>
+                                <button class="nav-link text-start"
+                                        type="button"
+                                        data-ui-show-kind="select">
+                                    Select
+                                </button>
+                                <button class="nav-link text-start"
+                                        type="button"
+                                        data-ui-show-kind="button">
+                                    Button
+                                </button>
                             </div>
                             <div class="ui-nav-group">
                                 <div class="ui-nav-group-label">導覽</div>
-                                <button class="nav-link text-start" type="button" data-ui-show-kind="breadcrumb">麵包屑</button>
+                                <button class="nav-link text-start"
+                                        type="button"
+                                        data-ui-show-kind="breadcrumb">
+                                    麵包屑
+                                </button>
                             </div>
                             <div class="ui-nav-group">
                                 <div class="ui-nav-group-label">標籤與選擇</div>
-                                <button class="nav-link text-start" type="button" data-ui-show-kind="tag-input">標籤式 Input</button>
-                                <button class="nav-link text-start" type="button" data-ui-show-kind="tag-select">標籤式 Select</button>
-                                <button class="nav-link text-start" type="button" data-ui-show-kind="checkbox">Checkbox</button>
-                                <button class="nav-link text-start" type="button" data-ui-show-kind="switch">Switch</button>
-                                <button class="nav-link text-start" type="button" data-ui-show-kind="radio">Radio</button>
+                                <button class="nav-link text-start"
+                                        type="button"
+                                        data-ui-show-kind="tag-input">
+                                    標籤式 Input
+                                </button>
+                                <button class="nav-link text-start"
+                                        type="button"
+                                        data-ui-show-kind="tag-select">
+                                    標籤式 Select
+                                </button>
+                                <button class="nav-link text-start"
+                                        type="button"
+                                        data-ui-show-kind="checkbox">
+                                    Checkbox
+                                </button>
+                                <button class="nav-link text-start"
+                                        type="button"
+                                        data-ui-show-kind="switch">
+                                    Switch
+                                </button>
+                                <button class="nav-link text-start"
+                                        type="button"
+                                        data-ui-show-kind="radio">
+                                    Radio
+                                </button>
                             </div>
                             <div class="ui-nav-group">
                                 <div class="ui-nav-group-label">檔案</div>
-                                <button class="nav-link text-start" type="button" data-ui-show-kind="file-upload">檔案上傳</button>
-                                <button class="nav-link text-start" type="button" data-ui-show-kind="file-download">檔案下載</button>
+                                <button class="nav-link text-start"
+                                        type="button"
+                                        data-ui-show-kind="file-upload">
+                                    檔案上傳
+                                </button>
+                                <button class="nav-link text-start"
+                                        type="button"
+                                        data-ui-show-kind="file-download">
+                                    檔案下載
+                                </button>
                             </div>
                             <div class="ui-nav-group">
                                 <div class="ui-nav-group-label">日期與資料</div>
-                                <button class="nav-link text-start" type="button" data-ui-show-kind="data-table">Data Table</button>
-                                <button class="nav-link text-start" type="button" data-ui-show-kind="date-picker">日期選擇器</button>
-                                <button class="nav-link text-start" type="button" data-ui-show-kind="date-time-picker">日期＋時間</button>
-                                <button class="nav-link text-start" type="button" data-ui-show-kind="time-picker">時間選擇器</button>
-                                <button class="nav-link text-start" type="button" data-ui-show-kind="date-range-picker">日期區間</button>
+                                <button class="nav-link text-start"
+                                        type="button"
+                                        data-ui-show-kind="data-table">
+                                    Data Table
+                                </button>
+                                <button class="nav-link text-start"
+                                        type="button"
+                                        data-ui-show-kind="date-picker">
+                                    日期選擇器
+                                </button>
+                                <button class="nav-link text-start"
+                                        type="button"
+                                        data-ui-show-kind="date-time-picker">
+                                    日期＋時間
+                                </button>
+                                <button class="nav-link text-start"
+                                        type="button"
+                                        data-ui-show-kind="time-picker">
+                                    時間選擇器
+                                </button>
+                                <button class="nav-link text-start"
+                                        type="button"
+                                        data-ui-show-kind="date-range-picker">
+                                    日期區間
+                                </button>
                             </div>
                         </div>
                     </div>
                 </nav>
             </aside>
 
+            @* 使用說明區 *@
             <div class="col-lg-9">
                 <section class="card shadow-sm mb-4" data-ui-general-guide hidden>
                     <div class="card-body p-4">
                         <h2 class="h3">使用說明</h2>
                         <p class="text-secondary">展示站與下載元件包都使用原生 HTML／JavaScript。下載靜態元件包後，在 Layout 引用兩個檔案，再複製元件 HTML 到 Razor View。</p>
                         <h3 class="h5 mt-4">1. 複製靜態檔案</h3>
-                        <p><a class="btn btn-primary" href="/downloads/UiComponentLibrary-static.zip" download>下載靜態元件包</a></p>
-                        <p>解壓縮後將三個檔案放入新專案的 <code>wwwroot/lib/ui-components/</code>；其中 README 可作為本機使用說明。</p>
+                        <p>
+                            <a class="btn btn-primary"
+                                   href="/downloads/UiComponentLibrary-static.zip"
+                                   download>
+                                下載靜態元件包
+                            </a>
+                        </p>
+                        <p>
+                            解壓縮後將三個檔案放入新專案的
+                            <code>wwwroot/lib/ui-components/</code>；其中 README 可作為本機使用說明。
+                        </p>
                         <h3 class="h5 mt-4">2. 在 Layout 引用</h3>
-                        <pre class="ui-doc-code"><code>&lt;link rel="stylesheet" href="~/lib/ui-components/ui-components.css" /&gt;
-&lt;script src="~/lib/ui-components/ui-components.js" defer&gt;&lt;/script&gt;</code></pre>
+                        <pre class="ui-doc-code">
+                            <code>&lt;link rel="stylesheet" href="~/lib/ui-components/ui-components.css" /&gt;
+                                  &lt;script src="~/lib/ui-components/ui-components.js" defer&gt;&lt;/script&gt;
+                            </code>
+                        </pre>
                         <h3 class="h5 mt-4">3. 複製元件 HTML</h3>
                         <p>從「可複製的 HTML 程式碼」複製到 Razor View。設定值使用原生 HTML 屬性，例如 <code>name</code>、<code>value</code>、<code>accept</code> 與 <code>multiple</code>。</p>
                         <h3 class="h5 mt-4">4. 取得表單資料</h3>
-                        <pre class="ui-doc-code"><code>var country = Request.Form["country"];
-var skills = Request.Form["skills"];
-var attachment = Request.Form.Files.GetFile("attachment");</code></pre>
+                        <pre class="ui-doc-code">
+                            <code>var country = Request.Form["country"];
+                                  var skills = Request.Form["skills"];
+                                  var attachment = Request.Form.Files.GetFile("attachment");
+                            </code>
+                        </pre>
                     </div>
                 </section>
 
                 <div class="ui-component-workspace">
+                    @* 元件配色編輯器區 *@
                     <section class="card shadow-sm mb-4 ui-theme-editor" data-ui-theme-editor aria-labelledby="theme-editor-title">
                         <div class="card-body p-4">
                             <h2 class="h4" id="theme-editor-title">元件配色編輯器</h2>
                             <p class="text-secondary">選擇目前元件的預覽、調整開放顏色，然後複製可直接貼到 Razor View 的 HTML。</p>
                             <div class="row mb-3 ui-color-controls">
-                                <div class="col-md-4" data-ui-color-row><label class="form-label">確認按鈕</label><input class="form-control form-control-color" type="color" data-ui-color="--ui-confirm-color" data-ui-default="#4f46e5" /></div>
-                                <div class="col-md-4" data-ui-color-row><label class="form-label">取消按鈕</label><input class="form-control form-control-color" type="color" data-ui-color="--ui-cancel-color" data-ui-default="#64748b" /></div>
-                                <div class="col-md-4" data-ui-color-row><label class="form-label">日期端點</label><input class="form-control form-control-color" type="color" data-ui-color="--ui-range-endpoint-color" data-ui-default="#4f46e5" /></div>
-                                <div class="col-md-4" data-ui-color-row><label class="form-label">日期區間</label><input class="form-control form-control-color" type="color" data-ui-color="--ui-range-fill-color" data-ui-default="#ddd6fe" /></div>
-                                <div class="col-md-4" data-ui-color-row><label class="form-label">時間控制</label><input class="form-control form-control-color" type="color" data-ui-color="--ui-time-control-color" data-ui-default="#475569" /></div>
-                                <div class="col-md-4" data-ui-color-row><label class="form-label">翻頁數字</label><input class="form-control form-control-color" type="color" data-ui-color="--ui-flip-number-color" data-ui-default="#ffffff" /></div>
-                                <div class="col-md-4" data-ui-color-row><label class="form-label">翻頁背景</label><input class="form-control form-control-color" type="color" data-ui-color="--ui-flip-number-background" data-ui-default="#1e293b" /></div>
-                                <div class="col-md-4" data-ui-color-row><label class="form-label">表頭文字</label><input class="form-control form-control-color" type="color" data-ui-color="--ui-table-header-text" data-ui-default="#111827" /></div>
-                                <div class="col-md-4" data-ui-color-row><label class="form-label">表格條紋</label><input class="form-control form-control-color" type="color" data-ui-color="--ui-table-stripe" data-ui-default="#f3f4f6" /></div>
-                                <div class="col-md-3" data-ui-color-row><label class="form-label">邊框</label><input class="form-control form-control-color" type="color" data-ui-color="--ui-border-color" data-ui-default="#ced4da" /></div>
-                                <div class="col-md-3" data-ui-color-row><label class="form-label">焦點</label><input class="form-control form-control-color" type="color" data-ui-color="--ui-focus-color" data-ui-default="#86b7fe" /></div>
-                                <div class="col-md-3" data-ui-color-row><label class="form-label">文字</label><input class="form-control form-control-color" type="color" data-ui-color="--ui-text-color" data-ui-default="#212529" /></div>
-                                <div class="col-md-3" data-ui-color-row><label class="form-label">背景</label><input class="form-control form-control-color" type="color" data-ui-color="--ui-background-color" data-ui-default="#ffffff" /></div>
-                                <div class="col-md-4" data-ui-color-row><label class="form-label">標籤顏色</label><input class="form-control form-control-color" type="color" data-ui-color="--ui-tag-color" data-ui-default="#4f46e5" /></div>
-                                <div class="col-md-4" data-ui-color-row><label class="form-label">標籤文字</label><input class="form-control form-control-color" type="color" data-ui-color="--ui-tag-text-color" data-ui-default="#ffffff" /></div>
-                                <div class="col-md-4" data-ui-color-row><label class="form-label">按鈕背景</label><input class="form-control form-control-color" type="color" data-ui-color="--ui-button-background" data-ui-default="#0d6efd" /></div>
-                                <div class="col-md-4" data-ui-color-row><label class="form-label">按鈕文字</label><input class="form-control form-control-color" type="color" data-ui-color="--ui-button-text" data-ui-default="#ffffff" /></div>
-                                <div class="col-md-4" data-ui-color-row><label class="form-label">按鈕外框</label><input class="form-control form-control-color" type="color" data-ui-color="--ui-button-border" data-ui-default="#0d6efd" /></div>
-                                <div class="col-md-4" data-ui-color-row><label class="form-label">上傳外框</label><input class="form-control form-control-color" type="color" data-ui-color="--ui-upload-border-color" data-ui-default="#8b5cf6" /></div>
-                                <div class="col-md-4" data-ui-color-row><label class="form-label">上傳進度條</label><input class="form-control form-control-color" type="color" data-ui-color="--ui-upload-progress-color" data-ui-default="#4f46e5" /></div>
-                                <div class="col-md-4" data-ui-color-row><label class="form-label">瀏覽按鈕</label><input class="form-control form-control-color" type="color" data-ui-color="--ui-upload-button-color" data-ui-default="#4f46e5" /></div>
-                                <div class="col-md-4" data-ui-color-row><label class="form-label">下載圖示</label><input class="form-control form-control-color" type="color" data-ui-color="--ui-download-icon-color" data-ui-default="#4f46e5" /></div>
-                                <div class="col-md-4" data-ui-color-row><label class="form-label">下載進度條</label><input class="form-control form-control-color" type="color" data-ui-color="--ui-download-progress-color" data-ui-default="#4f46e5" /></div>
-                                <div class="col-md-4" data-ui-color-row><label class="form-label">資料表表頭</label><input class="form-control form-control-color" type="color" data-ui-color="--ui-table-header-background" data-ui-default="#f7e9ea" /></div>
-                                <div class="col-md-4" data-ui-color-row><label class="form-label">資料表邊框</label><input class="form-control form-control-color" type="color" data-ui-color="--ui-table-border" data-ui-default="#d8dee8" /></div>
-                                <div class="col-md-4" data-ui-color-row><label class="form-label">資料表強調</label><input class="form-control form-control-color" type="color" data-ui-color="--ui-table-accent" data-ui-default="#a78bb0" /></div>
-                                <div class="col-md-4" data-ui-color-row><label class="form-label">麵包屑強調色</label><input class="form-control form-control-color" type="color" data-ui-color="--ui-breadcrumb-accent" data-ui-default="#0f766e" /></div>
-                                <div class="col-md-4" data-ui-color-row><label class="form-label">麵包屑柔和底色</label><input class="form-control form-control-color" type="color" data-ui-color="--ui-breadcrumb-accent-soft" data-ui-default="#ccfbf1" /></div>
-                                <div class="col-md-4" data-ui-color-row><label class="form-label">麵包屑文字</label><input class="form-control form-control-color" type="color" data-ui-color="--ui-breadcrumb-text" data-ui-default="#334155" /></div>
-                                <div class="col-md-4" data-ui-color-row><label class="form-label">目前頁面背景</label><input class="form-control form-control-color" type="color" data-ui-color="--ui-breadcrumb-current-background" data-ui-default="#0f766e" /></div>
-                                <div class="col-md-4" data-ui-color-row><label class="form-label">目前頁面文字</label><input class="form-control form-control-color" type="color" data-ui-color="--ui-breadcrumb-current-text" data-ui-default="#ffffff" /></div>
-                                <div class="col-md-4" data-ui-color-row><label class="form-label">Switch 開啟</label><input class="form-control form-control-color" type="color" data-ui-color="--ui-switch-on-color" data-ui-default="#0f766e" /></div>
-                                <div class="col-md-4" data-ui-color-row><label class="form-label">Switch 關閉</label><input class="form-control form-control-color" type="color" data-ui-color="--ui-switch-off-color" data-ui-default="#cbd5e1" /></div>
-                                <div class="col-md-4" data-ui-color-row><label class="form-label">Switch 滑塊</label><input class="form-control form-control-color" type="color" data-ui-color="--ui-switch-thumb-color" data-ui-default="#ffffff" /></div>
+                                <div class="col-md-4" data-ui-color-row>
+                                    <label class="form-label">確認按鈕</label>
+                                    <input class="form-control form-control-color"
+                                           type="color"
+                                           data-ui-color="--ui-confirm-color"
+                                           data-ui-default="#4f46e5" />
+                                </div>
+                                <div class="col-md-4" data-ui-color-row>
+                                    <label class="form-label">取消按鈕</label>
+                                    <input class="form-control form-control-color"
+                                           type="color"
+                                           data-ui-color="--ui-cancel-color"
+                                           data-ui-default="#64748b" />
+                                </div>
+                                <div class="col-md-4" data-ui-color-row>
+                                    <label class="form-label">日期端點</label>
+                                    <input class="form-control form-control-color"
+                                           type="color"
+                                           data-ui-color="--ui-range-endpoint-color"
+                                           data-ui-default="#4f46e5" />
+                                </div>
+                                <div class="col-md-4" data-ui-color-row>
+                                    <label class="form-label">日期區間</label>
+                                    <input class="form-control form-control-color"
+                                           type="color"
+                                           data-ui-color="--ui-range-fill-color"
+                                           data-ui-default="#ddd6fe" />
+                                </div>
+                                <div class="col-md-4" data-ui-color-row>
+                                    <label class="form-label">時間控制</label>
+                                    <input class="form-control form-control-color"
+                                           type="color"
+                                           data-ui-color="--ui-time-control-color"
+                                           data-ui-default="#475569" />
+                                </div>
+                                <div class="col-md-4" data-ui-color-row>
+                                    <label class="form-label">翻頁數字</label>
+                                    <input class="form-control form-control-color"
+                                           type="color"
+                                           data-ui-color="--ui-flip-number-color"
+                                           data-ui-default="#ffffff" />
+                                </div>
+                                <div class="col-md-4" data-ui-color-row>
+                                    <label class="form-label">翻頁背景</label>
+                                    <input class="form-control form-control-color"
+                                           type="color"
+                                           data-ui-color="--ui-flip-number-background"
+                                           data-ui-default="#1e293b" />
+                                </div>
+                                <div class="col-md-4" data-ui-color-row>
+                                    <label class="form-label">表頭文字</label>
+                                    <input class="form-control form-control-color"
+                                           type="color"
+                                           data-ui-color="--ui-table-header-text"
+                                           data-ui-default="#111827" />
+                                </div>
+                                <div class="col-md-4" data-ui-color-row>
+                                    <label class="form-label">表格條紋</label>
+                                    <input class="form-control form-control-color"
+                                           type="color"
+                                           data-ui-color="--ui-table-stripe"
+                                           data-ui-default="#f3f4f6" />
+                                </div>
+                                <div class="col-md-3" data-ui-color-row>
+                                    <label class="form-label">邊框</label>
+                                    <input class="form-control form-control-color"
+                                           type="color"
+                                           data-ui-color="--ui-border-color"
+                                           data-ui-default="#ced4da" />
+                                </div>
+                                <div class="col-md-3" data-ui-color-row>
+                                    <label class="form-label">焦點</label>
+                                    <input class="form-control form-control-color"
+                                           type="color"
+                                           data-ui-color="--ui-focus-color"
+                                           data-ui-default="#86b7fe" />
+                                </div>
+                                <div class="col-md-3" data-ui-color-row>
+                                    <label class="form-label">文字</label>
+                                    <input class="form-control form-control-color"
+                                           type="color"
+                                           data-ui-color="--ui-text-color"
+                                           data-ui-default="#212529" />
+                                </div>
+                                <div class="col-md-3" data-ui-color-row>
+                                    <label class="form-label">背景</label>
+                                    <input class="form-control form-control-color"
+                                           type="color"
+                                           data-ui-color="--ui-background-color"
+                                           data-ui-default="#ffffff" />
+                                </div>
+                                <div class="col-md-4" data-ui-color-row>
+                                    <label class="form-label">標籤顏色</label>
+                                    <input class="form-control form-control-color"
+                                           type="color"
+                                           data-ui-color="--ui-tag-color"
+                                           data-ui-default="#4f46e5" />
+                                </div>
+                                <div class="col-md-4" data-ui-color-row>
+                                    <label class="form-label">標籤文字</label>
+                                    <input class="form-control form-control-color"
+                                           type="color"
+                                           data-ui-color="--ui-tag-text-color"
+                                           data-ui-default="#ffffff" />
+                                </div>
+                                <div class="col-md-4" data-ui-color-row>
+                                    <label class="form-label">按鈕背景</label>
+                                    <input class="form-control form-control-color"
+                                           type="color"
+                                           data-ui-color="--ui-button-background"
+                                           data-ui-default="#0d6efd" />
+                                </div>
+                                <div class="col-md-4" data-ui-color-row>
+                                    <label class="form-label">按鈕文字</label>
+                                    <input class="form-control form-control-color"
+                                           type="color"
+                                           data-ui-color="--ui-button-text"
+                                           data-ui-default="#ffffff" />
+                                </div>
+                                <div class="col-md-4" data-ui-color-row>
+                                    <label class="form-label">按鈕外框</label>
+                                    <input class="form-control form-control-color"
+                                           type="color"
+                                           data-ui-color="--ui-button-border"
+                                           data-ui-default="#0d6efd" />
+                                </div>
+                                <div class="col-md-4" data-ui-color-row>
+                                    <label class="form-label">上傳外框</label>
+                                    <input class="form-control form-control-color"
+                                           type="color"
+                                           data-ui-color="--ui-upload-border-color"
+                                           data-ui-default="#8b5cf6" />
+                                </div>
+                                <div class="col-md-4" data-ui-color-row>
+                                    <label class="form-label">上傳進度條</label>
+                                    <input class="form-control form-control-color"
+                                           type="color"
+                                           data-ui-color="--ui-upload-progress-color"
+                                           data-ui-default="#4f46e5" />
+                                </div>
+                                <div class="col-md-4" data-ui-color-row>
+                                    <label class="form-label">瀏覽按鈕</label>
+                                    <input class="form-control form-control-color"
+                                           type="color"
+                                           data-ui-color="--ui-upload-button-color"
+                                           data-ui-default="#4f46e5" />
+                                </div>
+                                <div class="col-md-4" data-ui-color-row>
+                                    <label class="form-label">下載圖示</label>
+                                    <input class="form-control form-control-color"
+                                           type="color"
+                                           data-ui-color="--ui-download-icon-color"
+                                           data-ui-default="#4f46e5" />
+                                </div>
+                                <div class="col-md-4" data-ui-color-row>
+                                    <label class="form-label">下載進度條</label>
+                                    <input class="form-control form-control-color"
+                                           type="color"
+                                           data-ui-color="--ui-download-progress-color"
+                                           data-ui-default="#4f46e5" />
+                                </div>
+                                <div class="col-md-4" data-ui-color-row>
+                                    <label class="form-label">資料表表頭</label>
+                                    <input class="form-control form-control-color"
+                                           type="color"
+                                           data-ui-color="--ui-table-header-background"
+                                           data-ui-default="#f7e9ea" />
+                                </div>
+                                <div class="col-md-4" data-ui-color-row>
+                                    <label class="form-label">資料表邊框</label>
+                                    <input class="form-control form-control-color"
+                                           type="color"
+                                           data-ui-color="--ui-table-border"
+                                           data-ui-default="#d8dee8" />
+                                </div>
+                                <div class="col-md-4" data-ui-color-row>
+                                    <label class="form-label">資料表強調</label>
+                                    <input class="form-control form-control-color"
+                                           type="color"
+                                           data-ui-color="--ui-table-accent"
+                                           data-ui-default="#a78bb0" />
+                                </div>
+                                <div class="col-md-4" data-ui-color-row>
+                                    <label class="form-label">麵包屑強調色</label>
+                                    <input class="form-control form-control-color"
+                                           type="color"
+                                           data-ui-color="--ui-breadcrumb-accent"
+                                           data-ui-default="#0f766e" />
+                                </div>
+                                <div class="col-md-4" data-ui-color-row>
+                                    <label class="form-label">麵包屑柔和底色</label>
+                                    <input class="form-control form-control-color"
+                                           type="color"
+                                           data-ui-color="--ui-breadcrumb-accent-soft"
+                                           data-ui-default="#ccfbf1" />
+                                </div>
+                                <div class="col-md-4" data-ui-color-row>
+                                    <label class="form-label">麵包屑文字</label>
+                                    <input class="form-control form-control-color"
+                                           type="color"
+                                           data-ui-color="--ui-breadcrumb-text"
+                                           data-ui-default="#334155" />
+                                </div>
+                                <div class="col-md-4" data-ui-color-row>
+                                    <label class="form-label">目前頁面背景</label>
+                                    <input class="form-control form-control-color"
+                                           type="color"
+                                           data-ui-color="--ui-breadcrumb-current-background"
+                                           data-ui-default="#0f766e" />
+                                </div>
+                                <div class="col-md-4" data-ui-color-row>
+                                    <label class="form-label">目前頁面文字</label>
+                                    <input class="form-control form-control-color"
+                                           type="color"
+                                           data-ui-color="--ui-breadcrumb-current-text"
+                                           data-ui-default="#ffffff" />
+                                </div>
+                                <div class="col-md-4" data-ui-color-row>
+                                    <label class="form-label">Switch 開啟</label>
+                                    <input class="form-control form-control-color"
+                                           type="color"
+                                           data-ui-color="--ui-switch-on-color"
+                                           data-ui-default="#0f766e" />
+                                </div>
+                                <div class="col-md-4" data-ui-color-row>
+                                    <label class="form-label">Switch 關閉</label>
+                                    <input class="form-control form-control-color"
+                                           type="color"
+                                           data-ui-color="--ui-switch-off-color"
+                                           data-ui-default="#cbd5e1" />
+                                </div>
+                                <div class="col-md-4" data-ui-color-row>
+                                    <label class="form-label">Switch 滑塊</label>
+                                    <input class="form-control form-control-color"
+                                           type="color"
+                                           data-ui-color="--ui-switch-thumb-color"
+                                           data-ui-default="#ffffff" />
+                                </div>
                             </div>
+
+                            @* 檔案上傳專用設定欄位 *@
                             <div class="ui-upload-settings mt-3" data-ui-upload-settings hidden>
                                 <label class="form-label" for="ui-upload-accept">允許檔案類型</label>
-                                <input class="form-control" id="ui-upload-accept" type="text" value=".pdf,.doc,.docx" data-ui-upload-accept />
+                                <input class="form-control"
+                                       id="ui-upload-accept"
+                                       type="text"
+                                       value=".pdf,.doc,.docx"
+                                       data-ui-upload-accept />
                                 <label class="form-label mt-2" for="ui-upload-max-size">單一檔案上限（MB）</label>
-                                <input class="form-control" id="ui-upload-max-size" type="number" min="1" max="2048" value="10" data-ui-upload-max-size />
+                                <input class="form-control"
+                                       id="ui-upload-max-size"
+                                       type="number"
+                                       min="1"
+                                       max="2048"
+                                       value="10"
+                                       data-ui-upload-max-size />
                             </div>
+
+                            @* 導覽列專用圖示選擇器 *@
                             <div class="ui-breadcrumb-settings mt-3" data-ui-breadcrumb-settings hidden>
                                 <label class="form-label" for="ui-breadcrumb-separator">分隔圖示</label>
                                 <select class="form-select" id="ui-breadcrumb-separator" data-ui-breadcrumb-separator>
@@ -145,39 +457,85 @@ var attachment = Request.Form.Files.GetFile("attachment");</code></pre>
                                 </select>
                                 <div class="form-text">選擇後會同步更新預覽與可複製的 HTML。</div>
                             </div>
+
+                            @* 複製 *@
                             <details class="ui-code-details">
                                 <summary>顯示可複製的 HTML 程式碼</summary>
                                 <div class="ui-showcase-code-panel mt-3">
-                                    <div class="ui-showcase-code-panel-header"><span>HTML</span><span>可直接貼入 Razor View</span></div>
-                                    <pre class="ui-code-output mb-0" id="ui-code"><code data-ui-generated-code></code></pre>
+                                    <div class="ui-showcase-code-panel-header">
+                                        <span>HTML</span>
+                                        <span>可直接貼入 Razor View</span>
+                                    </div>
+                                    <pre class="ui-code-output mb-0" id="ui-code">
+                                        <code data-ui-generated-code></code>
+                                        </pre>
                                 </div>
-                                <button class="btn btn-outline-primary" type="button" data-ui-copy>複製程式碼</button>
+                                <button class="btn btn-outline-primary"
+                                        type="button"
+                                        data-ui-copy>
+                                    複製程式碼
+                                </button>
                             </details>
                         </div>
                     </section>
 
+                    @* 元件區 *@
                     <section aria-labelledby="component-preview-title" data-ui-preview-section>
                         <div class="mb-3"><h2 class="h3 mb-1" id="component-preview-title">Text Input 預覽</h2></div>
                         <form method="post" enctype="multipart/form-data" class="card shadow-sm ui-preview-card">
                             @Html.AntiForgeryToken()
                             <div class="card-body p-4">
                                 <div class="row g-2 g-lg-4">
+
+                                    @* Input *@
                                     <div class="col-12" data-ui-preview-item data-ui-preview-kind="text-input">
-                                        <div class="ui-field" data-ui-component="text-input" data-ui-for="Name" data-ui-label="姓名" style="--ui-border-color:#8b5cf6;--ui-focus-color:#7c3aed">
+                                        <div class="ui-field"
+                                             data-ui-component="text-input"
+                                             data-ui-for="Name"
+                                             data-ui-label="姓名"
+                                             style="--ui-border-color:#8b5cf6;--ui-focus-color:#7c3aed">
                                             <label class="form-label ui-label" for="Name">姓名</label>
-                                            <input class="form-control ui-control" id="Name" name="Name" type="text" value="@Model.Name" placeholder="請輸入姓名" />
+                                            <input class="form-control ui-control"
+                                                   id="Name"
+                                                   name="Name"
+                                                   type="text"
+                                                   value="@Model.Name"
+                                                   placeholder="請輸入姓名" />
                                         </div>
                                     </div>
-                                    <div class="col-12" data-ui-preview-item data-ui-preview-kind="textarea" hidden>
-                                        <div class="ui-field" data-ui-component="textarea" data-ui-for="Notes" data-ui-label="備註" style="--ui-background-color:#f8fafc">
+
+                                    @* Textarea *@
+                                    <div class="col-12"
+                                         data-ui-preview-item data-ui-preview-kind="textarea" hidden>
+                                        <div class="ui-field"
+                                             data-ui-component="textarea"
+                                             data-ui-for="Notes"
+                                             data-ui-label="備註"
+                                             style="--ui-background-color:#f8fafc">
                                             <label class="form-label ui-label" for="Notes">備註</label>
-                                            <textarea class="form-control ui-control" id="Notes" name="Notes" rows="3" placeholder="可選填">@Model.Notes</textarea>
+                                            <textarea class="form-control ui-control"
+                                                  id="Notes"
+                                                  name="Notes"
+                                                  rows="3"
+                                                      placeholder="可選填">
+                                                      @Model.Notes
+                                            </textarea>
                                         </div>
                                     </div>
-                                    <div class="col-md-6" data-ui-preview-item data-ui-preview-kind="select" hidden>
-                                        <div class="ui-field" data-ui-component="select" data-ui-for="Country" data-ui-label="國家／地區" style="--ui-focus-color:#16a34a">
+
+                                    @* Select *@
+                                    <div class="col-md-6"
+                                         data-ui-preview-item
+                                         data-ui-preview-kind="select" hidden>
+                                        <div class="ui-field"
+                                             data-ui-component="select"
+                                             data-ui-for="Country"
+                                             data-ui-label="國家／地區"
+                                             style="--ui-focus-color:#16a34a">
                                             <label class="form-label ui-label" for="Country">國家／地區</label>
-                                            <select class="form-select ui-control" id="Country" name="Country">
+                                            <select class="form-select ui-control"
+                                                    id="Country"
+                                                    name="Country">
                                                 @foreach (var option in Model.Countries)
                                                 {
                                                     <option value="@option.Value" selected="@(option.Value == Model.Country ? "selected" : null)">@option.Text</option>
@@ -185,14 +543,29 @@ var attachment = Request.Form.Files.GetFile("attachment");</code></pre>
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-8" data-ui-preview-item data-ui-preview-kind="tag-input" hidden>
-                                        <div class="ui-field ui-tag-input-field" data-ui-component="tag-input" data-ui-for="Tags" data-ui-label="標籤" style="--ui-border-color:#cbd5e1;--ui-focus-color:#4f46e5;--ui-text-color:#0f172a;--ui-background-color:#ffffff;--ui-tag-color:#4f46e5;--ui-tag-text-color:#ffffff">
+
+                                    @* 標籤式Input *@
+                                    <div class="col-md-8"
+                                         data-ui-preview-item data-ui-preview-kind="tag-input" hidden>
+                                        <div class="ui-field ui-tag-input-field"
+                                             data-ui-component="tag-input"
+                                             data-ui-for="Tags"
+                                             data-ui-label="標籤"
+                                             style="--ui-border-color:#cbd5e1;--ui-focus-color:#4f46e5;--ui-text-color:#0f172a;--ui-background-color:#ffffff;--ui-tag-color:#4f46e5;--ui-tag-text-color:#ffffff">
                                             <label class="form-label ui-label" for="Tags_input">標籤</label>
                                             <div class="ui-tag-input-control" data-ui-tag-input-control>
                                                 <div class="ui-tag-input-tags" data-ui-tag-input-tags aria-live="polite"></div>
-                                                <input class="ui-tag-input-input" id="Tags_input" type="text" placeholder="輸入文字後按 Enter 新增" data-ui-tag-input-input autocomplete="off" />
+                                                <input class="ui-tag-input-input"
+                                                       id="Tags_input"
+                                                       type="text"
+                                                       placeholder="輸入文字後按 Enter 新增"
+                                                       data-ui-tag-input-input autocomplete="off" />
                                             </div>
-                                            <select class="ui-tag-input-values" id="Tags" name="Tags" multiple data-ui-tag-input-values>
+                                            <select class="ui-tag-input-values"
+                                                    id="Tags"
+                                                    name="Tags"
+                                                    multiple
+                                                    data-ui-tag-input-values>
                                                 @foreach (var option in Model.SkillOptions)
                                                 {
                                                     var value = option.Value ?? option.Text;
@@ -205,12 +578,21 @@ var attachment = Request.Form.Files.GetFile("attachment");</code></pre>
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-8" data-ui-preview-item data-ui-preview-kind="tag-select" hidden>
-                                        <div class="ui-field ui-tag-select-field" data-ui-component="tag-select" data-ui-for="Skills" data-ui-label="技能標籤" style="--ui-border-color:#cbd5e1;--ui-focus-color:#4f46e5;--ui-text-color:#0f172a;--ui-background-color:#ffffff;--ui-tag-color:#4f46e5;--ui-tag-text-color:#ffffff">
+
+                                    @* 標籤式Select *@
+                                    <div class="col-md-8"
+                                         data-ui-preview-item data-ui-preview-kind="tag-select" hidden>
+                                        <div class="ui-field ui-tag-select-field"
+                                             data-ui-component="tag-select"
+                                             data-ui-for="Skills"
+                                             data-ui-label="技能標籤"
+                                             style="--ui-border-color:#cbd5e1;--ui-focus-color:#4f46e5;--ui-text-color:#0f172a;--ui-background-color:#ffffff;--ui-tag-color:#4f46e5;--ui-tag-text-color:#ffffff">
                                             <label class="form-label ui-label" for="Skills_options">技能標籤</label>
                                             <div class="ui-tag-select-control" data-ui-tag-select-control>
                                                 <div class="ui-tag-select-tags" data-ui-tag-select-tags aria-live="polite"></div>
-                                                <select class="ui-tag-select-menu" id="Skills_options" data-ui-tag-select-menu>
+                                                <select class="ui-tag-select-menu"
+                                                        id="Skills_options"
+                                                        data-ui-tag-select-menu>
                                                     <option value="">選擇項目</option>
                                                     @foreach (var option in Model.SkillOptions)
                                                     {
@@ -218,7 +600,11 @@ var attachment = Request.Form.Files.GetFile("attachment");</code></pre>
                                                     }
                                                 </select>
                                             </div>
-                                            <select class="ui-tag-select-values" id="Skills" name="Skills" multiple data-ui-tag-select-values>
+                                            <select class="ui-tag-select-values"
+                                                    id="Skills"
+                                                    name="Skills"
+                                                    multiple
+                                                    data-ui-tag-select-values>
                                                 @foreach (var option in Model.SkillOptions)
                                                 {
                                                     var value = option.Value ?? option.Text;
@@ -231,68 +617,371 @@ var attachment = Request.Form.Files.GetFile("attachment");</code></pre>
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-6 pt-md-4" data-ui-preview-item data-ui-preview-kind="checkbox" hidden>
-                                        <div class="ui-field ui-check-field" data-ui-component="checkbox" data-ui-for="EmailUpdates" data-ui-label="我想收到產品更新" style="--ui-focus-color:#ea580c">
-                                            <div class="form-check"><input class="form-check-input ui-check-control" id="EmailUpdates" name="EmailUpdates" type="checkbox" value="true" checked="@(Model.EmailUpdates ? "checked" : null)" /><label class="form-check-label ui-label" for="EmailUpdates">我想收到產品更新</label></div>
+
+                                    @* Checkbox *@
+                                    <div class="col-md-6 pt-md-4"
+                                         data-ui-preview-item data-ui-preview-kind="checkbox" hidden>
+                                        <div class="ui-field ui-check-field"
+                                             data-ui-component="checkbox"
+                                             data-ui-for="EmailUpdates"
+                                             data-ui-label="我想收到產品更新"
+                                             style="--ui-focus-color:#ea580c">
+                                            <div class="form-check">
+                                                <input class="form-check-input ui-check-control"
+                                                       id="EmailUpdates"
+                                                       name="EmailUpdates"
+                                                       type="checkbox"
+                                                       value="true"
+                                                       checked="@(Model.EmailUpdates ? "checked" : null)" />
+                                                <label class="form-check-label ui-label" for="EmailUpdates">我想收到產品更新</label>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-12" data-ui-preview-item data-ui-preview-kind="switch" hidden>
-                                        <div class="ui-switch" data-ui-component="switch" data-ui-for="EmailUpdates" data-ui-label="產品更新通知" style="--ui-switch-on-color:#0f766e;--ui-switch-off-color:#cbd5e1;--ui-switch-thumb-color:#ffffff">
-                                            <input class="ui-switch-input" id="EmailUpdatesSwitch" name="EmailUpdates" type="checkbox" value="true" checked="@(Model.EmailUpdates ? "checked" : null)" />
-                                            <label class="ui-switch-track" for="EmailUpdatesSwitch" aria-label="切換產品更新通知"><span class="ui-switch-thumb" aria-hidden="true"><i class="bi bi-check-lg ui-switch-on-icon"></i><i class="bi bi-x-lg ui-switch-off-icon"></i></span></label>
-                                            <span class="ui-switch-state" aria-hidden="true"><span class="ui-switch-on-text">已開啟</span><span class="ui-switch-off-text">已關閉</span></span>
+
+                                    @* Switch *@
+                                    <div class="col-12"
+                                         data-ui-preview-item data-ui-preview-kind="switch" hidden>
+                                        <div class="ui-switch"
+                                             data-ui-component="switch"
+                                             data-ui-for="EmailUpdates"
+                                             data-ui-label="產品更新通知"
+                                             style="--ui-switch-on-color:#0f766e;--ui-switch-off-color:#cbd5e1;--ui-switch-thumb-color:#ffffff">
+                                            <input class="ui-switch-input"
+                                                   id="EmailUpdatesSwitch"
+                                                   name="EmailUpdates"
+                                                   type="checkbox"
+                                                   value="true"
+                                                   checked="@(Model.EmailUpdates ? "checked" : null)" />
+                                            <label class="ui-switch-track"
+                                                   for="EmailUpdatesSwitch"
+                                                   aria-label="切換產品更新通知">
+                                                <span class="ui-switch-thumb" aria-hidden="true">
+                                                    <i class="bi bi-check-lg ui-switch-on-icon"></i>
+                                                    <i class="bi bi-x-lg ui-switch-off-icon"></i>
+                                                </span>
+                                            </label>
+                                            <span class="ui-switch-state" aria-hidden="true">
+                                                <span class="ui-switch-on-text">已開啟</span>
+                                                <span class="ui-switch-off-text">已關閉</span>
+                                            </span>
                                         </div>
                                     </div>
+
+                                    @* Radio *@
                                     <div class="col-md-6" data-ui-preview-item data-ui-preview-kind="radio" hidden>
                                         <fieldset class="mb-3">
                                             <legend class="fs-6">偏好的聯絡方式</legend>
-                                            <div class="ui-field ui-check-field" data-ui-component="radio" data-ui-for="PreferredContact" data-ui-label="電子郵件" style="--ui-focus-color:#2563eb"><div class="form-check"><input class="form-check-input ui-check-control" id="PreferredContact_Email" name="PreferredContact" type="radio" value="Email" checked="@(Model.PreferredContact == "Email" ? "checked" : null)" /><label class="form-check-label ui-label" for="PreferredContact_Email">電子郵件</label></div></div>
-                                            <div class="ui-field ui-check-field" data-ui-component="radio" data-ui-for="PreferredContact" data-ui-label="電話" style="--ui-focus-color:#2563eb"><div class="form-check"><input class="form-check-input ui-check-control" id="PreferredContact_Phone" name="PreferredContact" type="radio" value="Phone" checked="@(Model.PreferredContact == "Phone" ? "checked" : null)" /><label class="form-check-label ui-label" for="PreferredContact_Phone">電話</label></div></div>
+                                            <div class="ui-field ui-check-field"
+                                                 data-ui-component="radio"
+                                                 data-ui-for="PreferredContact"
+                                                 data-ui-label="電子郵件"
+                                                 style="--ui-focus-color:#2563eb">
+                                                <div class="form-check">
+                                                    <input class="form-check-input ui-check-control"
+                                                           id="PreferredContact_Email"
+                                                           name="PreferredContact"
+                                                           type="radio"
+                                                           value="Email"
+                                                           checked="@(Model.PreferredContact == "Email" ? "checked" : null)" />
+                                                    <label class="form-check-label ui-label" for="PreferredContact_Email">電子郵件</label>
+                                                </div>
+                                            </div>
+                                            <div class="ui-field ui-check-field"
+                                                 data-ui-component="radio"
+                                                 data-ui-for="PreferredContact"
+                                                 data-ui-label="電話"
+                                                 style="--ui-focus-color:#2563eb">
+                                                <div class="form-check">
+                                                    <input class="form-check-input ui-check-control"
+                                                           id="PreferredContact_Phone"
+                                                           name="PreferredContact"
+                                                           type="radio"
+                                                           value="Phone"
+                                                           checked="@(Model.PreferredContact == "Phone" ? "checked" : null)" />
+                                                    <label class="form-check-label ui-label" for="PreferredContact_Phone">電話</label>
+                                                </div>
+                                            </div>
                                         </fieldset>
                                     </div>
-                                    <div class="col-12" data-ui-preview-item data-ui-preview-kind="button" hidden><button class="btn ui-button" data-ui-component="button" type="submit" style="--ui-button-background:#4f46e5">送出表單</button></div>
-                                    <div class="col-12" data-ui-preview-item data-ui-preview-kind="breadcrumb" hidden>
-                                        <nav class="ui-breadcrumb" data-ui-component="breadcrumb" data-ui-breadcrumb-separator="chevron-right" aria-label="目前位置" style="--ui-breadcrumb-accent:#0f766e;--ui-breadcrumb-accent-soft:#ccfbf1;--ui-breadcrumb-text:#334155;--ui-breadcrumb-current-background:#0f766e;--ui-breadcrumb-current-text:#ffffff">
+
+                                    @* Button *@
+                                    <div class="col-12"
+                                         data-ui-preview-item
+                                         data-ui-preview-kind="button" hidden>
+                                        <button class="btn ui-button"
+                                                data-ui-component="button"
+                                                type="submit"
+                                                style="--ui-button-background:#4f46e5">
+                                            送出表單
+                                        </button>
+                                    </div>
+
+                                    @* 導覽-麵包屑 *@
+                                    <div class="col-12"
+                                         data-ui-preview-item data-ui-preview-kind="breadcrumb" hidden>
+                                        <nav class="ui-breadcrumb"
+                                             data-ui-component="breadcrumb"
+                                             data-ui-breadcrumb-separator="chevron-right"
+                                             aria-label="目前位置"
+                                             style="--ui-breadcrumb-accent:#0f766e;--ui-breadcrumb-accent-soft:#ccfbf1;--ui-breadcrumb-text:#334155;--ui-breadcrumb-current-background:#0f766e;--ui-breadcrumb-current-text:#ffffff">
                                             <ol class="breadcrumb ui-breadcrumb-list">
-                                                <li class="breadcrumb-item ui-breadcrumb-item"><a class="ui-breadcrumb-link" href="/"><span class="ui-breadcrumb-home" aria-hidden="true"><i class="bi bi-house-door-fill"></i></span><span>首頁</span></a></li>
-                                                <li class="ui-breadcrumb-separator" aria-hidden="true"><i class="bi bi-chevron-right" data-ui-breadcrumb-separator-icon></i></li>
-                                                <li class="breadcrumb-item ui-breadcrumb-item"><a class="ui-breadcrumb-link" href="/components"><span>元件</span></a></li>
-                                                <li class="ui-breadcrumb-separator" aria-hidden="true"><i class="bi bi-chevron-right" data-ui-breadcrumb-separator-icon></i></li>
-                                                <li class="breadcrumb-item ui-breadcrumb-item"><span class="ui-breadcrumb-current" aria-current="page"><i class="bi bi-grid-1x2-fill" aria-hidden="true"></i><span>元件總覽</span></span></li>
+                                                <li class="breadcrumb-item ui-breadcrumb-item">
+                                                    <a class="ui-breadcrumb-link" href="/">
+                                                        <span class="ui-breadcrumb-home" aria-hidden="true">
+                                                            <i class="bi bi-house-door-fill"></i>
+                                                        </span>
+                                                        <span>首頁</span>
+                                                    </a>
+                                                </li>
+                                                <li class="ui-breadcrumb-separator" aria-hidden="true">
+                                                    <i class="bi bi-chevron-right" data-ui-breadcrumb-separator-icon> </i>
+                                                </li>
+                                                <li class="breadcrumb-item ui-breadcrumb-item">
+                                                    <a class="ui-breadcrumb-link" href="/components">
+                                                        <span>元件</span>
+                                                    </a>
+                                                </li>
+                                                <li class="ui-breadcrumb-separator" aria-hidden="true">
+                                                    <i class="bi bi-chevron-right" data-ui-breadcrumb-separator-icon></i>
+                                                </li>
+                                                <li class="breadcrumb-item ui-breadcrumb-item">
+                                                    <span class="ui-breadcrumb-current"
+                                                          aria-current="page">
+                                                        <i class="bi bi-grid-1x2-fill" aria-hidden="true"></i>
+                                                        <span>元件總覽</span>
+                                                    </span>
+                                                </li>
                                             </ol>
                                         </nav>
                                     </div>
-                                    <div class="col-md-8" data-ui-preview-item data-ui-preview-kind="file-upload" hidden>
-                                        <div class="ui-field ui-file-upload" data-ui-component="file-upload" data-ui-for="UploadFile" data-ui-label="附件" data-ui-accept=".pdf,.doc,.docx" data-ui-max-size="10" style="--ui-upload-border-color:#8b5cf6;--ui-upload-progress-color:#4f46e5;--ui-upload-button-color:#4f46e5">
+
+                                    @* 檔案上傳 *@
+                                    <div class="col-md-8"
+                                         data-ui-preview-item data-ui-preview-kind="file-upload" hidden>
+                                        <div class="ui-field ui-file-upload"
+                                             data-ui-component="file-upload"
+                                             data-ui-for="UploadFile"
+                                             data-ui-label="附件"
+                                             data-ui-accept=".pdf,.doc,.docx"
+                                             data-ui-max-size="10"
+                                             style="--ui-upload-border-color:#8b5cf6;--ui-upload-progress-color:#4f46e5;--ui-upload-button-color:#4f46e5">
                                             <label class="form-label ui-label" for="UploadFile">附件</label>
-                                            <div class="ui-file-drop-zone" data-ui-file-dropzone tabindex="0" role="button"><span class="ui-file-upload-icon" aria-hidden="true"><i class="bi bi-cloud-arrow-up"></i></span><strong>拖放檔案到這裡</strong><span class="ui-file-or">或</span><button class="ui-file-browse" type="button" data-ui-file-browse>瀏覽檔案</button><span class="ui-file-hint">支援 .pdf、.doc、.docx · 上限 10 MB</span></div>
-                                            <input class="ui-file-input" id="UploadFile" name="UploadFile" type="file" accept=".pdf,.doc,.docx" data-ui-file-input />
+                                            <div class="ui-file-drop-zone"
+                                                 data-ui-file-dropzone tabindex="0"
+                                                 role="button">
+                                                <span class="ui-file-upload-icon"
+                                                      aria-hidden="true">
+                                                    <i class="bi bi-cloud-arrow-up"></i>
+                                                </span>
+                                                <strong>拖放檔案到這裡</strong>
+                                                <span class="ui-file-or">或</span>
+                                                <button class="ui-file-browse"
+                                                        type="button"
+                                                        data-ui-file-browse>
+                                                    瀏覽檔案
+                                                </button>
+                                                <span class="ui-file-hint">支援 .pdf、.doc、.docx · 上限 10 MB</span>
+                                            </div>
+                                            <input class="ui-file-input"
+                                                   id="UploadFile"
+                                                   name="UploadFile"
+                                                   type="file"
+                                                   accept=".pdf,.doc,.docx"
+                                                   data-ui-file-input />
                                             <div class="ui-file-list" data-ui-file-list aria-live="polite"></div>
                                         </div>
                                     </div>
-                                    <div class="col-12" data-ui-preview-item data-ui-preview-kind="file-download" hidden><section class="ui-file-download" data-ui-component="file-download" data-ui-download-name="年度報告.txt" data-ui-download-url="/downloads/download-demo.txt"><div class="ui-download-card"><div class="ui-download-file-icon" aria-hidden="true"><i class="bi bi-file-earmark-arrow-down"></i></div><div class="ui-download-copy"><strong>年度報告</strong><span>年度報告.txt</span></div><div class="ui-download-actions"><button class="btn ui-button" type="button" data-ui-download-start><i class="bi bi-download" aria-hidden="true"></i>下載檔案</button></div></div><div class="ui-download-demo-actions"><span>效果示範</span><button type="button" class="btn btn-outline-success" data-ui-download-success>顯示成功</button><button type="button" class="btn btn-outline-danger" data-ui-download-failure>顯示失敗</button></div></section></div>
-                                    <div class="col-12" data-ui-preview-item data-ui-preview-kind="data-table" hidden><div class="ui-data-table" data-ui-component="data-table" data-ui-data-table="true" data-ui-page-size="10" data-ui-page-size-options="10,25,50" data-ui-sortable="true" data-ui-striped="true" data-ui-hover="true" style="--ui-table-header-background:#f7e9ea;--ui-table-border:#d8dee8;--ui-table-accent:#a78bb0"><table class="ui-data-table-grid"><thead><tr><th data-ui-sort-type="number">單位代號</th><th>單位</th><th data-ui-sort-type="number">員編</th><th>姓名</th><th>職稱</th><th data-ui-sortable="false">講師身份</th></tr></thead><tbody>@foreach (var row in Model.DataTableRows) {
-                                        <tr><td data-ui-sort-value="@row.UnitCode">@row.UnitCode</td><td>@row.UnitName</td><td data-ui-sort-value="@row.EmployeeCode">@row.EmployeeCode</td><td>@row.Name</td><td>@row.Title</td><td>@row.Instructor</td></tr>
-                                    }
-                                </tbody></table></div></div>
-                                <div class="col-md-6" data-ui-preview-item data-ui-preview-kind="date-picker" hidden><div class="ui-field" data-ui-component="date-picker" data-ui-for="SelectedDate" data-ui-label="預約日期" style="--ui-confirm-color:#4f46e5;--ui-cancel-color:#64748b;--ui-range-endpoint-color:#4f46e5"><label class="form-label ui-label" for="SelectedDate">預約日期</label><input class="form-control ui-control ui-date-control" id="SelectedDate" name="SelectedDate" type="text" readonly autocomplete="off" data-ui-date-control="date" value="@selectedDate" /></div></div>
-                                <div class="col-md-6" data-ui-preview-item data-ui-preview-kind="date-time-picker" hidden><div class="ui-field" data-ui-component="date-time-picker" data-ui-for="SelectedDateTime" data-ui-label="開始日期與時間" style="--ui-confirm-color:#4f46e5;--ui-cancel-color:#64748b;--ui-range-endpoint-color:#4f46e5"><label class="form-label ui-label" for="SelectedDateTime">開始日期與時間</label><input class="form-control ui-control ui-date-control" id="SelectedDateTime" name="SelectedDateTime" type="text" readonly autocomplete="off" data-ui-date-control="datetime" value="@selectedDateTime" /></div></div>
-                                <div class="col-md-6" data-ui-preview-item data-ui-preview-kind="time-picker" hidden><div class="ui-field" data-ui-component="time-picker" data-ui-for="SelectedTime" data-ui-label="開始時間" style="--ui-confirm-color:#4f46e5;--ui-cancel-color:#64748b;--ui-time-control-color:#475569;--ui-flip-number-color:#ffffff;--ui-flip-number-background:#1e293b"><label class="form-label ui-label" for="SelectedTime">開始時間</label><input class="form-control ui-control ui-time-control" id="SelectedTime" name="SelectedTime" type="text" readonly autocomplete="off" data-ui-time-control="true" value="@selectedTime" /></div></div>
-                                <div class="col-md-8" data-ui-preview-item data-ui-preview-kind="date-range-picker" hidden><div class="ui-field" data-ui-component="date-range-picker" data-ui-for="StartDate" data-ui-end-for="EndDate" data-ui-label="住宿日期" style="--ui-confirm-color:#4f46e5;--ui-cancel-color:#64748b;--ui-range-endpoint-color:#4f46e5;--ui-range-fill-color:#ddd6fe"><label class="form-label ui-label" for="StartDate">住宿日期</label><input class="form-control ui-control ui-date-control" id="StartDate" type="text" readonly autocomplete="off" data-ui-date-control="range" value="@dateRange" /><input name="StartDate" type="hidden" data-ui-range-start value="@startDate" /><input name="EndDate" type="hidden" data-ui-range-end value="@endDate" /></div></div>
+
+                                    @* 檔案下載 *@
+                                    <div class="col-12"
+                                         data-ui-preview-item data-ui-preview-kind="file-download" hidden>
+                                        <section class="ui-file-download"
+                                                 data-ui-component="file-download"
+                                                 data-ui-download-name="年度報告.txt"
+                                                 data-ui-download-url="/downloads/download-demo.txt">
+                                            <div class="ui-download-card">
+                                                <div class="ui-download-file-icon" aria-hidden="true">
+                                                    <i class="bi bi-file-earmark-arrow-down"></i>
+                                                </div>
+                                                <div class="ui-download-copy">
+                                                    <strong>年度報告</strong>
+                                                    <span>年度報告.txt</span>
+                                                </div>
+                                                <div class="ui-download-actions">
+                                                    <button class="btn ui-button"
+                                                            type="button"
+                                                            data-ui-download-start>
+                                                        <i class="bi bi-download" aria-hidden="true"></i>下載檔案
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="ui-download-demo-actions">
+                                                <span>效果示範</span>
+                                                <button type="button"
+                                                        class="btn btn-outline-success"
+                                                        data-ui-download-success>
+                                                    顯示成功
+                                                </button>
+                                                <button type="button"
+                                                        class="btn btn-outline-danger"
+                                                        data-ui-download-failure>
+                                                    顯示失敗
+                                                </button>
+                                            </div>
+                                        </section>
+                                    </div>
+
+                                    @* Data table *@
+                                    <div class="col-12"
+                                         data-ui-preview-item data-ui-preview-kind="data-table" hidden>
+                                        <div class="ui-data-table"
+                                             data-ui-component="data-table"
+                                             data-ui-data-table="true"
+                                             data-ui-page-size="10"
+                                             data-ui-page-size-options="1,10,25,50"
+                                             data-ui-sortable="true"
+                                             data-ui-striped="true"
+                                             data-ui-hover="true"
+                                             style="--ui-table-header-background:#f7e9ea;--ui-table-border:#d8dee8;--ui-table-accent:#a78bb0">
+                                            <table class="ui-data-table-grid">
+                                                <thead>
+                                                    <tr>
+                                                        <th data-ui-sort-type="number">單位代號</th>
+                                                        <th>單位</th>
+                                                        <th data-ui-sort-type="number">員編</th>
+                                                        <th>姓名</th>
+                                                        <th>職稱</th>
+                                                        <th data-ui-sortable="false">講師身份</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (var row in Model.DataTableRows)
+                                                    {
+                                                        <tr><td data-ui-sort-value="@row.UnitCode">@row.UnitCode</td><td>@row.UnitName</td><td data-ui-sort-value="@row.EmployeeCode">@row.EmployeeCode</td><td>@row.Name</td><td>@row.Title</td><td>@row.Instructor</td></tr>
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    @* 日期選擇器 *@
+                                    <div class="col-md-6"
+                                         data-ui-preview-item data-ui-preview-kind="date-picker" hidden>
+                                        <div class="ui-field"
+                                             data-ui-component="date-picker"
+                                             data-ui-for="SelectedDate"
+                                             data-ui-label="預約日期"
+                                             style="--ui-confirm-color:#4f46e5;--ui-cancel-color:#64748b;--ui-range-endpoint-color:#4f46e5">
+                                            <label class="form-label ui-label" for="SelectedDate">預約日期</label>
+                                            <input class="form-control ui-control ui-date-control"
+                                                   id="SelectedDate"
+                                                   name="SelectedDate"
+                                                   type="text"
+                                                   readonly
+                                                   autocomplete="off"
+                                                   data-ui-date-control="date"
+                                                   value="@selectedDate" />
+                                        </div>
+                                    </div>
+
+                                    @* 時間&日期選擇器 *@
+                                    <div class="col-md-6"
+                                         data-ui-preview-item data-ui-preview-kind="date-time-picker" hidden>
+                                        <div class="ui-field"
+                                             data-ui-component="date-time-picker"
+                                             data-ui-for="SelectedDateTime"
+                                             data-ui-label="開始日期與時間"
+                                             style="--ui-confirm-color:#4f46e5;--ui-cancel-color:#64748b;--ui-range-endpoint-color:#4f46e5">
+                                            <label class="form-label ui-label" for="SelectedDateTime">開始日期與時間</label>
+                                            <input class="form-control ui-control ui-date-control"
+                                                   id="SelectedDateTime"
+                                                   name="SelectedDateTime"
+                                                   type="text"
+                                                   readonly
+                                                   autocomplete="off"
+                                                   data-ui-date-control="datetime"
+                                                   value="@selectedDateTime" />
+                                        </div>
+                                    </div>
+
+                                    @* 時間選擇器(翻頁時鐘) *@
+                                    <div class="col-md-6"
+                                         data-ui-preview-item data-ui-preview-kind="time-picker" hidden>
+                                        <div class="ui-field"
+                                             data-ui-component="time-picker"
+                                             data-ui-for="SelectedTime"
+                                             data-ui-label="開始時間"
+                                             style="--ui-confirm-color:#4f46e5;--ui-cancel-color:#64748b;--ui-time-control-color:#475569;--ui-flip-number-color:#ffffff;--ui-flip-number-background:#1e293b">
+                                            <label class="form-label ui-label" for="SelectedTime">開始時間</label>
+                                            <input class="form-control ui-control ui-time-control"
+                                                   id="SelectedTime"
+                                                   name="SelectedTime"
+                                                   type="text"
+                                                   readonly
+                                                   autocomplete="off"
+                                                   data-ui-time-control="true"
+                                                   value="@selectedTime" />
+                                        </div>
+                                    </div>
+
+                                    @* 日期區間選擇器 *@
+                                    <div class="col-md-8"
+                                         data-ui-preview-item data-ui-preview-kind="date-range-picker" hidden>
+                                        <div class="ui-field"
+                                             data-ui-component="date-range-picker"
+                                             data-ui-for="StartDate"
+                                             data-ui-end-for="EndDate"
+                                             data-ui-label="住宿日期"
+                                             style="--ui-confirm-color:#4f46e5;--ui-cancel-color:#64748b;--ui-range-endpoint-color:#4f46e5;--ui-range-fill-color:#ddd6fe">
+                                            <label class="form-label ui-label" for="StartDate">住宿日期</label>
+                                            <input class="form-control ui-control ui-date-control"
+                                                   id="StartDate"
+                                                   type="text"
+                                                   readonly
+                                                   autocomplete="off"
+                                                   data-ui-date-control="range"
+                                                   value="@dateRange" />
+                                            <input name="StartDate"
+                                                   type="hidden"
+                                                   data-ui-range-start value="@startDate" />
+                                            <input name="EndDate"
+                                                   type="hidden"
+                                                   data-ui-range-end value="@endDate" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </section>
+                </div>
+
+                @* 元件設定範例區 *@
+                <section class="card shadow-sm mt-4"
+                         data-ui-component-doc aria-labelledby="component-doc-title">
+                    <div class="card-body p-4">
+                        <h2 class="h4" id="component-doc-title">Text Input 設定</h2>
+                        <p class="text-secondary" data-ui-doc-summary></p>
+                        <div class="row g-4">
+                            <div class="col-lg-7">
+                                <h3 class="h6">HTML 用法</h3>
+                                <div class="ui-showcase-code-panel">
+                                    <div class="ui-showcase-code-panel-header">
+                                        <span>HTML</span>
+                                        <span>與上方配色同步</span>
+                                    </div>
+                                    <pre class="ui-doc-code mb-0">
+                                        <code data-ui-doc-razor></code>
+                                        </pre>
+                                </div>
+                            </div>
+                            <div class="col-lg-5">
+                                <h3 class="h6">資料與設定</h3>
+                                <div data-ui-doc-data></div>
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </section>
             </div>
-
-            <section class="card shadow-sm mt-4" data-ui-component-doc aria-labelledby="component-doc-title">
-                <div class="card-body p-4">
-                    <h2 class="h4" id="component-doc-title">Text Input 設定</h2>
-                    <p class="text-secondary" data-ui-doc-summary></p>
-                    <div class="row g-4"><div class="col-lg-7"><h3 class="h6">HTML 用法</h3><div class="ui-showcase-code-panel"><div class="ui-showcase-code-panel-header"><span>HTML</span><span>與上方配色同步</span></div><pre class="ui-doc-code mb-0"><code data-ui-doc-razor></code></pre></div></div><div class="col-lg-5"><h3 class="h6">資料與設定</h3><div data-ui-doc-data></div></div></div>
-                </div>
-            </section>
         </div>
     </div>
-</div>
 </div>

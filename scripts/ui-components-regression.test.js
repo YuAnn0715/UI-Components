@@ -408,7 +408,20 @@ assert.ok(fixtures.uploadInput.listeners.has("change"), "file upload interaction
 assert.ok(fixtures.uploadDropZone.listeners.has("drop"), "file drop interaction was not initialized");
 const tableHeader = fixtures.tableComponent.querySelector("table").tHead.rows[0].cells[0];
 assert.ok(tableHeader.querySelector(".ui-data-table-sort-button")?.listeners.has("click"), "data table sorting was not initialized");
-assert.ok(fixtures.tableComponent.querySelector(".ui-data-table-pagination"), "data table pagination was not initialized");
+const tablePagination = fixtures.tableComponent.querySelector(".ui-data-table-pagination");
+assert.ok(tablePagination, "data table pagination was not initialized");
+assert.equal(tablePagination.children[0]?.textContent, "<", "data table previous-page button is missing");
+assert.equal(tablePagination.children.at(-1)?.textContent, ">", "data table next-page button is missing");
+assert.ok(tablePagination.children[0]?.listeners.has("click"), "data table previous-page interaction was not initialized");
+assert.ok(tablePagination.children.at(-1)?.listeners.has("click"), "data table next-page interaction was not initialized");
+assert.match(source, /"data-table": \[\[[\s\S]*data-ui-sortable[\s\S]*true[\s\S]*false/, "data table parameter notes do not explain data-ui-sortable true and false");
+assert.match(source, /"data-table": \[\[[\s\S]*data-ui-data-table[\s\S]*data-ui-striped[\s\S]*data-ui-hover/, "data table parameter notes are missing table behavior attributes");
+assert.match(source, /"data-table":\s*`[^`]*data-ui-striped="true"[^`]*data-ui-hover="true"/, "data table generated HTML is missing striped or hover settings");
+const parameterNotesBlock = source.match(/const parameterNotes = \{([\s\S]*?)\n\s*\};/)?.[1] ?? "";
+ ["data-ui-tag-input-control", "data-ui-tag-select-control", "data-ui-accept", "data-ui-file-dropzone", "data-ui-download-success", "data-ui-download-failure", "data-ui-sort-value", "data-ui-end-for", "data-ui-breadcrumb-separator-icon"].forEach(attribute => {
+    assert.match(parameterNotesBlock, new RegExp(attribute.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")), `${attribute} is missing from component parameter notes`);
+});
+assert.match(source, /const commonData = [\s\S]*data-ui-component[\s\S]*data-ui-for[\s\S]*data-ui-label/, "common data-ui guidance is missing from component documentation");
 
 const cssRule = selector => {
     const escaped = selector.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -420,6 +433,9 @@ assert.match(cssRule(".ui-file-item"), /width:\s*100%/i, "file progress item is 
 assert.match(cssRule(".ui-file-item"), /min-width:\s*0/i, "file progress item can overflow because its minimum width is not reset");
 assert.match(cssRule(".ui-download-file-icon"), /var\(--ui-download-icon-color/i, "download file icon does not use a configurable theme color");
 assert.match(cssRule(".ui-download-progress > i"), /var\(--ui-download-progress-color/i, "download progress does not use a configurable theme color");
+assert.match(cssRule(".ui-data-table-page-button"), /transition:[^;]*transform/i, "data table pagination buttons have no hover transition");
+assert.match(styles, /\.ui-data-table-page-button:not\(:disabled\):hover[\s\S]*transform:\s*translateY\(-2px\)/, "data table pagination buttons do not lift on hover");
+assert.match(styles, /\.ui-data-table-page-button:not\(:disabled\):hover[\s\S]*box-shadow:/, "data table pagination buttons have no hover shadow");
 assert.match(showcaseStyles, /\.ui-component-workspace\s*\{[^}]*grid-template-columns:\s*minmax\(0,\s*1fr\)/s, "editor and preview are not stacked vertically");
 assert.match(showcaseStyles, /\.ui-preview-card \[data-ui-preview-item\]\s*\{[^}]*width:\s*100%/s, "preview components do not fill the available width");
 assert.match(showcaseStyles, /\.ui-preview-card \[data-ui-preview-item\]\s*\{[^}]*flex:\s*0 0 100%/s, "preview grid columns are not expanded to full width");
