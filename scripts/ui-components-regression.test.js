@@ -269,6 +269,28 @@ function makeFixtures() {
         "[data-ui-tag-input-control]": tagInputControl
     });
 
+    const tagSelectMenu = new FakeElement("select", { uiTagSelectMenu: "" });
+    const tagSelectPlaceholder = new FakeElement("option");
+    tagSelectPlaceholder.value = "";
+    tagSelectPlaceholder.text = "選擇技能";
+    const tagSelectCsharp = new FakeElement("option");
+    tagSelectCsharp.value = "csharp";
+    tagSelectCsharp.text = "C#";
+    const tagSelectAspNetCore = new FakeElement("option");
+    tagSelectAspNetCore.value = "aspnet-core";
+    tagSelectAspNetCore.text = "ASP.NET Core";
+    tagSelectMenu.append(tagSelectPlaceholder, tagSelectCsharp, tagSelectAspNetCore);
+    const tagSelectTags = new FakeElement("div", { uiTagSelectTags: "" });
+    const tagSelectValues = new FakeElement("select", { uiTagSelectValues: "" });
+    const tagSelectControl = new FakeElement("div", { uiTagSelectControl: "" });
+    tagSelectControl.append(tagSelectTags, tagSelectMenu);
+    const tagSelect = new FakeElement("div", { uiComponent: "tag-select" }, {
+        "[data-ui-tag-select-menu]": tagSelectMenu,
+        "[data-ui-tag-select-tags]": tagSelectTags,
+        "[data-ui-tag-select-values]": tagSelectValues,
+        "[data-ui-tag-select-control]": tagSelectControl
+    });
+
     const uploadInput = new FakeElement("input", { uiFileInput: "" });
     uploadInput.accept = ".txt";
     const uploadDropZone = new FakeElement("div", { uiFileDropzone: "" });
@@ -306,7 +328,7 @@ function makeFixtures() {
     const selectorMap = new Map([
         ["[data-ui-component='file-download']", [download]],
         ["[data-ui-component='tag-input']", [tagInput]],
-        ["[data-ui-component='tag-select']", []],
+        ["[data-ui-component='tag-select']", [tagSelect]],
         ["[data-ui-premium-time-control]", []],
         ["[data-ui-date-control]", dateControls],
         ["[data-ui-component='file-upload']", [upload]],
@@ -343,11 +365,12 @@ function makeFixtures() {
         clearTimeout: () => {},
         setTimeout: callback => callback()
     };
-    return { document, window, downloadStart, download, dateControls, timeControl, tagInputText, tagInputValues, uploadInput, uploadDropZone, tableComponent, colorInput, codeOutput, checkboxNav, radioNav, breadcrumbNav, breadcrumb, breadcrumbIconOne, breadcrumbIconTwo, breadcrumbSeparator, checkboxTarget, radioTarget, secondRadioTarget };
+    return { document, window, downloadStart, download, dateControls, timeControl, tagInputText, tagInputValues, tagSelectMenu, tagSelectValues, tagSelectTags, uploadInput, uploadDropZone, tableComponent, colorInput, codeOutput, checkboxNav, radioNav, breadcrumbNav, breadcrumb, breadcrumbIconOne, breadcrumbIconTwo, breadcrumbSeparator, checkboxTarget, radioTarget, secondRadioTarget };
 }
 
 const source = fs.readFileSync("standalone/ui-components.js", "utf8");
 const styles = fs.readFileSync("standalone/ui-components.css", "utf8");
+const iconStyles = fs.readFileSync("standalone/bootstrap-icons/font/bootstrap-icons.min.css", "utf8");
 const showcaseStyles = fs.readFileSync("UiComponentLibrary/wwwroot/css/showcase.css", "utf8");
 const showcaseMarkup = fs.readFileSync("UiComponentLibrary/Views/Home/Index.cshtml", "utf8");
 const fixtures = makeFixtures();
@@ -404,6 +427,10 @@ assert.ok(fixtures.tagInputText.listeners.has("keydown"), "tag input Enter inter
 fixtures.tagInputText.value = "custom-tag";
 fixtures.tagInputText.dispatchEvent(new FakeEvent("keydown", { key: "Enter", preventDefault: () => {} }));
 assert.ok(fixtures.tagInputValues.options.some(option => option.value === "custom-tag" && option.selected), "tag input Enter did not create a selected tag");
+fixtures.tagSelectMenu.value = "csharp";
+fixtures.tagSelectMenu.dispatchEvent(new FakeEvent("change"));
+assert.ok(fixtures.tagSelectValues.options.some(option => option.value === "csharp" && option.selected), "tag select did not sync the selected menu value");
+assert.equal(fixtures.tagSelectTags.children[0]?.children[0]?.textContent, "C#", "tag select did not render the selected tag label");
 assert.ok(fixtures.uploadInput.listeners.has("change"), "file upload interaction was not initialized");
 assert.ok(fixtures.uploadDropZone.listeners.has("drop"), "file drop interaction was not initialized");
 const tableHeader = fixtures.tableComponent.querySelector("table").tHead.rows[0].cells[0];
@@ -427,6 +454,13 @@ const cssRule = selector => {
     const escaped = selector.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
     return styles.match(new RegExp(`${escaped}\\s*\\{([^}]*)\\}`, "s"))?.[1] ?? "";
 };
+const textInputPreview = showcaseMarkup.match(/data-ui-preview-kind="text-input"[\s\S]*?data-ui-preview-kind="textarea"/)?.[0] ?? "";
+assert.match(cssRule(".ui-control:focus"), /outline\s*:\s*(?:0|none)/i, "standalone ui-control focus keeps the browser default black outline");
+assert.match(textInputPreview, /<input class="ui-control"/, "text input preview does not match the copied standalone HTML");
+assert.doesNotMatch(textInputPreview, /form-control/, "text input preview depends on Bootstrap form-control instead of the standalone component style");
+assert.match(textInputPreview, /autocomplete="name"/, "text input preview is missing autocomplete guidance for a person's name");
+assert.match(source, /"text-input": field\([\s\S]*autocomplete="name"/, "generated text input HTML is missing autocomplete guidance for a person's name");
+assert.match(parameterNotesBlock, /autocomplete/, "text input parameter notes do not explain the autocomplete attribute");
 assert.match(cssRule(".ui-file-list"), /width:\s*100%/i, "file progress list is not constrained to the uploader width");
 assert.match(cssRule(".ui-file-upload"), /width:\s*100%/i, "file uploader does not define its own width");
 assert.match(cssRule(".ui-file-item"), /width:\s*100%/i, "file progress item is not constrained to the uploader width");
@@ -452,6 +486,20 @@ assert.match(styles, /\.ui-breadcrumb-list[\s\S]*\.ui-breadcrumb-current/, "brea
 assert.match(source, /separatorIcons[\s\S]*slash-lg[\s\S]*dash-lg/, "breadcrumb separator icon choices are missing");
 assert.match(source, /data-ui-breadcrumb-separator/, "breadcrumb generated HTML has no separator setting");
 assert.match(source, /breadcrumb:\s*`<nav class="ui-breadcrumb"[\s\S]*aria-current="page"/, "breadcrumb generated HTML is missing accessible current-page markup");
+assert.match(iconStyles, /@font-face[\s\S]*bootstrap-icons\.woff2/, "standalone package is missing the Bootstrap Icons font definition");
+assert.ok(fs.existsSync("standalone/bootstrap-icons/font/fonts/bootstrap-icons.woff2"), "standalone package is missing the Bootstrap Icons woff2 font");
+assert.match(showcaseMarkup, /bootstrap-icons\/font\/bootstrap-icons\.min\.css/, "showcase usage instructions do not explain how to load Bootstrap Icons");
+assert.match(source, /"tag-input":\s*\{[\s\S]*?ui-tag-input-values[\s\S]*?Request\.Form[\s\S]*?tags/, "tag input documentation does not explain how to retrieve submitted tag values");
+assert.match(source, /"tag-select":\s*\{[\s\S]*?ui-tag-select-values[\s\S]*?Request\.Form[\s\S]*?skills/, "tag select documentation does not explain how to retrieve submitted selected values");
+assert.match(source, /"tag-input":\s*`[\s\S]*data-ui-tag-input-values/, "tag input generated HTML is missing its form value select");
+assert.match(source, /"tag-select":\s*`[\s\S]*data-ui-tag-select-values/, "tag select generated HTML is missing its form value select");
+const tagInputSnippet = source.match(/"tag-input":\s*`([\s\S]*?)`,\r?\n\s*"tag-select"/)?.[1] ?? "";
+const tagSelectSnippet = source.match(/"tag-select":\s*`([\s\S]*?)`,\r?\n\s*checkbox:/)?.[1] ?? "";
+const tagSelectValuesMarkup = tagSelectSnippet.match(/<select class="ui-tag-select-values"[\s\S]*?<\/select>/)?.[0] ?? "";
+assert.doesNotMatch(tagInputSnippet, /<option\b/, "tag input generated HTML should not imply predefined options");
+assert.match(tagSelectSnippet, /value="csharp">C#<\/option>[\s\S]*value="aspnet-core">ASP\.NET Core<\/option>/, "tag select generated HTML should use the documented C# and ASP.NET Core examples");
+assert.doesNotMatch(tagSelectSnippet, /value="javascript"/, "tag select generated HTML still uses the old JavaScript example");
+assert.doesNotMatch(tagSelectValuesMarkup, /<option\b/, "tag select generated hidden values should be populated by JavaScript instead of duplicating defaults");
 assert.match(source, /switch:\s*`<div class="ui-switch"[\s\S]*ui-switch-input/, "switch generated HTML is missing");
 assert.match(styles, /\.ui-switch-input:checked \+ \.ui-switch-track/, "switch checked state styling is missing");
 assert.match(styles, /\.ui-switch-input:focus-visible \+ \.ui-switch-track/, "switch keyboard focus styling is missing");
@@ -459,6 +507,7 @@ assert.match(styles, /\.ui-switch-input:checked \+ \.ui-switch-track \.ui-switch
 assert.match(styles, /\.ui-switch-input:checked \+ \.ui-switch-track \.ui-switch-off-icon/, "switch checked state does not hide the X icon");
 assert.match(source, /radio:\s*\["--ui-border-color", "--ui-focus-color", "--ui-text-color"\]/, "radio editor still exposes background color");
 
+assert.match(source, /radio:\s*['"][\s\S]*name="preferredContact"[\s\S]*value="email"[\s\S]*name="preferredContact"[\s\S]*value="phone"/, "radio generated HTML should include two mutually exclusive contact options");
 const expectedThemeVariables = [
     "--ui-border-color", "--ui-focus-color", "--ui-text-color", "--ui-background-color",
     "--ui-tag-color", "--ui-tag-text-color",
@@ -483,6 +532,6 @@ assert.match(source, /getComputedStyle\(active\)[\s\S]*--ui-download-progress-co
 assert.match(source, /"file-download":\s*`[^`]*\$\{style\}/s, "download generated HTML does not include the selected icon color");
 assert.match(source, /const themeSnippet = \(snippet, component\)[\s\S]*\$\{style\}/, "generated label snippets have no theme style adapter");
 assert.match(source, /snippets\.checkbox = themeSnippet\(snippets\.checkbox, "checkbox"\)/, "checkbox generated HTML does not include the selected theme");
-assert.match(source, /snippets\.radio = themeSnippet\(snippets\.radio, "radio"\)/, "radio generated HTML does not include the selected theme");
+assert.match(source, /themeGroupSnippet[\s\S]*snippets\.radio = themeGroupSnippet\(snippets\.radio, "radio"\)/, "radio generated HTML does not include the selected theme");
 
 console.log("PASS: theme synchronization and component initializers reached their interaction bindings");

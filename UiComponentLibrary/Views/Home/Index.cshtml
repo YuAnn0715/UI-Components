@@ -149,7 +149,7 @@
                 <section class="card shadow-sm mb-4" data-ui-general-guide hidden>
                     <div class="card-body p-4">
                         <h2 class="h3">使用說明</h2>
-                        <p class="text-secondary">展示站與下載元件包都使用原生 HTML／JavaScript。下載靜態元件包後，在 Layout 引用兩個檔案，再複製元件 HTML 到 Razor View。</p>
+                        <p class="text-secondary">展示站與下載元件包都使用原生 HTML／JavaScript。下載靜態元件包後，在 Layout 依序引用 Bootstrap Icons、元件 CSS 與 JavaScript，再複製元件 HTML 到 Razor View。</p>
                         <h3 class="h5 mt-4">1. 複製靜態檔案</h3>
                         <p>
                             <a class="btn btn-primary"
@@ -159,22 +159,22 @@
                             </a>
                         </p>
                         <p>
-                            解壓縮後將三個檔案放入新專案的
-                            <code>wwwroot/lib/ui-components/</code>；其中 README 可作為本機使用說明。
+                            解壓縮後將 <code>ui-components.css</code>、<code>ui-components.js</code> 與
+                            <code>bootstrap-icons/</code> 資料夾放入新專案的
+                            <code>wwwroot/lib/ui-components/</code>，並保留圖示字型的目錄結構；其中 README 可作為本機使用說明。
                         </p>
                         <h3 class="h5 mt-4">2. 在 Layout 引用</h3>
-                        <pre class="ui-doc-code">
-                            <code>&lt;link rel="stylesheet" href="~/lib/ui-components/ui-components.css" /&gt;
-                                  &lt;script src="~/lib/ui-components/ui-components.js" defer&gt;&lt;/script&gt;
+                        <pre class="ui-doc-code"><code>&lt;link rel="stylesheet" href="~/lib/ui-components/bootstrap-icons/font/bootstrap-icons.min.css" /&gt;
+&lt;link rel="stylesheet" href="~/lib/ui-components/ui-components.css" /&gt;
+&lt;script src="~/lib/ui-components/ui-components.js" defer&gt;&lt;/script&gt;
                             </code>
                         </pre>
                         <h3 class="h5 mt-4">3. 複製元件 HTML</h3>
                         <p>從「可複製的 HTML 程式碼」複製到 Razor View。設定值使用原生 HTML 屬性，例如 <code>name</code>、<code>value</code>、<code>accept</code> 與 <code>multiple</code>。</p>
                         <h3 class="h5 mt-4">4. 取得表單資料</h3>
-                        <pre class="ui-doc-code">
-                            <code>var country = Request.Form["country"];
-                                  var skills = Request.Form["skills"];
-                                  var attachment = Request.Form.Files.GetFile("attachment");
+                        <pre class="ui-doc-code"><code>var country = Request.Form["country"];
+var skills = Request.Form["skills"];
+var attachment = Request.Form.Files.GetFile("attachment");
                             </code>
                         </pre>
                     </div>
@@ -495,12 +495,13 @@
                                              data-ui-label="姓名"
                                              style="--ui-border-color:#8b5cf6;--ui-focus-color:#7c3aed">
                                             <label class="form-label ui-label" for="Name">姓名</label>
-                                            <input class="form-control ui-control"
+                                            <input class="ui-control"
                                                    id="Name"
                                                    name="Name"
                                                    type="text"
                                                    value="@Model.Name"
-                                                   placeholder="請輸入姓名" />
+                                                   placeholder="請輸入姓名"
+                                                   autocomplete="name" />
                                         </div>
                                     </div>
 

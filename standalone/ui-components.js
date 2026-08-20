@@ -97,29 +97,29 @@
         select: { title: "Select", summary: "從 option 選項中選擇一個值。", data: "<p>直接在 <code>select</code> 中加入 <code>option</code>；使用者選取值可由 <code>select.value</code> 或表單欄位取得。</p>" },
         checkbox: { title: "Checkbox", summary: "用於單一 true／false 開關。", data: "<p>使用原生 checkbox；以 <code>checked</code> 設定初始值，並從 <code>input.checked</code> 取得狀態。</p>" },
         switch: { title: "Switch", summary: "把單一 true／false 設定變成清楚、好操作的滑動開關。", data: "<p>保留原生 <code>input[type=checkbox]</code>，因此可以直接放進表單；以 <code>checked</code> 設定初始狀態。</p><p>可用三個 <code>--ui-switch-*</code> CSS 變數調整開啟、關閉與滑塊配色。</p>" },
-        radio: { title: "Radio", summary: "同一個欄位提供多個互斥選項。", data: "<p>同一組 Radio 使用相同 <code>name</code>，每個選項使用不同 <code>value</code>。</p>" },
+        radio: { title: "Radio", summary: "同一個欄位提供多個互斥選項。", data: "<p>同一組 Radio 使用相同 <code>name</code>，每個選項使用不同 <code>value</code>。</p><p>ASP.NET Core 可用 <code>Request.Form[\"preferredContact\"]</code> 取得目前選取值。</p>" },
         button: { title: "Button", summary: "提交表單或觸發頁面動作的按鈕。", data: "<p>使用原生 <code>button</code>；<code>type=\"submit\"</code> 可提交表單，<code>type=\"button\"</code> 可觸發前端動作。</p>" },
         "date-picker": { title: "日期選擇器", summary: "選擇單一日期。", data: "<p>元件會寫入 <code>input[name=selectedDate].value</code>，格式為 <code>YYYY-MM-DD</code>。</p>" },
         "date-time-picker": { title: "日期＋時間", summary: "選擇日期與時間。", data: "<p>元件會寫入 <code>input[name=selectedDateTime].value</code>，格式為 <code>YYYY-MM-DD HH:mm</code>。</p>" },
         "time-picker": { title: "時間選擇器", summary: "使用翻頁時鐘選擇時間。", data: "<p>元件會寫入 <code>input[name=selectedTime].value</code>，格式為 <code>HH:mm</code>。</p>" },
         "date-range-picker": { title: "日期區間", summary: "一次選擇起日與迄日。", data: "<p>元件會分別寫入 <code>input[name=startDate]</code> 與 <code>input[name=endDate]</code>。</p>" },
         "data-table": { title: "Data Table", summary: "可排序、可分頁的資料表。", data: "<p>一般 HTML <code>table</code> 加上 <code>data-ui-data-table=\"true\"</code> 後，即可啟用排序、每頁筆數選擇與分頁。</p><p>可用 <code>data-ui-striped</code> 開關斑馬紋、用 <code>data-ui-hover</code> 開關滑入列高亮；排序欄位可在標題上使用 <code>data-ui-sortable=\"true\"</code> 或 <code>data-ui-sortable=\"false\"</code>。</p>" },
-        "tag-input": { title: "標籤式 Input", summary: "輸入文字後按 Enter 建立自訂標籤。", data: "<p>在 <code>data-ui-tag-input-input</code> 輸入文字後按 <kbd>Enter</kbd> 建立 tag。實際值由具 <code>name</code> 與 <code>multiple</code> 的隱藏 <code>select</code> 送出。</p>" },
-        "tag-select": { title: "標籤式 Select", summary: "從選單選取多個項目並顯示為標籤。", data: "<p>使用 <code>data-ui-tag-select-menu</code> 選擇既有項目，實際選取值由具 <code>name</code> 與 <code>multiple</code> 的隱藏 <code>select</code> 送出。</p>" },
+        "tag-input": { title: "標籤式 Input", summary: "輸入文字後按 Enter 建立自訂標籤。", data: `<p>在 <code>data-ui-tag-input-input</code> 輸入文字後按 <kbd>Enter</kbd> 建立 tag。<code>data-ui-tag-input-values</code> 是隱藏的原生 <code>select multiple</code>，不是第二個可見元件；它會保存自訂 tag，並作為表單實際送出的欄位。</p><p>ASP.NET Core 可用 <code>var tags = Request.Form["tags"].ToArray();</code> 取得所有 tag 值；前端可讀取 <code>data-ui-tag-input-values</code> 的 <code>selectedOptions</code>。</p>` },
+        "tag-select": { title: "標籤式 Select", summary: "從選單選取多個項目並顯示為標籤。", data: `<p>使用 <code>data-ui-tag-select-menu</code> 選擇既有項目；<code>data-ui-tag-select-values</code> 是隱藏的原生 <code>select multiple</code>，會保存已選項目並作為表單實際送出的欄位。</p><p>ASP.NET Core 可用 <code>var skills = Request.Form["skills"].ToArray();</code> 取得所有選取值；前端可讀取 <code>data-ui-tag-select-values</code> 的 <code>selectedOptions</code>。</p>` },
         "file-upload": { title: "檔案上傳", summary: "支援拖放與瀏覽檔案。", data: "<p>使用 <code>input[type=file]</code> 取得檔案；前端會檢查格式與大小並顯示清單，伺服器仍必須驗證檔案。</p>" },
         "file-download": { title: "檔案下載", summary: "顯示下載進度並提供檔案連結。", data: "<p><code>data-ui-download-url</code> 會用於完成後的下載連結；實際檔案傳輸由瀏覽器處理。</p>" },
         breadcrumb: { title: "麵包屑", summary: "以圖示、色彩與目前位置膠囊，讓頁面層級更容易掃讀。", data: "<p>使用 Bootstrap 5 的 <code>breadcrumb</code> 與 <code>breadcrumb-item</code> 語意結構，搭配 UI Component Library 的視覺樣式。</p><p>連結項目使用 <code>a</code>，目前頁面使用 <code>aria-current=\"page\"</code>；分隔圖示可由 <code>data-ui-breadcrumb-separator</code> 選擇。</p>" }
     };
     const parameterNotes = {
-        "text-input": [["name", "表單欄位名稱"], ["type / placeholder", "原生輸入型別與提示文字"], ["value", "初始值"]],
+        "text-input": [["name", "表單欄位名稱"], ["type / placeholder", "原生輸入型別與提示文字"], ["value", "初始值"], ["autocomplete", "瀏覽器自動填入提示，例如 name、email、username"]],
         textarea: [["name", "表單欄位名稱"], ["rows / placeholder", "顯示行數與提示文字"]],
         select: [["name", "表單欄位名稱"], ["option", "選項顯示文字與 value"], ["value", "目前選取值"]],
         checkbox: [["name / value", "勾選後送出的欄位與值"], ["checked", "預設勾選狀態"]],
         switch: [["name / value", "開啟後送出的欄位與值"], ["checked", "預設開啟狀態"], ["disabled", "停用切換"]],
         radio: [["name", "同組選項使用相同名稱"], ["value", "選項送出的值"]],
         button: [["type", "submit 提交表單；button 觸發前端動作"], ["style", "按鈕配色"]],
-        "tag-input": [["data-ui-tag-input-control", "標籤輸入控制區，請保留此屬性"], ["data-ui-tag-input-tags", "顯示目前標籤的容器，請保留此屬性"], ["data-ui-tag-input-input", "輸入文字後按 Enter 建立自訂標籤"], ["name + multiple", "實際送出 tag 值的 select"], ["data-ui-tag-input-values", "包含自訂 tag 的選取值"]],
-        "tag-select": [["data-ui-tag-select-control", "標籤選擇控制區，請保留此屬性"], ["data-ui-tag-select-tags", "顯示目前標籤的容器，請保留此屬性"], ["data-ui-tag-select-menu", "選擇既有項目的選單"], ["name + multiple", "實際送出選取值的 select"], ["data-ui-tag-select-values", "包含已選項目的選取值"]],
+        "tag-input": [["data-ui-tag-input-control", "標籤輸入控制區，請保留此屬性"], ["data-ui-tag-input-tags", "顯示目前標籤的容器，請保留此屬性"], ["data-ui-tag-input-input", "輸入文字後按 Enter 建立自訂標籤"], ["name + multiple", "表單實際送出的 tag 欄位；ASP.NET Core 可用 Request.Form[\"tags\"].ToArray() 取得"], ["data-ui-tag-input-values", "隱藏的資料 select，請保留；元件會在這裡同步自訂 tag"]],
+        "tag-select": [["data-ui-tag-select-control", "標籤選擇控制區，請保留此屬性"], ["data-ui-tag-select-tags", "顯示目前標籤的容器，請保留此屬性"], ["data-ui-tag-select-menu", "使用者操作的既有項目選單"], ["name + multiple", "表單實際送出的選取欄位；ASP.NET Core 可用 Request.Form[\"skills\"].ToArray() 取得"], ["data-ui-tag-select-values", "隱藏的資料 select，請保留；元件會在這裡同步已選項目"]],
         "file-upload": [["name", "檔案欄位名稱"], ["accept / data-ui-accept", "副檔名或 MIME 類型限制；兩者應保持一致"], ["data-ui-max-size", "單一檔案容量上限（MB）"], ["data-ui-file-dropzone", "拖放檔案區，請保留此屬性"], ["data-ui-file-browse", "觸發檔案選擇器的按鈕，請保留此屬性"], ["data-ui-file-input", "原生檔案 input 的初始化 hook，請保留此屬性"], ["data-ui-file-list", "顯示檔案與上傳進度的容器，請保留此屬性"], ["multiple", "允許選擇多個檔案"]],
         "file-download": [["data-ui-download-name", "顯示的檔名"], ["data-ui-download-url", "完成後的下載連結"], ["data-ui-download-start", "觸發下載效果的按鈕"], ["data-ui-download-success", "展示頁專用的成功效果示範按鈕"], ["data-ui-download-failure", "展示頁專用的失敗效果示範按鈕"]],
         "data-table": [["data-ui-data-table", "使用 true 啟用資料表排序、分頁與筆數控制"], ["data-ui-page-size", "預設每頁顯示筆數"], ["data-ui-page-size-options", "每頁筆數選項，例如 1,10,25,50"], ["data-ui-sortable", "外層使用 true／false 開關排序；標題 th 也可用 true／false 控制個別欄位"], ["data-ui-sort-type", "標題欄位排序型別，例如 number、date 或 text"], ["data-ui-sort-value", "指定與畫面文字不同的實際排序值"], ["data-ui-striped", "使用 true 顯示斑馬紋列，使用 false 關閉"], ["data-ui-hover", "使用 true 顯示滑入列高亮，使用 false 關閉"]],
@@ -209,14 +209,14 @@
         // 建立欄位程式碼。
         const field = (label, content, component = kind) => `<div class="ui-field" data-ui-component="${component}"${style}>\n  <label class="ui-label" for="${component}-value">${label}</label>\n  ${content}\n</div>`;
         const snippets = {
-            "text-input": field("姓名", '<input class="ui-control" id="text-input-value" name="name" type="text" placeholder="請輸入姓名" />'),
+            "text-input": field("姓名", '<input class="ui-control" id="text-input-value" name="name" type="text" placeholder="請輸入姓名" autocomplete="name" />'),
             textarea: field("備註", '<textarea class="ui-control" id="textarea-value" name="notes" rows="3" placeholder="可選填"></textarea>'),
             select: field("國家", '<select class="ui-control" id="select-value" name="country">\n    <option value="TW">台灣</option>\n    <option value="JP">日本</option>\n  </select>'),
-            "tag-input": `<div class="ui-field" data-ui-component="tag-input"${style}>\n  <label class="ui-label" for="tag-input-input">標籤</label>\n  <div class="ui-tag-input-control" data-ui-tag-input-control>\n    <div class="ui-tag-input-tags" data-ui-tag-input-tags></div>\n    <input class="ui-tag-input-input" id="tag-input-input" type="text" placeholder="輸入文字後按 Enter 新增" data-ui-tag-input-input autocomplete="off" />\n  </div>\n  <select class="ui-tag-input-values" name="tags" multiple data-ui-tag-input-values>\n    <option value="csharp">C#</option>\n    <option value="javascript">JavaScript</option>\n  </select>\n</div>`,
-            "tag-select": `<div class="ui-field" data-ui-component="tag-select"${style}>\n  <label class="ui-label" for="tag-select-menu">技能</label>\n  <div class="ui-tag-select-control" data-ui-tag-select-control>\n    <div class="ui-tag-select-tags" data-ui-tag-select-tags></div>\n    <select class="ui-tag-select-menu" id="tag-select-menu" data-ui-tag-select-menu>\n      <option value="">選擇技能</option>\n      <option value="csharp">C#</option>\n      <option value="javascript">JavaScript</option>\n    </select>\n  </div>\n  <select class="ui-tag-select-values" name="skills" multiple data-ui-tag-select-values>\n    <option value="csharp">C#</option>\n    <option value="javascript">JavaScript</option>\n  </select>\n</div>`,
+            "tag-input": `<div class="ui-field" data-ui-component="tag-input"${style}>\n  <label class="ui-label" for="tag-input-input">標籤</label>\n  <div class="ui-tag-input-control" data-ui-tag-input-control>\n    <div class="ui-tag-input-tags" data-ui-tag-input-tags></div>\n    <input class="ui-tag-input-input" id="tag-input-input" type="text" placeholder="輸入文字後按 Enter 新增" data-ui-tag-input-input autocomplete="off" />\n  </div>\n  <select class="ui-tag-input-values" name="tags" multiple data-ui-tag-input-values>\n    <!-- JavaScript 會將輸入的自訂 tag 加入此欄位；請保留以送出表單資料。 -->\n  </select>\n</div>`,
+            "tag-select": `<div class="ui-field" data-ui-component="tag-select"${style}>\n  <label class="ui-label" for="tag-select-menu">技能</label>\n  <div class="ui-tag-select-control" data-ui-tag-select-control>\n    <div class="ui-tag-select-tags" data-ui-tag-select-tags></div>\n    <select class="ui-tag-select-menu" id="tag-select-menu" data-ui-tag-select-menu>\n      <option value="">選擇技能</option>\n      <option value="csharp">C#</option>\n      <option value="aspnet-core">ASP.NET Core</option>\n    </select>\n  </div>\n  <select class="ui-tag-select-values" name="skills" multiple data-ui-tag-select-values>\n    <!-- JavaScript 會將選取的項目加入此欄位；請保留以送出表單資料。 -->\n  </select>\n</div>`,
             checkbox: '<label class="ui-field"><input class="ui-check-control" name="emailUpdates" type="checkbox" value="true" /> 我想收到產品更新</label>',
             switch: `<div class="ui-switch" data-ui-component="switch"${style}>\n  <input class="ui-switch-input" id="notifications-switch" name="notifications" type="checkbox" value="true" />\n  <label class="ui-switch-track" for="notifications-switch" aria-label="切換產品更新通知"><span class="ui-switch-thumb" aria-hidden="true"><i class="bi bi-check-lg ui-switch-on-icon"></i><i class="bi bi-x-lg ui-switch-off-icon"></i></span></label>\n  <span class="ui-switch-state" aria-hidden="true"><span class="ui-switch-on-text">已開啟</span><span class="ui-switch-off-text">已關閉</span></span>\n</div>`,
-            radio: '<label class="ui-field"><input class="ui-check-control" name="preferredContact" type="radio" value="email" /> 電子郵件</label>',
+            radio: '<div class="ui-field" role="group" aria-labelledby="preferred-contact-label">\n  <span class="ui-label" id="preferred-contact-label">偏好的聯絡方式</span>\n  <label class="ui-radio-option"><input class="ui-check-control" id="preferred-contact-email" name="preferredContact" type="radio" value="email" /> 電子郵件</label>\n  <label class="ui-radio-option"><input class="ui-check-control" id="preferred-contact-phone" name="preferredContact" type="radio" value="phone" /> 電話</label>\n</div>',
             button: `<button class="ui-button" type="button"${style}>送出表單</button>`,
             "file-upload": `<div class="ui-file-upload" data-ui-component="file-upload" data-ui-accept=".pdf,.doc,.docx" data-ui-max-size="10"${style}>\n  <label class="ui-label" for="attachment">附件</label>\n  <div class="ui-file-drop-zone" data-ui-file-dropzone tabindex="0" role="button">\n    <span class="ui-file-upload-icon" aria-hidden="true"><i class="bi bi-cloud-arrow-up"></i></span><strong>拖放檔案到這裡</strong><span class="ui-file-or">或</span><button class="ui-file-browse" type="button" data-ui-file-browse>瀏覽檔案</button><span class="ui-file-hint">支援 .pdf、.doc、.docx · 上限 10 MB</span>\n  </div>\n  <input class="ui-file-input" id="attachment" name="attachment" type="file" accept=".pdf,.doc,.docx" data-ui-file-input />\n  <div class="ui-file-list" data-ui-file-list aria-live="polite"></div>\n</div>`,
             "file-download": `<section class="ui-file-download" data-ui-component="file-download" data-ui-download-name="年度報告.pdf" data-ui-download-url="/files/annual-report.pdf"${style}>\n  <div class="ui-download-card"><div class="ui-download-file-icon" aria-hidden="true"><i class="bi bi-file-earmark-arrow-down"></i></div><div class="ui-download-copy"><strong>年度報告</strong><span>年度報告.pdf</span></div><div class="ui-download-actions"><button class="ui-button" type="button" data-ui-download-start><i class="bi bi-download" aria-hidden="true"></i>下載檔案</button></div></div>\n  <div class="ui-download-demo-actions"><span>效果示範</span><button type="button" class="btn btn-outline-success" data-ui-download-success>顯示成功</button><button type="button" class="btn btn-outline-danger" data-ui-download-failure>顯示失敗</button></div>\n</section>`,
@@ -234,8 +234,12 @@
             '<label class="ui-field">',
             `<label class="ui-field" data-ui-component="${component}"${style}>`
         );
+        const themeGroupSnippet = (snippet, component) => snippet.replace(
+            '<div class="ui-field" role="group"',
+            "<div class=\"ui-field\" data-ui-component=\"" + component + "\"" + style + " role=\"group\""
+        );
         snippets.checkbox = themeSnippet(snippets.checkbox, "checkbox");
-        snippets.radio = themeSnippet(snippets.radio, "radio");
+        snippets.radio = themeGroupSnippet(snippets.radio, "radio");
         formatCode(codeOutput, snippets[kind] || "");
     }
 
@@ -456,8 +460,14 @@
 
         menu.addEventListener("change", () => {
             if (!menu.value) return;
-            const option = optionFor(menu.value);
-            if (option) option.selected = true;
+            const menuOption = [...menu.options].find(option => option.value === menu.value);
+            let option = optionFor(menu.value);
+            if (!option) {
+                option = new Option(menuOption?.text || menu.value, menu.value, false, true);
+                values.add(option);
+            } else {
+                option.selected = true;
+            }
             menu.value = "";
             render();
             values.dispatchEvent(new Event("change", { bubbles: true }));

@@ -1,12 +1,14 @@
 # UiComponentLibrary 繁中使用指南
 
-UiComponentLibrary 現在只提供 standalone 靜態元件包。請從展示站下載 `UiComponentLibrary-static.zip`，解壓縮後把 `ui-components.css` 與 `ui-components.js` 複製到目標 ASP.NET Core 網站的 `wwwroot/lib/ui-components/`。
+UiComponentLibrary 現在只提供 standalone 靜態元件包。請從展示站下載 `UiComponentLibrary-static.zip`，解壓縮後把 `ui-components.css`、`ui-components.js` 與 `bootstrap-icons/` 資料夾複製到目標 ASP.NET Core 網站的 `wwwroot/lib/ui-components/`，並保留圖示字型的目錄結構。
 
 ## 1. 在 Layout 載入靜態檔案
 
 在共用 Layout 的 `<head>` 載入 CSS，並在元件 HTML 後載入 JavaScript；使用 `defer` 也可以：
 
 ```cshtml
+<link rel="stylesheet" href="~/lib/ui-components/bootstrap-icons/font/bootstrap-icons.min.css" asp-append-version="true" />
+
 <link rel="stylesheet" href="~/lib/ui-components/ui-components.css" asp-append-version="true" />
 
 <script src="~/lib/ui-components/ui-components.js" asp-append-version="true"></script>
@@ -93,6 +95,12 @@ var attachment = Request.Form.Files.GetFile("attachment");
 
 按下 `Enter` 後，輸入文字會被 trim；空白與重複值不會建立 tag。自訂值會動態加入 `data-ui-tag-input-values`，因此可直接由 ASP.NET Core 的 `Request.Form["Tags"]` 取得。
 
+`data-ui-tag-input-values` 是隱藏的原生 `<select multiple>`，不是第二個可見元件；請保留它，讓 tag 能隨表單送出：
+
+```csharp
+var tags = Request.Form["Tags"].ToArray();
+```
+
 ## 5. 標籤式選單：`ui-tag-select`
 
 `ui-tag-select` 只從既有選單選取多個項目。每個 tag 的 × 按鈕可以移除值；實際送出的值放在具有 `name` 與 `multiple` 的隱藏 `select`。
@@ -112,13 +120,18 @@ var attachment = Request.Form.Files.GetFile("attachment");
     </select>
   </div>
   <select class="ui-tag-select-values" id="Skills" name="Skills" multiple data-ui-tag-select-values>
-    <option value="csharp">C#</option>
-    <option value="aspnet-core">ASP.NET Core</option>
+    <!-- JavaScript 會將選取的項目加入此欄位；請保留以送出表單資料。 -->
   </select>
 </div>
 ```
 
 選取選單項目後會建立 tag，選取值會同步寫入 `data-ui-tag-select-values`，因此可直接由 ASP.NET Core 的 `Request.Form["Skills"]` 取得。
+
+`data-ui-tag-select-values` 是保存已選項目的隱藏 `<select multiple>`；可用下列方式取得所有選取值：
+
+```csharp
+var skills = Request.Form["Skills"].ToArray();
+```
 
 ## 6. 檔案上傳
 
@@ -137,6 +150,7 @@ var attachment = Request.Form.Files.GetFile("attachment");
 
 `standalone` 資料夾包含：
 
+- `bootstrap-icons/font/`：Bootstrap Icons 的 CSS 與字型檔，供元件中的 `bi bi-*` 圖示使用
 - `ui-components.css`：元件樣式
 - `ui-components.js`：互動行為、展示站程式碼產生器與標籤式輸入功能
-- `UiComponentLibrary-static.zip`：可直接下載的三檔元件包
+- `UiComponentLibrary-static.zip`：包含上述元件檔案與 Bootstrap Icons 資源的下載包

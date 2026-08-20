@@ -1,11 +1,12 @@
 # UiComponentLibrary 靜態版
 
-這個資料夾包含可直接複製到任何 ASP.NET Core 專案 `wwwroot/lib/ui-components/` 的靜態元件檔案。使用方式只需要 `ui-components.css`、`ui-components.js` 與元件 HTML。
+這個資料夾包含可直接複製到任何 ASP.NET Core 專案 `wwwroot/lib/ui-components/` 的靜態元件檔案。使用方式需要 Bootstrap Icons、`ui-components.css`、`ui-components.js` 與元件 HTML。
 
-1. 複製 `ui-components.css` 和 `ui-components.js` 到目標專案的 `wwwroot/lib/ui-components/`。
+1. 複製 `ui-components.css`、`ui-components.js` 和 `bootstrap-icons/` 資料夾到目標專案的 `wwwroot/lib/ui-components/`，並保留 `bootstrap-icons/font/fonts/` 內的字型檔。
 2. 在 `Views/Shared/_Layout.cshtml` 的 `<head>` 加入：
 
 ```html
+<link rel="stylesheet" href="~/lib/ui-components/bootstrap-icons/font/bootstrap-icons.min.css" />
 <link rel="stylesheet" href="~/lib/ui-components/ui-components.css" />
 ```
 
@@ -18,6 +19,10 @@
 4. 在展示器完成配色後，複製「HTML 程式碼」到 Razor View。表單資料使用原生欄位名稱讀取，例如 `Request.Form["country"]`；檔案使用 `Request.Form.Files`。
 
 `ui-components.js` 必須在元件 HTML 後載入，或使用 `defer` 載入。
+
+元件使用的 `<i class="bi bi-..."></i>` 圖示由 Bootstrap Icons 提供；若未載入圖示 CSS 與字型，圖示不會顯示。
+
+標籤式 Input 與標籤式 Select 都會包含一個隱藏的 `<select multiple>` 作為表單資料欄位，請勿移除：標籤式 Input 的值可由 `Request.Form["Tags"].ToArray()` 取得；標籤式 Select 的值可由 `Request.Form["Skills"].ToArray()` 取得。
 
 資料表可使用一般 HTML `<table>`，外層加上 `data-ui-data-table`、`data-ui-page-size` 與 `data-ui-page-size-options`，即可啟用排序、每頁筆數選擇與分離式分頁列；欄位可用 `data-ui-sortable="false"` 停用排序。
 
